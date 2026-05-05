@@ -32,8 +32,14 @@ This site must be easy to manage long-term. No shortcuts. No bandaids. Do it pro
 ## Design System
 
 - **Style:** Modern minimal
-- **Colors:** TBD — to be chosen with visual companion in session 2
-- **Font:** Clean geometric sans-serif (e.g., Inter, DM Sans, or similar via Google Fonts)
+- **Colors:** Dark Premium palette — confirmed session 1
+  - Background: `#1c1c1c` (near-black)
+  - Cards/secondary: `#242424`
+  - Heading text: `#f0ede8` (warm cream)
+  - Body text: `#d4cfc9`
+  - Accent/gold: `#c9a96e`
+  - Borders: `#2e2e2e`
+- **Font:** Inter (already set in theme — clean geometric sans-serif)
 - **Spacing:** Generous — never crowded, never cluttered
 - **Images:** Sourced from phillanton.com, adapted to Oxford Wood Works color palette
 - **Buttons:** Simple, flat, no drop shadows — solid or outline style only

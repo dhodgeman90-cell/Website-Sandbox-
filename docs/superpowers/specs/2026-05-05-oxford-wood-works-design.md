@@ -43,7 +43,8 @@ This is a **Phase 1 preliminary project** — the goal is to establish the found
 ### Visual Direction
 - **Style:** Modern and minimal
 - **Feel:** Clean lines, white space, premium — comparable to a high-end home goods brand
-- **Colors:** TBD — to be chosen with user via visual companion in session 2
+- **Colors:** Dark Premium — confirmed session 1 via visual companion
+  - Background: `#1c1c1c`, Cards: `#242424`, Heading: `#f0ede8`, Body: `#d4cfc9`, Gold accent: `#c9a96e`, Borders: `#2e2e2e`
 - **Typography:** Clean geometric sans-serif (Inter, DM Sans, or equivalent)
 - **No:** gradients, drop shadows, decorative borders, crowded layouts
 
