@@ -88,6 +88,29 @@
     .footer-content--isolated-grid-item-desktop > :last-child {
       grid-column: 1 / -1;
     }
+
+    /* Logo auto-width, text and email form share remaining space equally */
+    .footer-content[style*='--grid-columns: 3'] {
+      grid-template-columns: auto 1fr 1fr;
+      align-items: center;
+    }
+
+    /* Newsletter text group spans full width */
+    .footer-content > *:has(+ *:has(.email-signup-block)) {
+      grid-column: 1 / -1;
+    }
+
+    /* Email signup form spans full width */
+    .footer-content > *:has(.email-signup-block) {
+      grid-column: 1 / -1;
+    }
+
+    /* Heading + description lay out side by side horizontally */
+    .footer-content > *:has(+ *:has(.email-signup-block)) .layout-panel-flex {
+      flex-direction: row;
+      align-items: center;
+      gap: 48px;
+    }
   }
 {% endstylesheet %}
 
