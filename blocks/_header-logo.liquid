@@ -55,14 +55,23 @@
     class="header-logo__image-container header-logo__image-container--original"
     data-testid="header-logo"
   >
-    {% render 'image',
-      image: settings.logo,
-      class: 'header-logo__image',
-      height: settings.logo_height,
-      alt_text_fallback: alt_text_fallback,
-      text_fallback: shop.name,
-      style: logo_style
-    %}
+    {% if settings.logo %}
+      {% render 'image',
+        image: settings.logo,
+        class: 'header-logo__image',
+        height: settings.logo_height,
+        alt_text_fallback: alt_text_fallback,
+        text_fallback: shop.name,
+        style: logo_style
+      %}
+    {% else %}
+      <img
+        src="{{ 'oxford-wood-works-logo.svg' | asset_url }}"
+        alt="{{ shop.name }}"
+        class="header-logo__image"
+        style="height: 60px; width: auto; display: block;"
+      >
+    {% endif %}
   </span>
 
   {% if use_inverse_logo %}

@@ -63,6 +63,15 @@
     <div class="logo-block__image-wrapper">
       {{ logo_image }}
     </div>
+  {% elsif 'oxford-wood-works-logo.svg' != blank %}
+    <div class="logo-block__image-wrapper">
+      <img
+        src="{{ 'oxford-wood-works-logo.svg' | asset_url }}"
+        alt="{{ shop.name }}"
+        class="logo-block__image"
+        style="height: 70px; width: auto;"
+      >
+    </div>
   {% else %}
     {% render 'jumbo-text', text: shop.name %}
   {% endif %}
