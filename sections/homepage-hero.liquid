@@ -1,0 +1,122 @@
+<section class="homepage-hero">
+  <div class="homepage-hero__bg" style="background-image: url('{{ 'homepage-hero.jpg' | asset_url }}');"></div>
+  <div class="homepage-hero__fade"></div>
+  <div class="homepage-hero__content">
+    <h1 class="homepage-hero__headline">Handcrafted quality meets machined precision</h1>
+    <div class="homepage-hero__ctas">
+      <a href="{{ routes.collections_url }}/all" class="homepage-hero__btn homepage-hero__btn--primary">Door Profiles</a>
+      <a href="{{ routes.collections_url }}/all" class="homepage-hero__btn homepage-hero__btn--outline">Explore Our Work</a>
+      <a href="/pages/contact" class="homepage-hero__btn homepage-hero__btn--outline">Get a Quote</a>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .homepage-hero {
+    position: relative;
+    min-height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1c1c1c;
+    overflow: hidden;
+  }
+
+  .homepage-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center center;
+    filter: invert(1) contrast(1.1);
+    mix-blend-mode: screen;
+    opacity: 0.35;
+  }
+
+  .homepage-hero__fade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, #1c1c1c 100%);
+  }
+
+  .homepage-hero__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 120px 24px 140px;
+    max-width: 820px;
+    width: 100%;
+  }
+
+  .homepage-hero__headline {
+    font-family: var(--font-heading--family);
+    font-size: clamp(1.75rem, 4.5vw, 3.25rem);
+    color: #f0ede8;
+    font-weight: 400;
+    line-height: 1.18;
+    margin: 0 0 52px;
+    letter-spacing: -0.01em;
+  }
+
+  .homepage-hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+  }
+
+  .homepage-hero__btn {
+    display: inline-block;
+    padding: 13px 30px;
+    font-size: 0.8125rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: var(--font-body--family);
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .homepage-hero__btn:hover {
+    opacity: 0.75;
+  }
+
+  .homepage-hero__btn--primary {
+    background-color: #c9a96e;
+    color: #1c1c1c;
+    border: 1px solid #c9a96e;
+  }
+
+  .homepage-hero__btn--outline {
+    background-color: transparent;
+    color: #f0ede8;
+    border: 1px solid rgba(240, 237, 232, 0.5);
+  }
+
+  @media screen and (max-width: 749px) {
+    .homepage-hero {
+      min-height: 75vh;
+    }
+
+    .homepage-hero__content {
+      padding: 80px 24px 100px;
+    }
+
+    .homepage-hero__ctas {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .homepage-hero__btn {
+      width: 100%;
+      max-width: 260px;
+      text-align: center;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Homepage Hero",
+  "settings": []
+}
+{% endschema %}
