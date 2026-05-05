@@ -1,7 +1,7 @@
 <div class="door-profiles-page">
   <div class="door-profiles-header">
     <p class="door-profiles-eyebrow">Our Range</p>
-    <h1 class="door-profiles-title">Door Profiles</h1>
+    <h2 class="door-profiles-title">Door Profiles</h2>
     <p class="door-profiles-subtitle">CNC-cut MDF doors machined to precision. Each profile is available in custom sizes and finishes — select a design and request a quote to get started.</p>
   </div>
 
@@ -23,7 +23,6 @@
             alt="{{ name }} door profile"
             loading="lazy"
             class="door-profile-card__img"
-            onerror="this.style.display='none'"
           >
         </div>
         <div class="door-profile-card__info">
@@ -42,7 +41,7 @@
   </div>
 </div>
 
-{% stylesheet %}
+<style>
   .door-profiles-page {
     background: #1c1c1c;
     min-height: 60vh;
@@ -208,7 +207,15 @@
       padding: 24px 20px;
     }
   }
-{% endstylesheet %}
+</style>
+
+{% javascript %}
+  document.querySelectorAll('.door-profile-card__img').forEach(function(img) {
+    img.addEventListener('error', function() {
+      this.style.display = 'none';
+    });
+  });
+{% endjavascript %}
 
 {% schema %}
 {
