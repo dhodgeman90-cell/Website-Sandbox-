@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Development Services — Cabinet Shops</title>
+  <style>
+    /* ─── PRINT-TO-PDF INSTRUCTIONS ──────────────────────────────────────────
+       Open this file in Chrome or Edge.
+       Press Ctrl+P → set Destination to "Save as PDF"
+       Paper: Letter | Margins: None | Scale: Default
+       Enable "Background graphics" checkbox
+       Click Save.
+    ─────────────────────────────────────────────────────────────────────── */
+
+    @page {
+      size: letter;
+      margin: 0.35in;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, 'Segoe UI', Arial, sans-serif;
+      font-size: 7.8pt;
+      color: #1a1a1a;
+      background: #fff;
+      line-height: 1.35;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────────────────────── */
+    .header {
+      background: #1c1c1c;
+      color: #f0ede8;
+      padding: 11px 14px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 9px;
+    }
+
+    .header-left .eyebrow {
+      font-size: 6.5pt;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #c9a96e;
+      margin-bottom: 3px;
+    }
+
+    .header-left h1 {
+      font-size: 15pt;
+      font-weight: 700;
+      color: #f0ede8;
+      letter-spacing: -0.3px;
+      line-height: 1.1;
+    }
+
+    .header-right {
+      text-align: right;
+      font-size: 7pt;
+      color: #a09890;
+      line-height: 1.6;
+    }
+
+    .header-right strong {
+      color: #c9a96e;
+    }
+
+    /* ── SECTION LABEL ──────────────────────────────────────────────────── */
+    .section-label {
+      font-size: 6.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #c9a96e;
+      border-bottom: 1px solid #c9a96e;
+      padding-bottom: 2px;
+      margin-bottom: 5px;
+      margin-top: 9px;
+    }
+
+    /* ── TABLES ─────────────────────────────────────────────────────────── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      background: #242424;
+      color: #f0ede8;
+      font-weight: 600;
+      font-size: 6.8pt;
+      text-align: left;
+      padding: 4px 7px;
+    }
+
+    tbody td {
+      padding: 4px 7px;
+      border-bottom: 1px solid #eaeaea;
+      vertical-align: top;
+      font-size: 7.5pt;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:nth-child(even) td {
+      background: #f7f7f7;
+    }
+
+    .tier-name {
+      font-weight: 700;
+      white-space: nowrap;
+      color: #1c1c1c;
+    }
+
+    .price-main {
+      font-weight: 700;
+      color: #1c1c1c;
+    }
+
+    .price-sub {
+      font-size: 6.2pt;
+      color: #999;
+      margin-top: 1px;
+    }
+
+    /* ── TWO-COLUMN SECTION ─────────────────────────────────────────────── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 13px;
+      margin-top: 2px;
+    }
+
+    /* ── STEPS LIST ─────────────────────────────────────────────────────── */
+    .steps {
+      list-style: none;
+      padding: 0;
+      counter-reset: step;
+    }
+
+    .steps li {
+      counter-increment: step;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      padding: 3px 0;
+      border-bottom: 1px solid #efefef;
+      font-size: 7.5pt;
+    }
+
+    .steps li:last-child {
+      border-bottom: none;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      flex-shrink: 0;
+      background: #1c1c1c;
+      color: #c9a96e;
+      font-weight: 700;
+      font-size: 6pt;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    /* ── BOTTOM STRIPS ──────────────────────────────────────────────────── */
+    .strip {
+      margin-top: 7px;
+      padding: 5px 9px;
+      font-size: 7pt;
+      line-height: 1.5;
+    }
+
+    .strip-warning {
+      background: #fff9f2;
+      border-left: 3px solid #c9a96e;
+    }
+
+    .strip-dark {
+      background: #f2f2f2;
+      border-left: 3px solid #555;
+      margin-top: 5px;
+    }
+
+    .strip strong {
+      font-weight: 700;
+    }
+
+    /* ── PRINT SPECIFICS ────────────────────────────────────────────────── */
+    @media print {
+      body {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .no-print {
+        display: none;
+      }
+    }
+
+    /* ── SCREEN PREVIEW ONLY ────────────────────────────────────────────── */
+    @media screen {
+      body {
+        max-width: 8.5in;
+        margin: 0.5in auto;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+        padding: 0.35in;
+        background: #fff;
+      }
+
+      .print-hint {
+        background: #1c1c1c;
+        color: #c9a96e;
+        font-size: 7.5pt;
+        padding: 6px 12px;
+        margin-bottom: 14px;
+        border-radius: 2px;
+        font-family: monospace;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-hint no-print">
+    To save as PDF: Ctrl+P → Destination: Save as PDF → Paper: Letter → Margins: None → ✓ Background graphics → Save
+  </div>
+
+  <!-- ── HEADER ─────────────────────────────────────────────────────────── -->
+  <div class="header">
+    <div class="header-left">
+      <div class="eyebrow">Web Development Services</div>
+      <h1>Cabinet Shop Websites</h1>
+    </div>
+    <div class="header-right">
+      Prepared by: <strong>[Your Name / Business]</strong><br>
+      Standard rate: <strong>$150/hr</strong> &nbsp;|&nbsp; Tier 1 flat: <strong>$2,000</strong><br>
+      May 2026
+    </div>
+  </div>
+
+  <!-- ── SERVICE TIERS ──────────────────────────────────────────────────── -->
+  <div class="section-label">Service Tiers</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:16%">Tier</th>
+        <th style="width:17%">Total Cost</th>
+        <th style="width:11%">Delivery</th>
+        <th>What's Included</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="tier-name">Tier 1 — Shell</div></td>
+        <td>
+          <div class="price-main">$2,000 flat</div>
+          <div class="price-sub">~13 hrs of work</div>
+        </td>
+        <td>5–7 days</td>
+        <td>Shopify store setup · Dawn theme with full brand customization (colors, fonts, logo) · 4 core pages: <strong>Home</strong> (hero, CTA), <strong>About</strong>, <strong>Door Profiles</strong>, <strong>Contact</strong> · Mobile-responsive · SEO metadata on all pages · Native contact form · Domain connection walkthrough · 1 revision round</td>
+      </tr>
+      <tr>
+        <td><div class="tier-name">Tier 2 — Standard</div></td>
+        <td>
+          <div class="price-main">~$3,500–$4,250</div>
+          <div class="price-sub">+10–15 hrs @ $150</div>
+        </td>
+        <td>10–14 days</td>
+        <td>Everything in Tier 1 + door/product catalog using Shopify Collections · Tag-based filtering by style, finish &amp; size (vanilla JS, no apps) · Custom quote request form · Photo gallery section · Google Analytics setup</td>
+      </tr>
+      <tr>
+        <td><div class="tier-name">Tier 3 — Professional</div></td>
+        <td>
+          <div class="price-main">~$6,500–$8,000</div>
+          <div class="price-sub">+30–40 hrs @ $150</div>
+        </td>
+        <td>3–5 weeks</td>
+        <td>Everything in Tier 2 + <strong>interactive door configurator</strong> (visitor selects style, size &amp; finish — built in vanilla JS) · <strong>live quote calculator</strong> (instant pricing from configurator selections) · Portfolio gallery with category filtering · Blog/news section (Shopify native)</td>
+      </tr>
+      <tr>
+        <td><div class="tier-name">Tier 4 — Premium</div></td>
+        <td>
+          <div class="price-main">~$9,500–$11,750</div>
+          <div class="price-sub">+50–65 hrs @ $150</div>
+        </td>
+        <td>6–8 weeks</td>
+        <td>Everything in Tier 3 + full e-commerce (cart, checkout &amp; payment via Shopify native) · Trade/contractor pricing tier (customer tags + Liquid conditional logic) · Newsletter signup form · Custom product pages with downloadable spec sheets</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── TWO-COLUMN: RETAINER + HOW IT WORKS ───────────────────────────── -->
+  <div class="two-col">
+
+    <!-- Retainer -->
+    <div>
+      <div class="section-label">Monthly Retainer Options</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Plan</th>
+            <th>Hrs/mo</th>
+            <th>Cost</th>
+            <th>Covers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Light</strong></td>
+            <td>2 hrs</td>
+            <td>$300/mo</td>
+            <td>Text &amp; image updates, minor fixes</td>
+          </tr>
+          <tr>
+            <td><strong>Standard</strong></td>
+            <td>4 hrs</td>
+            <td>$600/mo</td>
+            <td>Above + new products, SEO checks</td>
+          </tr>
+          <tr>
+            <td><strong>Growth</strong></td>
+            <td>8 hrs</td>
+            <td>$1,200/mo</td>
+            <td>Above + new sections, seasonal updates</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size:6.2pt; color:#999; margin-top:3px; padding-left:2px;">
+        Unused hours do not roll over. Overages billed at $150/hr.
+      </div>
+    </div>
+
+    <!-- How it Works -->
+    <div>
+      <div class="section-label">How a Project Works</div>
+      <ol class="steps">
+        <li>Client selects a tier</li>
+        <li>15–30 min kickoff call — confirm brand &amp; content requirements</li>
+        <li>Client delivers all assets within 2 business days (logo, copy, photos)</li>
+        <li>Build phase begins (see delivery times above)</li>
+        <li>Client submits consolidated feedback in one review pass</li>
+        <li>Revisions applied, final checks, site goes live</li>
+        <li>Optional retainer begins for ongoing support</li>
+      </ol>
+    </div>
+
+  </div>
+
+  <!-- ── NOT INCLUDED ───────────────────────────────────────────────────── -->
+  <div class="strip strip-warning">
+    <strong>Not included in any tier:</strong> &nbsp;Photography &amp; copywriting (client supplies all assets) &nbsp;·&nbsp; Email marketing campaign management &nbsp;·&nbsp; Custom Shopify app development &nbsp;·&nbsp; Domain purchase or registration &nbsp;·&nbsp; Shopify subscription fees (billed direct to client)
+  </div>
+
+  <!-- ── PLATFORM NOTE ──────────────────────────────────────────────────── -->
+  <div class="strip strip-dark">
+    All sites built on <strong>Shopify</strong> using the <strong>Dawn theme</strong>, custom CSS, and vanilla JavaScript — no third-party apps, no plugins, no lock-in. The client owns their Shopify store outright.
+  </div>
+
+</body>
+</html>
