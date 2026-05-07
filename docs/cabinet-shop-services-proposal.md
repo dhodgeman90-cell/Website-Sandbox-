@@ -22,7 +22,7 @@ All sites are built on **Shopify** using the **Dawn theme** as a base.
 - Shopify handles hosting, security, and uptime
 - Dawn is Shopify's official open-source theme — well-maintained, fast, and fully customizable
 - Custom branding is applied through theme settings and hand-written CSS
-- All custom functionality (configurators, calculators, filtering) is built in vanilla JavaScript — no plugins required
+- All custom functionality (quote forms, calculators) is built in vanilla JavaScript — no plugins required
 - Shopify billing goes directly to the client; no markup on platform costs
 
 ---
@@ -31,10 +31,10 @@ All sites are built on **Shopify** using the **Dawn theme** as a base.
 
 ---
 
-### Tier 1 — Shell Site
+### Tier 1 — Shell
 **$2,000 flat | Estimated build: ~13 hours**
 
-A clean, professional web presence built to convert visitors into enquiries. Four core pages, fully branded, mobile-responsive, and ready to go live.
+A clean, professional web presence built to convert visitors into enquiries. Three core pages, fully branded, mobile-responsive, and ready to go live.
 
 **Included:**
 
@@ -42,11 +42,10 @@ A clean, professional web presence built to convert visitors into enquiries. Fou
 - Dawn theme installation with full brand customization
   - Colors, typography, logo placement
   - Applied via `settings_data.json` and custom CSS
-- Four core pages:
+- Three core pages:
   - **Home** — Hero image, headline, intro text, call to action button
-  - **About** — Company story, values, contact details
   - **Door Profiles** — Visual showcase of available door styles
-  - **Contact** — Native Shopify contact form (no third-party required)
+  - **About / Contact** — Company story, values, contact details, and a basic inquiry form (name, email, message — Shopify native)
 - Mobile-responsive layout across all pages
 - Basic SEO foundation: page titles, meta descriptions, image alt text
 - Domain connection (client completes the DNS step; walkthrough provided)
@@ -56,47 +55,64 @@ A clean, professional web presence built to convert visitors into enquiries. Fou
 
 ---
 
-### Tier 2 — Standard
-**$3,500–$4,250 total | ~10–15 additional hours @ $150**
+### Tier 2 — Smart Quote
+**$3,500–$4,000 total | ~10–13 additional hours @ $150**
 
-Everything in Tier 1, plus a product catalog and quote request capability.
+Everything in Tier 1, plus a structured quote request form that captures exactly what a customer needs — no more vague enquiry emails.
 
 **Added features:**
 
-- Door/product catalog using Shopify native Collections
-- Tag-based filtering by style, finish, and size — built in vanilla JavaScript, no apps
-- Custom quote request form linked to specific door styles (Liquid form with native Shopify handling)
-- Photo gallery section for product and project photography (CSS grid layout, Liquid)
-- Google Analytics setup (code snippet added directly to `theme.liquid`)
-- Shopify analytics dashboard orientation for the client
+- Upgraded quote form replacing the generic contact form, with fields for:
+  - Door profile selection (dropdown linked to available styles)
+  - Width × height per door
+  - Quantity
+  - Preferred finish
+  - Contact information and notes
+- Built as a custom Liquid form with Shopify's native form handling — no apps or third-party services required
+- Client receives structured, actionable data from every enquiry
 
 ---
 
-### Tier 3 — Professional
-**$6,500–$8,000 total | ~30–40 additional hours @ $150**
+### Tier 3 — Live Estimator
+**$6,000–$7,000 total | ~20–27 additional hours @ $150**
 
-Everything in Tier 2, plus interactive tooling that lets visitors configure and price doors without picking up a phone.
+Everything in Tier 2, plus a JavaScript price calculator that shows customers an instant estimate on screen before they submit — no phone call required to get a ballpark figure.
 
 **Added features:**
 
-- **Interactive door configurator** — visitor selects door style, size, and finish; built entirely in vanilla JavaScript, no apps or external services
-- **Live quote calculator** — instant pricing output tied to configurator selections; JavaScript-only, no backend required
-- Project portfolio gallery with category-based filtering (CSS + JS)
-- Blog / news section using Shopify's native blog feature (no plugins)
+- **Live price calculator** — customer enters door profile, dimensions, and quantity; an estimate appears instantly on the page
+- Estimate is display-only (no checkout); customer still submits the quote form to proceed
+- Removes the back-and-forth quoting cycle for straightforward orders; qualifies buyers before they make contact
+- Built entirely in vanilla JavaScript — no apps, no backend, no external services
 
 ---
 
-### Tier 4 — Premium
-**$9,500–$11,750 total | ~50–65 additional hours @ $150**
+### Tier 4 — Full E-Commerce
+**$9,000–$11,000 total | ~20–27 additional hours @ $150 above Tier 3**
 
-Everything in Tier 3, plus full e-commerce and trade account functionality.
+Everything in Tier 3, plus live cart, checkout, and payment processing. Customers can complete a purchase without calling or waiting for a quote response.
 
 **Added features:**
 
-- Full e-commerce: live cart, checkout, and payment processing (Shopify native — no custom app required)
-- Trade/contractor pricing tier — verified trade accounts see separate pricing, implemented using Shopify customer tags and Liquid conditional logic
-- Newsletter signup form (Shopify native, connects directly to client's email list)
-- Custom product detail pages with downloadable spec sheets (PDFs hosted in Shopify Files)
+- Full e-commerce: live cart, Shopify checkout, and payment processing (Shopify native — no custom app required)
+- Product pages for each door profile, linked to the configurator and checkout flow
+- Order confirmation emails handled automatically by Shopify
+
+**Note:** Requires the client to be on Shopify's Basic plan or above. Most shops are already on a qualifying plan.
+
+---
+
+### Tier 5 — Trade & Pro Portal
+**$12,500–$15,000 total | ~23–27 additional hours @ $150 above Tier 4**
+
+Everything in Tier 4, plus a verified trade account system — builders, designers, and contractors who register see a separate price tier without any custom app development.
+
+**Added features:**
+
+- **Trade/contractor pricing** — verified trade accounts see a different price tier, implemented using Shopify customer tags and Liquid conditional logic (no custom app required)
+- Trade account registration form; accounts are manually approved and tagged by the client
+- Downloadable spec sheets — PDFs hosted directly in Shopify Files, linked from product pages
+- Bulk order support — order notes and quantity-based pricing adjustments
 
 ---
 
@@ -136,9 +152,10 @@ The following items are outside the scope of these services:
 | Tier | Estimated Delivery |
 |------|-------------------|
 | Tier 1 — Shell | 5–7 business days |
-| Tier 2 — Standard | 10–14 business days |
-| Tier 3 — Professional | 3–5 weeks |
-| Tier 4 — Premium | 6–8 weeks |
+| Tier 2 — Smart Quote | 10–14 business days |
+| Tier 3 — Live Estimator | 3–4 weeks |
+| Tier 4 — Full E-Commerce | 4–6 weeks |
+| Tier 5 — Trade & Pro Portal | 6–8 weeks |
 
 Timelines begin from the date all client assets are received (logo, copy, photos). Delays in asset delivery extend the timeline by an equivalent amount.
 
@@ -162,8 +179,9 @@ Timelines begin from the date all client assets are received (logo, copy, photos
 | Tier | Flat / Estimated Total | Ongoing Option |
 |------|----------------------|----------------|
 | Tier 1 — Shell | $2,000 flat | Retainer optional |
-| Tier 2 — Standard | ~$3,500–$4,250 | Retainer optional |
-| Tier 3 — Professional | ~$6,500–$8,000 | Retainer recommended |
-| Tier 4 — Premium | ~$9,500–$11,750 | Retainer recommended |
+| Tier 2 — Smart Quote | ~$3,500–$4,000 | Retainer optional |
+| Tier 3 — Live Estimator | ~$6,000–$7,000 | Retainer recommended |
+| Tier 4 — Full E-Commerce | ~$9,000–$11,000 | Retainer recommended |
+| Tier 5 — Trade & Pro Portal | ~$12,500–$15,000 | Retainer recommended |
 
 All pricing above Tier 1 is estimated based on scope. Final cost is determined by actual hours worked at $150/hr. Clients are informed before any work begins that would exceed the estimate.
