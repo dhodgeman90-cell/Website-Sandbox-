@@ -1,0 +1,194 @@
+<div class="about-page">
+
+  <div class="about-page__hero">
+    <p class="about-page__eyebrow">Our Story</p>
+    <h1 class="about-page__title">Precision doors,<br>built to order</h1>
+  </div>
+
+  <div class="about-page__body">
+    <div class="about-page__intro">
+      <p>Oxford Wood Works began with a simple idea: that a well-made cabinet door shouldn't require a trade account, a minimum order, or a three-week wait. We cut every door to order using CNC equipment — no stock, no waste, no compromise on size.</p>
+      <p>Our MDF door profiles are machined from licensed designs. Each one is available in any width and height you specify, ready to prime and paint in the finish of your choice.</p>
+    </div>
+
+    <div class="about-page__values">
+      <div class="about-page__value">
+        <p class="about-page__value-label">Made to measure</p>
+        <p class="about-page__value-body">We don't sell standard sizes. Every order is cut to the exact dimensions you provide — down to the millimetre.</p>
+      </div>
+      <div class="about-page__value">
+        <p class="about-page__value-label">CNC machined</p>
+        <p class="about-page__value-body">Our profiles are cut on professional CNC equipment. The result is a consistent, repeatable cut across every door in an order.</p>
+      </div>
+      <div class="about-page__value">
+        <p class="about-page__value-label">Ready to finish</p>
+        <p class="about-page__value-body">Doors are supplied primed and ready to paint. Choose your finish — matte, satin, gloss — and apply it yourself or have us source a painter.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-page__cta-strip">
+    <p>Ready to start an order?</p>
+    <div class="about-page__cta-btns">
+      <a href="/pages/door-profiles" class="about-page__btn about-page__btn--primary">View Door Profiles</a>
+      <a href="/pages/contact" class="about-page__btn about-page__btn--outline">Get in Touch</a>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  .about-page {
+    background: #000000;
+    min-height: 60vh;
+  }
+
+  .about-page__hero {
+    padding: 80px 40px 56px;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .about-page__eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #888888;
+    margin: 0 0 16px;
+  }
+
+  .about-page__title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    color: #ffffff;
+    font-weight: 400;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .about-page__body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .about-page__intro p {
+    font-size: 0.9rem;
+    color: #cccccc;
+    line-height: 1.8;
+    margin: 0 0 20px;
+  }
+
+  .about-page__intro p:last-child {
+    margin-bottom: 0;
+  }
+
+  .about-page__values {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .about-page__value {
+    border-left: 1px solid #1e1e1e;
+    padding-left: 24px;
+  }
+
+  .about-page__value-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #c9a96e;
+    margin: 0 0 8px;
+  }
+
+  .about-page__value-body {
+    font-size: 0.82rem;
+    color: #cccccc;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .about-page__cta-strip {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 40px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .about-page__cta-strip > p {
+    font-size: 0.85rem;
+    color: #888888;
+    margin: 0;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  .about-page__cta-btns {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .about-page__btn {
+    display: inline-block;
+    padding: 12px 28px;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .about-page__btn:hover {
+    opacity: 0.75;
+  }
+
+  .about-page__btn--primary {
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #ffffff;
+  }
+
+  .about-page__btn--outline {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  @media screen and (max-width: 749px) {
+    .about-page__hero {
+      padding: 48px 20px 36px;
+    }
+
+    .about-page__body {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 40px 20px;
+    }
+
+    .about-page__cta-strip {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 40px 20px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "About Page",
+  "settings": [],
+  "presets": []
+}
+{% endschema %}

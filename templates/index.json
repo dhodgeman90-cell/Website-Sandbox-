@@ -1,19 +1,21 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */{
+{
   "sections": {
     "homepage_hero": {
       "type": "homepage-hero",
       "settings": {}
+    },
+    "value_props": {
+      "type": "homepage-value-props",
+      "settings": {}
+    },
+    "profiles_preview": {
+      "type": "homepage-profiles-preview",
+      "settings": {}
     }
   },
   "order": [
-    "homepage_hero"
+    "homepage_hero",
+    "value_props",
+    "profiles_preview"
   ]
 }
