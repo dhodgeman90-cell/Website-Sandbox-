@@ -7,15 +7,10 @@
     "value_props": {
       "type": "homepage-value-props",
       "settings": {}
-    },
-    "profiles_preview": {
-      "type": "homepage-profiles-preview",
-      "settings": {}
     }
   },
   "order": [
     "homepage_hero",
-    "value_props",
-    "profiles_preview"
+    "value_props"
   ]
 }
