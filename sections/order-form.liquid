@@ -129,8 +129,8 @@
                     <option value="S006 — Skinny Bead 125">S006 — Skinny Bead 125</option>
                   </select>
                 </td>
-                <td><input class="oww-form-input oww-order-input" type="number" min="1" placeholder="e.g. 24"></td>
-                <td><input class="oww-form-input oww-order-input" type="number" min="1" placeholder="e.g. 36"></td>
+                <td><input class="oww-form-input oww-order-input" type="text" placeholder="e.g. 24 1/2"></td>
+                <td><input class="oww-form-input oww-order-input" type="text" placeholder="e.g. 36 3/4"></td>
               </tr>
               {%- endfor -%}
             </tbody>
@@ -722,12 +722,13 @@
       var orderLines = [];
       var rows = document.querySelectorAll('.oww-order-row');
       rows.forEach(function(row, idx) {
-        var inputs  = row.querySelectorAll('input[type="number"]');
-        var select  = row.querySelector('select');
-        var qty     = inputs[0] ? inputs[0].value.trim() : '';
-        var style   = select   ? select.value.trim()      : '';
-        var width   = inputs[1] ? inputs[1].value.trim()  : '';
-        var height  = inputs[2] ? inputs[2].value.trim()  : '';
+        var qtyInput    = row.querySelector('input[type="number"]');
+        var dimInputs   = row.querySelectorAll('input[type="text"]');
+        var select      = row.querySelector('select');
+        var qty    = qtyInput    ? qtyInput.value.trim()    : '';
+        var style  = select      ? select.value.trim()      : '';
+        var width  = dimInputs[0] ? dimInputs[0].value.trim() : '';
+        var height = dimInputs[1] ? dimInputs[1].value.trim() : '';
         if (!qty && !style && !width && !height) return;
         orderLines.push(
           'Row ' + (idx + 1) + ': Qty ' + (qty || '—') +
