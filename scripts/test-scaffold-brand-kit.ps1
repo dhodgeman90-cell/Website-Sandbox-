@@ -39,14 +39,34 @@ foreach ($folder in $expectedFolders) {
     }
 }
 
+$expectedReadmes = @(
+    "00_Brand_Guidelines\README.md",
+    "01_Logos\README.md",
+    "02_Colour_Palette\README.md",
+    "03_Favicon\README.md",
+    "04_Social_Media\README.md",
+    "05_Extras\README.md"
+)
+
+foreach ($readme in $expectedReadmes) {
+    $path = Join-Path $testRoot $readme
+    if (Test-Path $path) {
+        Write-Host "  PASS  $readme" -ForegroundColor Green
+        $passed++
+    } else {
+        Write-Host "  FAIL  $readme — NOT FOUND" -ForegroundColor Red
+        $failed++
+    }
+}
+
 Write-Host ""
+# Clean up regardless of result
+Remove-Item $testRoot -Recurse -Force
+Write-Host "Test folder cleaned up." -ForegroundColor Gray
+
 if ($failed -eq 0) {
-    Write-Host "All $passed folders present. Scaffold script working correctly." -ForegroundColor Green
+    Write-Host "All $passed checks passed. Scaffold script working correctly." -ForegroundColor Green
 } else {
     Write-Host "$passed passed, $failed failed." -ForegroundColor Red
     exit 1
 }
-
-# Clean up
-Remove-Item $testRoot -Recurse -Force
-Write-Host "Test folder cleaned up." -ForegroundColor Gray

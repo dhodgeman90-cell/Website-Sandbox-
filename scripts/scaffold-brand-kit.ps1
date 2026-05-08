@@ -4,6 +4,7 @@
 
 param(
     [Parameter(Mandatory=$true)]
+    [ValidatePattern('^[A-Za-z0-9_\- ]+$')]
     [string]$ClientName,
 
     [Parameter(Mandatory=$false)]
