@@ -109,8 +109,8 @@
                 <th class="oww-order-table__num-col">#</th>
                 <th class="oww-order-table__qty-col">Qty</th>
                 <th class="oww-order-table__style-col">Door Style</th>
-                <th class="oww-order-table__dim-col">Width (mm)</th>
-                <th class="oww-order-table__dim-col">Height (mm)</th>
+                <th class="oww-order-table__dim-col">Width (in)</th>
+                <th class="oww-order-table__dim-col">Height (in)</th>
               </tr>
             </thead>
             <tbody id="owwOrderRows">
@@ -129,8 +129,8 @@
                     <option value="S006 — Skinny Bead 125">S006 — Skinny Bead 125</option>
                   </select>
                 </td>
-                <td><input class="oww-form-input oww-order-input" type="number" min="1" placeholder="e.g. 600"></td>
-                <td><input class="oww-form-input oww-order-input" type="number" min="1" placeholder="e.g. 900"></td>
+                <td><input class="oww-form-input oww-order-input" type="number" min="1" placeholder="e.g. 24"></td>
+                <td><input class="oww-form-input oww-order-input" type="number" min="1" placeholder="e.g. 36"></td>
               </tr>
               {%- endfor -%}
             </tbody>
@@ -732,7 +732,7 @@
         orderLines.push(
           'Row ' + (idx + 1) + ': Qty ' + (qty || '—') +
           ' | ' + (style || '—') +
-          ' | ' + (width || '—') + 'mm × ' + (height || '—') + 'mm'
+          ' | ' + (width || '—') + '" × ' + (height || '—') + '"'
         );
       });
 
