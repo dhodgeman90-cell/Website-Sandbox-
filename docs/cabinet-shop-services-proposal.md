@@ -50,8 +50,10 @@ A clean, professional web presence built to convert visitors into enquiries. Thr
 - Basic SEO foundation: page titles, meta descriptions, image alt text
 - Domain connection (client completes the DNS step; walkthrough provided)
 - One round of revisions included
+- Custom favicon created and installed (client supplies logo)
 
 **Client provides:** Logo file, brand colors (or direction), written copy, product photos
+**Brand assets:** Favicon included. All other brand assets (logo suite, colour palette, social templates) supplied by client.
 
 ---
 
@@ -70,6 +72,8 @@ Everything in Tier 1, plus a structured quote request form that captures exactly
   - Contact information and notes
 - Built as a custom Liquid form with Shopify's native form handling — no apps or third-party services required
 - Client receives structured, actionable data from every enquiry
+- Custom favicon created and installed; client's existing logo and colour scheme applied to the site
+**Brand assets:** Favicon included. All other brand assets supplied by client.
 
 ---
 
