@@ -90,6 +90,14 @@ Everything in Tier 2, plus a JavaScript price calculator that shows customers an
 - Removes the back-and-forth quoting cycle for straightforward orders; qualifies buyers before they make contact
 - Built entirely in vanilla JavaScript — no apps, no backend, no external services
 
+**Brand Kit — Essentials (included from Tier 3):**
+- Primary logo (horizontal / long form), condensed logo (vertical / short form), icon mark
+- Custom favicon (.ico + .png)
+- Hex colour palette (6 brand colours)
+- 5 × social media post templates (1080×1080 + 1200×630)
+- All assets delivered in SVG + PNG format
+- Assets implemented directly on the site; no technical handoff required from client
+
 ---
 
 ### Tier 4 — Full E-Commerce
@@ -105,6 +113,15 @@ Everything in Tier 3, plus live cart, checkout, and payment processing. Customer
 
 **Note:** Requires the client to be on Shopify's Basic plan or above. Most shops are already on a qualifying plan.
 
+**Brand Kit — Extended (included from Tier 4):**
+- Everything in Tier 3 Brand Kit
+- 15 × social media post templates
+- Social profile image set (sized for Facebook, Instagram, LinkedIn, YouTube)
+- Email signature template (HTML, ready to install in any email client)
+- Branded thumbnail pack (YouTube and web, 1280×720)
+- White and black logo variants
+- All assets in SVG + PNG + PDF format
+
 ---
 
 ### Tier 5 — Trade & Pro Portal
@@ -118,6 +135,15 @@ Everything in Tier 4, plus a verified trade account system — builders, designe
 - Trade account registration form; accounts are manually approved and tagged by the client
 - Downloadable spec sheets — PDFs hosted directly in Shopify Files, linked from product pages
 - Bulk order support — order notes and quantity-based pricing adjustments
+
+**Brand Identity System (included at Tier 5):**
+- Everything in Tier 4 Brand Kit
+- Brand guidelines PDF (print-ready; covers logo usage, colour palette, typography, do's and don'ts)
+- CSS design system documentation (colour variables, button styles, typography scale)
+- Typography hierarchy defined (heading levels, body text, labels)
+- Button and UI component style guide
+- Ongoing brand asset management (updates and additions at the retainer rate)
+- ZIP archive of all brand assets for clients with in-house IT teams
 
 ---
 
@@ -143,7 +169,8 @@ The following items are outside the scope of these services:
 
 | Item | Reason |
 |------|--------|
-| Photography and copywriting | Client supplies all assets |
+| Photography and copywriting | Client supplies all photos and written copy for the site |
+| Brand asset creation (Tiers 1–2) | Client supplies logo, colours, and brand assets for Tiers 1 and 2 only — brand kit is included from Tier 3 |
 | Email marketing campaigns | Client manages their own Klaviyo/Mailchimp account |
 | Custom Shopify app development | Requires a separate development stack beyond this scope |
 | Third-party app integrations | Only Shopify-native features are used |
@@ -158,9 +185,9 @@ The following items are outside the scope of these services:
 |------|-------------------|
 | Tier 1 — Shell | 5–7 business days |
 | Tier 2 — Smart Quote | 10–14 business days |
-| Tier 3 — Live Estimator | 3–4 weeks |
-| Tier 4 — Full E-Commerce | 4–6 weeks |
-| Tier 5 — Trade & Pro Portal | 6–8 weeks |
+| Tier 3 — Live Estimator | 4–5 weeks (includes brand kit) |
+| Tier 4 — Full E-Commerce | 5–7 weeks (includes extended brand kit) |
+| Tier 5 — Trade & Pro Portal | 7–9 weeks (includes brand identity system) |
 
 Timelines begin from the date all client assets are received (logo, copy, photos). Delays in asset delivery extend the timeline by an equivalent amount.
 
