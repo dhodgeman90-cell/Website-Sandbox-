@@ -709,7 +709,7 @@
 
   // ── Submit: assemble contact[body] ──────────────────────────────
   (function() {
-    var form = document.querySelector('form[action="/contact#ContactForm"]');
+    var form = document.getElementById('ContactForm');
     if (!form) return;
 
     form.addEventListener('submit', function() {
