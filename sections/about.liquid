@@ -1,7 +1,7 @@
 <div class="about-page">
 
   <div class="about-page__hero">
-    <p class="about-page__eyebrow">Our Story</p>
+    <p class="about-page__eyebrow">About / Testimonials</p>
     <h1 class="about-page__title">Precision doors,<br>built to order</h1>
   </div>
 
@@ -25,6 +25,14 @@
         <p class="about-page__value-label">Ready to finish</p>
         <p class="about-page__value-body">Doors are supplied primed and ready to paint. Choose your finish — matte, satin, gloss — and apply it yourself or have us source a painter.</p>
       </div>
+    </div>
+  </div>
+
+  <div class="about-page__testimonials">
+    <p class="about-page__eyebrow">What people are saying</p>
+    <div class="about-page__testimonial">
+      <p class="about-page__testimonial-quote">"I didn't know what to expect but Oxford Wood Work's Cabinetry really was better than mine! I quit! I'm just going to let them make mine from now on!"</p>
+      <p class="about-page__testimonial-attr">— Jim M., Amazing Cabinetry, Bismarck ND</p>
     </div>
   </div>
 
@@ -166,6 +174,38 @@
     border: 1px solid rgba(255, 255, 255, 0.4);
   }
 
+  .about-page__testimonials {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 40px;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .about-page__testimonials .about-page__eyebrow {
+    margin-bottom: 32px;
+  }
+
+  .about-page__testimonial {
+    border-left: 1px solid #c9a96e;
+    padding-left: 24px;
+  }
+
+  .about-page__testimonial-quote {
+    font-size: 0.95rem;
+    color: #f0ede8;
+    line-height: 1.8;
+    font-style: italic;
+    margin: 0 0 12px;
+  }
+
+  .about-page__testimonial-attr {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #c9a96e;
+    margin: 0;
+  }
+
   @media screen and (max-width: 749px) {
     .about-page__hero {
       padding: 48px 20px 36px;
@@ -174,6 +214,10 @@
     .about-page__body {
       grid-template-columns: 1fr;
       gap: 40px;
+      padding: 40px 20px;
+    }
+
+    .about-page__testimonials {
       padding: 40px 20px;
     }
 
@@ -188,7 +232,7 @@
 
 {% schema %}
 {
-  "name": "About Page",
+  "name": "About & Testimonials",
   "settings": [],
   "presets": []
 }
