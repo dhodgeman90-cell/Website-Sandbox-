@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phill Anton Consulting — Website & Brand Packages</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #74EA16;
+    --green-dim: rgba(116, 234, 22, 0.12);
+    --green-border: rgba(116, 234, 22, 0.35);
+    --navy: #18303D;
+    --navy-light: #1e3d4d;
+    --dark: #111c21;
+    --card: #18303D;
+    --border: rgba(255,255,255,0.08);
+    --text: rgba(255,255,255,0.88);
+    --muted: rgba(255,255,255,0.45);
+    --heading: #ffffff;
+  }
+
+  body {
+    background: #0f1e26;
+    color: var(--text);
+    font-family: 'Titillium Web', sans-serif;
+    min-height: 100vh;
+    padding: 60px 40px;
+  }
+
+  .page { max-width: 1120px; margin: 0 auto; }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .logo-wrap {
+    margin-bottom: 28px;
+  }
+
+  .logo-wrap img {
+    height: 52px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  .header-rule {
+    width: 40px;
+    height: 3px;
+    background: var(--green);
+    margin: 0 auto 24px;
+  }
+
+  .header h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 34px;
+    font-weight: 300;
+    color: var(--heading);
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .header p {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.65;
+  }
+
+  /* ── Tier grid ── */
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 52px;
+  }
+
+  .tier {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px 18px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s;
+  }
+
+  .tier.muted { opacity: 0.55; }
+
+  .tier.highlight { border-color: var(--green); }
+
+  .tier-badge {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .tier.highlight .tier-badge { color: var(--green); }
+
+  .tier-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--heading);
+    margin-bottom: 4px;
+  }
+
+  .tier-price {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 21px;
+    font-weight: 300;
+    color: var(--heading);
+    margin-bottom: 18px;
+  }
+
+  .tier-price span { font-size: 12px; color: var(--muted); }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 18px;
+  }
+
+  .tier.highlight .divider { background: var(--green-border); }
+
+  .brand-badge {
+    display: inline-block;
+    background: var(--green-dim);
+    border: 1px solid var(--green-border);
+    color: var(--green);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+  }
+
+  .feature-list { list-style: none; flex: 1; }
+
+  .feature-list li {
+    font-size: 12px;
+    color: var(--text);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    line-height: 1.4;
+  }
+
+  .feature-list li:last-child { border-bottom: none; }
+
+  .feature-list li::before {
+    content: '—';
+    color: rgba(255,255,255,0.2);
+    flex-shrink: 0;
+    font-size: 10px;
+    margin-top: 1px;
+  }
+
+  .tier.highlight .feature-list li::before {
+    content: '✦';
+    color: var(--green);
+    font-size: 8px;
+    margin-top: 2px;
+  }
+
+  .feature-list li.brand { color: #ffffff; font-weight: 600; }
+  .feature-list li.inherited { color: var(--muted); font-style: italic; }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    margin-bottom: 52px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dot-muted { background: rgba(255,255,255,0.2); }
+  .dot-active { background: var(--green); }
+
+  /* ── Brand kit breakdown ── */
+  .brand-section {
+    background: var(--card);
+    border: 1px solid var(--green-border);
+    border-radius: 6px;
+    padding: 40px 44px;
+    margin-bottom: 40px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+
+  .brand-section h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--heading);
+    margin-bottom: 8px;
+  }
+
+  .brand-section > p {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .brand-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .brand-card {
+    background: #0f1e26;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 20px;
+  }
+
+  .brand-card-tier {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+
+  .brand-card h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--heading);
+    margin-bottom: 14px;
+  }
+
+  .asset-list { list-style: none; }
+
+  .asset-list li {
+    font-size: 12px;
+    color: var(--text);
+    padding: 4px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .asset-list li::before {
+    content: '';
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+  }
+
+  /* ── Folder tree ── */
+  .folder-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 40px 44px;
+    margin-bottom: 40px;
+  }
+
+  .folder-section h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--heading);
+    margin-bottom: 6px;
+  }
+
+  .folder-section > p {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .folder-tree {
+    font-family: 'Courier New', monospace;
+    font-size: 12.5px;
+    line-height: 2;
+    background: #0f1e26;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px 28px;
+  }
+
+  .folder-tree .folder { color: var(--green); font-weight: 600; }
+  .folder-tree .file   { color: var(--text); }
+  .folder-tree .comment { color: rgba(255,255,255,0.25); }
+
+  /* ── Delivery cards ── */
+  .delivery-note {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 52px;
+  }
+
+  .note-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px 32px;
+  }
+
+  .note-card h3 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+
+  .note-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer p { font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 0.06em; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-wrap">
+      <img src="https://www.phillanton.com/cdn/shop/files/Phill_Logo.png?v=1703093064&width=300" alt="Phill Anton Consulting">
+    </div>
+    <div class="header-rule"></div>
+    <h1>Website &amp; Brand Packages</h1>
+    <p>Five tiers of website service — with a full brand identity system that grows as your investment does.</p>
+  </div>
+
+  <!-- Tier grid -->
+  <div class="tiers">
+
+    <div class="tier muted">
+      <div class="tier-badge">Tier 1</div>
+      <div class="tier-name">Shell</div>
+      <div class="tier-price">~$2,000 <span>starting</span></div>
+      <div class="divider"></div>
+      <ul class="feature-list">
+        <li>Homepage + door profiles page</li>
+        <li>About &amp; contact pages</li>
+        <li>Basic enquiry form</li>
+        <li class="brand">Custom favicon</li>
+        <li class="inherited">Client supplies logo &amp; brand assets</li>
+      </ul>
+    </div>
+
+    <div class="tier muted">
+      <div class="tier-badge">Tier 2</div>
+      <div class="tier-name">Smart Quote</div>
+      <div class="tier-price">~$3,500 <span>starting</span></div>
+      <div class="divider"></div>
+      <ul class="feature-list">
+        <li>Everything in Tier 1</li>
+        <li>Structured quote form</li>
+        <li>Profile / size / finish fields</li>
+        <li class="brand">Custom favicon</li>
+        <li class="brand">Client logo &amp; colours implemented</li>
+      </ul>
+    </div>
+
+    <div class="tier highlight">
+      <div class="tier-badge">Tier 3 — Brand Kit Begins ✦</div>
+      <div class="tier-name">Live Estimator</div>
+      <div class="tier-price">~$6,500 <span>starting</span></div>
+      <div class="divider"></div>
+      <div class="brand-badge">Full Brand Kit Included</div>
+      <ul class="feature-list">
+        <li>Everything in Tier 2</li>
+        <li>Live JS price calculator</li>
+        <li class="brand">Logo suite — long, short &amp; icon mark</li>
+        <li class="brand">Hex colour palette (6 colours)</li>
+        <li class="brand">Custom favicon</li>
+        <li class="brand">5 social media post templates</li>
+      </ul>
+    </div>
+
+    <div class="tier highlight">
+      <div class="tier-badge">Tier 4</div>
+      <div class="tier-name">Full E-Commerce</div>
+      <div class="tier-price">~$10,000 <span>starting</span></div>
+      <div class="divider"></div>
+      <div class="brand-badge">Extended Brand Kit</div>
+      <ul class="feature-list">
+        <li>Everything in Tier 3</li>
+        <li>Cart, checkout &amp; payment</li>
+        <li class="brand">15 social media templates</li>
+        <li class="brand">Email signature template</li>
+        <li class="brand">Social profile image set</li>
+        <li class="brand">Branded thumbnail pack</li>
+      </ul>
+    </div>
+
+    <div class="tier highlight">
+      <div class="tier-badge">Tier 5</div>
+      <div class="tier-name">Trade &amp; Pro Portal</div>
+      <div class="tier-price">~$14,000 <span>starting</span></div>
+      <div class="divider"></div>
+      <div class="brand-badge">Brand Identity System</div>
+      <ul class="feature-list">
+        <li>Everything in Tier 4</li>
+        <li>Trade pricing &amp; spec downloads</li>
+        <li class="brand">CSS design system doc</li>
+        <li class="brand">Brand guidelines PDF</li>
+        <li class="brand">Ongoing brand asset management</li>
+        <li class="brand">ZIP delivery for IT handoff</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-dot dot-muted"></div>
+      <span>Tiers 1–2: Client supplies brand assets — we implement them</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot dot-active"></div>
+      <span>Tiers 3–5: We design and deliver the full brand kit</span>
+    </div>
+  </div>
+
+  <!-- Brand kit breakdown -->
+  <div class="brand-section">
+    <div class="section-label">Deliverables</div>
+    <h2>What's Inside the Brand Kit</h2>
+    <p>Every asset, organised by tier</p>
+    <div class="brand-grid">
+
+      <div class="brand-card">
+        <div class="brand-card-tier">Tier 3 — Foundation</div>
+        <h3>Brand Essentials</h3>
+        <ul class="asset-list">
+          <li>Primary logo (horizontal / long form)</li>
+          <li>Condensed logo (vertical / short form)</li>
+          <li>Icon mark (standalone symbol)</li>
+          <li>Custom favicon (.ico + .png)</li>
+          <li>Hex colour palette — 6 brand colours</li>
+          <li>5 × social media post templates</li>
+          <li>All assets in SVG + PNG format</li>
+        </ul>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-tier">Tier 4 — Extended</div>
+        <h3>Brand Kit</h3>
+        <ul class="asset-list">
+          <li>Everything in Tier 3</li>
+          <li>15 × social media post templates</li>
+          <li>Social profile image set (all platforms)</li>
+          <li>Email signature template (HTML)</li>
+          <li>Branded thumbnail pack (YouTube / web)</li>
+          <li>White + black logo variants</li>
+          <li>All assets in SVG + PNG + PDF</li>
+        </ul>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-tier">Tier 5 — Complete</div>
+        <h3>Brand Identity System</h3>
+        <ul class="asset-list">
+          <li>Everything in Tier 4</li>
+          <li>Brand guidelines PDF (print-ready)</li>
+          <li>CSS design system documentation</li>
+          <li>Typography hierarchy defined</li>
+          <li>Button &amp; UI component style guide</li>
+          <li>Ongoing brand asset management</li>
+          <li>ZIP delivery for IT team handoff</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Folder structure -->
+  <div class="folder-section">
+    <div class="section-label">Organisation</div>
+    <h2>The Deliverable Folder</h2>
+    <p>How every brand kit is organised and handed over — clean, professional, and ready to use.</p>
+    <div class="folder-tree">
+<span class="folder">📁 ClientName_BrandKit/</span>
+<br>
+<span class="comment">&nbsp;&nbsp;├──</span> <span class="folder">📁 00_Brand_Guidelines/</span>
+<br>
+<span class="comment">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└──</span> <span class="file">ClientName_BrandGuidelines.pdf</span>
+<br>
+<span class="comment">&nbsp;&nbsp;│</span>
+<br>
+<span class="comment">&nbsp;&nbsp;├──</span> <span class="folder">📁 01_Logos/</span>
+<br>
+<span class="comment">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├──</span> <span class="folder">📁 Primary/</span> <span class="comment">&nbsp;← horizontal / long form</span>
+<br>
+<span class="comment">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├──</span> <span class="folder">📁 Condensed/</span> <span class="comment">← vertical / short form</span>
+<br>
+<span class="comment">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└──</span> <span class="folder">📁 Icon_Mark/</span> <span class="comment">&nbsp;← standalone symbol</span>
+<br>
+<span class="comment">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Each folder: full-colour, white, black — SVG + PNG + PDF)</span>
+<br>
+<span class="comment">&nbsp;&nbsp;│</span>
+<br>
+<span class="comment">&nbsp;&nbsp;├──</span> <span class="folder">📁 02_Colour_Palette/</span>
+<br>
+<span class="comment">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└──</span> <span class="file">ClientName_Colours.pdf</span> <span class="comment">← hex, RGB, CMYK swatches</span>
+<br>
+<span class="comment">&nbsp;&nbsp;│</span>
+<br>
+<span class="comment">&nbsp;&nbsp;├──</span> <span class="folder">📁 03_Favicon/</span>
+<br>
+<span class="comment">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├──</span> <span class="file">favicon.ico</span>
+<br>
+<span class="comment">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└──</span> <span class="file">favicon-32x32.png &nbsp;favicon-180x180.png</span>
+<br>
+<span class="comment">&nbsp;&nbsp;│</span>
+<br>
+<span class="comment">&nbsp;&nbsp;├──</span> <span class="folder">📁 04_Social_Media/</span>
+<br>
+<span class="comment">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├──</span> <span class="folder">📁 Post_Templates/</span> <span class="comment">← 1080×1080 + 1200×630</span>
+<br>
+<span class="comment">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├──</span> <span class="folder">📁 Profile_Images/</span> <span class="comment">← sized per platform</span>
+<br>
+<span class="comment">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└──</span> <span class="folder">📁 Thumbnails/</span> <span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;← YouTube / web (1280×720)</span>
+<br>
+<span class="comment">&nbsp;&nbsp;│</span>
+<br>
+<span class="comment">&nbsp;&nbsp;└──</span> <span class="folder">📁 05_Extras/</span> <span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← email sig, CSS doc (Tier 5)</span>
+    </div>
+  </div>
+
+  <!-- Delivery model -->
+  <div class="delivery-note">
+    <div class="note-card">
+      <h3>Standard Delivery</h3>
+      <p>All brand assets are implemented directly on your website. Your site launches with everything in place — no technical knowledge required on your end.</p>
+    </div>
+    <div class="note-card">
+      <h3>IT Handoff (Tier 5)</h3>
+      <p>For clients with in-house IT teams, a complete ZIP archive of all brand assets is provided in the folder structure above — organised, labelled, and ready to hand over.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Phill Anton Consulting &nbsp;·&nbsp; Website &amp; Brand Packages &nbsp;·&nbsp; Confidential</p>
+  </div>
+
+</div>
+</body>
+</html>
