@@ -73,6 +73,7 @@ Everything in Tier 1, plus a structured quote request form that captures exactly
 - Built as a custom Liquid form with Shopify's native form handling — no apps or third-party services required
 - Client receives structured, actionable data from every enquiry
 - Custom favicon created and installed; client's existing logo and colour scheme applied to the site
+
 **Brand assets:** Favicon included. All other brand assets supplied by client.
 
 ---
