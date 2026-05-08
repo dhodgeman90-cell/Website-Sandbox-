@@ -115,7 +115,7 @@ Everything in Tier 3, plus live cart, checkout, and payment processing. Customer
 
 **Brand Kit — Extended (included from Tier 4):**
 - Everything in Tier 3 Brand Kit
-- 15 × social media post templates
+- 15 × social media post templates total (10 additional to the 5 in Tier 3)
 - Social profile image set (sized for Facebook, Instagram, LinkedIn, YouTube)
 - Email signature template (HTML, ready to install in any email client)
 - Branded thumbnail pack (YouTube and web, 1280×720)
@@ -136,7 +136,7 @@ Everything in Tier 4, plus a verified trade account system — builders, designe
 - Downloadable spec sheets — PDFs hosted directly in Shopify Files, linked from product pages
 - Bulk order support — order notes and quantity-based pricing adjustments
 
-**Brand Identity System (included at Tier 5):**
+**Brand Identity System (included from Tier 5):**
 - Everything in Tier 4 Brand Kit
 - Brand guidelines PDF (print-ready; covers logo usage, colour palette, typography, do's and don'ts)
 - CSS design system documentation (colour variables, button styles, typography scale)
