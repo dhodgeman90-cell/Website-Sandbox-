@@ -6,7 +6,7 @@
   </div>
 
   <div class="door-profiles-grid">
-    {%- assign profile_data = "S001|Shaker|door-s001.png,S002|Bevel Shaker|door-s002.webp,S003|Double Shaker|door-s003.webp,S004|Slim Shaker|door-s004.webp,S005|Skinny 150V|door-s005.webp,S006|Skinny Bead 125|door-s006.webp" -%}
+    {%- assign profile_data = "S001|Shaker|door-s001.webp,S002|Bevel Shaker|door-s002.webp,S003|Double Shaker|door-s003.webp,S004|Slim Shaker|door-s004.webp,S005|Skinny 150V|door-s005.webp,S006|Skinny Bead 125|door-s006.webp" -%}
     {%- assign profiles = profile_data | split: "," -%}
     {%- for profile_str in profiles -%}
       {%- assign parts = profile_str | split: "|" -%}
