@@ -222,7 +222,44 @@
       },
     });
   }
-  function updateSpecPanel() {}
+  function updateSpecPanel() {
+    const wLabel = cfg.widths.find(o => o.value === state.width)?.label || '—';
+    const hLabel = cfg.heights.find(o => o.value === state.height)?.label || '—';
+    const dLabel = cfg.depths.find(o => o.value === state.depth)?.label || '—';
+    const fLabel = cfg.finishes.find(o => o.id === state.finish)?.label || '—';
+
+    document.getElementById('spec-width').textContent   = wLabel;
+    document.getElementById('spec-height').textContent  = hLabel;
+    document.getElementById('spec-depth').textContent   = dLabel;
+    document.getElementById('spec-finish').textContent  = fLabel;
+    document.getElementById('spec-drawers').textContent = state.drawers.length;
+
+    const price = calculatePrice();
+    document.getElementById('cab-price').textContent = price > 0
+      ? `$${price.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`
+      : '$0';
+
+    const isReady = state.width && state.height && state.depth && state.finish && state.drawers.length > 0;
+    const btn = document.getElementById('cab-atc');
+    btn.disabled = !isReady;
+    btn.textContent = isReady
+      ? `Add to Cart — $${price.toLocaleString('en-US', { minimumFractionDigits: 0 })}`
+      : 'Add to Cart';
+
+    clearAtcError();
+  }
+
+  function showAtcError(msg) {
+    const el = document.getElementById('cab-atc-error');
+    el.textContent = msg;
+    el.hidden = false;
+  }
+
+  function clearAtcError() {
+    const el = document.getElementById('cab-atc-error');
+    el.textContent = '';
+    el.hidden = true;
+  }
 
   document.addEventListener('DOMContentLoaded', init);
 })();
