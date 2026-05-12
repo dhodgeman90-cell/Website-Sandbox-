@@ -51,6 +51,7 @@
     renderPalette();
     renderPreview();
     updateSpecPanel();
+    document.getElementById('cab-atc').addEventListener('click', addToCart);
   }
 
   // Placeholder stubs — implemented in Tasks 6, 7, 8, 9
@@ -259,6 +260,50 @@
     const el = document.getElementById('cab-atc-error');
     el.textContent = '';
     el.hidden = true;
+  }
+
+  function addToCart() {
+    if (!cfg.variantId) return;
+
+    const btn = document.getElementById('cab-atc');
+    btn.disabled = true;
+    btn.textContent = 'Adding…';
+    clearAtcError();
+
+    const properties = {
+      '_cabinet_width':        state.width,
+      '_cabinet_height':       state.height,
+      '_cabinet_depth':        state.depth,
+      '_cabinet_finish':       state.finish,
+      '_cabinet_finish_label': cfg.finishes.find(f => f.id === state.finish)?.label || state.finish,
+      '_cabinet_drawer_count': state.drawers.length,
+      '_cabinet_drawers':      JSON.stringify(
+        state.drawers.map((d, i) => ({ pos: i + 1, type: d.id, h: d.heightIn }))
+      ),
+      '_cabinet_price':        calculatePrice().toFixed(2),
+    };
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id:         cfg.variantId,
+        quantity:   1,
+        properties: properties,
+      }),
+    })
+      .then(res => {
+        if (!res.ok) return res.json().then(err => { throw err; });
+        return res.json();
+      })
+      .then(() => {
+        window.location.href = '/cart';
+      })
+      .catch(err => {
+        showAtcError(err.description || err.message || 'Could not add to cart. Please try again.');
+        btn.disabled = false;
+        updateSpecPanel();
+      });
   }
 
   document.addEventListener('DOMContentLoaded', init);
