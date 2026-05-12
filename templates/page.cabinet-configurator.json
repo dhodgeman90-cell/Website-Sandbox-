@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "cabinet-configurator",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
