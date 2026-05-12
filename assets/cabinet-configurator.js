@@ -119,8 +119,109 @@
     const map = { oak: '#8B6914', walnut: '#3d2b1f', white: '#e8e8e8', black: '#1a1a1a' };
     return map[id] || '#555';
   }
-  function renderPalette() {}
-  function renderPreview() {}
+  function renderPalette() {
+    const container = document.getElementById('cab-palette');
+    if (!container) return;
+    container.innerHTML = '';
+    cfg.drawerTypes.forEach(type => {
+      const item = document.createElement('div');
+      item.className = 'cab-palette-item';
+      item.dataset.typeId = type.id;
+      item.innerHTML = `
+        <span class="cab-drag-handle">⠿</span>
+        <span>${type.label}</span>
+        <span class="cab-palette-item-price">+$${type.price}</span>
+      `;
+      container.appendChild(item);
+    });
+
+    Sortable.create(container, {
+      group: { name: 'drawers', pull: 'clone', put: false },
+      sort: false,
+      animation: 150,
+      ghostClass: 'sortable-ghost',
+      chosenClass: 'sortable-chosen',
+    });
+  }
+  function renderPreview() {
+    const cabinet   = document.getElementById('cab-cabinet');
+    const dropHint  = document.getElementById('cab-drop-hint');
+    const label     = document.getElementById('cab-preview-label');
+
+    const wLabel = cfg.widths.find(o => o.value === state.width)?.label || '—';
+    const hLabel = cfg.heights.find(o => o.value === state.height)?.label || '—';
+    const dLabel = cfg.depths.find(o => o.value === state.depth)?.label || '—';
+    label.textContent = (state.width && state.height && state.depth)
+      ? `${wLabel} × ${hLabel} × ${dLabel}`
+      : '—';
+
+    if (dropHint) dropHint.style.display = state.drawers.length ? 'none' : 'block';
+
+    cabinet.querySelectorAll('.cab-drawer-slot').forEach(el => el.remove());
+    const existingDropzone = cabinet.querySelector('.cab-cabinet-dropzone');
+    if (existingDropzone) existingDropzone.remove();
+
+    const totalUnits = state.drawers.reduce((s, d) => s + d.heightIn, 0) || 1;
+
+    state.drawers.forEach(drawer => {
+      const slot = document.createElement('div');
+      slot.className = 'cab-drawer-slot';
+      slot.dataset.uid = drawer.uid;
+      const heightPx = Math.round((drawer.heightIn / totalUnits) * 180);
+      slot.style.height = `${Math.max(heightPx, 22)}px`;
+
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'cab-drawer-remove';
+      removeBtn.type = 'button';
+      removeBtn.textContent = '×';
+      removeBtn.setAttribute('aria-label', `Remove ${drawer.label}`);
+      removeBtn.addEventListener('click', () => {
+        state.drawers = state.drawers.filter(d => d.uid !== drawer.uid);
+        renderPreview();
+        updateSpecPanel();
+      });
+
+      slot.innerHTML = `<span>${drawer.label}</span>`;
+      slot.appendChild(removeBtn);
+      cabinet.appendChild(slot);
+    });
+
+    if (state.drawers.length < cfg.maxDrawers) {
+      const dz = document.createElement('div');
+      dz.className = 'cab-cabinet-dropzone';
+      dz.textContent = '+ drag here';
+      cabinet.appendChild(dz);
+    }
+
+    if (cabinet._sortable) cabinet._sortable.destroy();
+    cabinet._sortable = Sortable.create(cabinet, {
+      group: { name: 'drawers', pull: false, put: true },
+      animation: 150,
+      ghostClass: 'sortable-ghost',
+      chosenClass: 'sortable-chosen',
+      filter: '.cab-cabinet-dropzone, .cab-drop-hint, .cab-drawer-remove',
+      onAdd(evt) {
+        const typeId = evt.item.dataset.typeId;
+        const type   = cfg.drawerTypes.find(t => t.id === typeId);
+        evt.item.remove();
+        if (!type) return;
+        if (state.drawers.length >= cfg.maxDrawers) {
+          showAtcError(`Maximum ${cfg.maxDrawers} drawers allowed`);
+          return;
+        }
+        state.drawers.push({ uid: uid(), id: type.id, label: type.label, heightIn: type.height_in, price: type.price });
+        renderPreview();
+        updateSpecPanel();
+      },
+      onEnd(evt) {
+        if (evt.from === cabinet && evt.to === cabinet && evt.oldIndex !== evt.newIndex) {
+          const moved = state.drawers.splice(evt.oldIndex, 1)[0];
+          state.drawers.splice(evt.newIndex, 0, moved);
+          renderPreview();
+        }
+      },
+    });
+  }
   function updateSpecPanel() {}
 
   document.addEventListener('DOMContentLoaded', init);
