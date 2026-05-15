@@ -62,6 +62,14 @@
     ground.receiveShadow = true;
     scene.add(ground);
 
+    // OrbitControls — lets customer drag to rotate cabinet
+    controls = new THREE.OrbitControls(camera, canvas);
+    controls.enableDamping  = true;
+    controls.dampingFactor  = 0.08;
+    controls.enablePan      = false;
+    controls.minDistance    = 25;
+    controls.maxDistance    = 180;
+
     // Resize handler
     function onResize() {
       const cw = canvas.clientWidth;
@@ -77,6 +85,7 @@
     // Render loop
     (function animate() {
       requestAnimationFrame(animate);
+      controls.update();
       renderer.render(scene, camera);
     }());
   }

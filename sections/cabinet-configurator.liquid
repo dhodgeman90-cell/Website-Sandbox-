@@ -49,6 +49,7 @@
   {%- comment -%} Centre panel: Three.js 3D preview {%- endcomment -%}
   <div class="cab-panel cab-panel--preview">
     <canvas id="cc-canvas"></canvas>
+    <div class="cab-rotate-hint">&#8635; Drag to rotate</div>
   </div>
 
   {%- comment -%} Right panel: spec + price + cart {%- endcomment -%}
@@ -220,6 +221,16 @@
     font-size: 0.6rem;
     color: #555;
     text-align: center;
+  }
+
+  .cab-rotate-hint {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    font-size: 0.55rem;
+    color: #444;
+    letter-spacing: 0.06em;
+    pointer-events: none;
   }
 
   /* ── Responsive ─────────────────────────────────────────────────────────── */
