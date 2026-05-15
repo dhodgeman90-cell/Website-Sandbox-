@@ -3,17 +3,53 @@
   assign cfg = cab_product.metafields.cabinet_config
 -%}
 
-<section class="cabinet-configurator" id="cabinet-configurator">
+<script>
+  window.cabinetConfig = {
+    widths:   {{ cfg.available_widths.value | default: '[]' | json }},
+    depths:   {{ cfg.available_depths.value | default: '[]' | json }},
+    colors:   {{ cfg.available_colors.value | default: '[]' | json }},
+    variants: {{ cab_product.variants | json }}
+  };
+</script>
 
-  {%- comment -%} Config data injected for JS — reads from cabinet_config metafields {%- endcomment -%}
-  <script>
-    window.cabinetConfig = {
-      widths:   {{ cfg.available_widths.value | default: '[]' | json }},
-      depths:   {{ cfg.available_depths.value | default: '[]' | json }},
-      colors:   {{ cfg.available_colors.value | default: '[]' | json }},
-      variants: {{ cab_product.variants | json }}
-    };
-  </script>
+{%- comment -%} Hero ─────────────────────────────────────────────────────── {%- endcomment -%}
+<div class="cab-hero">
+  <div class="cab-hero__eyebrow">Made to Order &middot; CNC Precision</div>
+  <h1 class="cab-hero__headline">Build Your Baseball Card Cabinet</h1>
+  <p class="cab-hero__sub">Choose your width, depth, and finish. We cut it to spec in our CNC shop and ship it to your door.</p>
+  <a href="#cc-configurator" class="cab-hero__cta">Start Configuring &#8595;</a>
+</div>
+
+{%- comment -%} How it works ─────────────────────────────────────────────── {%- endcomment -%}
+<div class="cab-steps">
+  <div class="cab-section-label cab-steps__label">How it works</div>
+  <div class="cab-steps__grid">
+
+    <div class="cab-step">
+      <div class="cab-step__num">1</div>
+      <div class="cab-step__title">Configure</div>
+      <div class="cab-step__desc">Pick your size and finish. See it in 3D as you go.</div>
+    </div>
+
+    <div class="cab-step">
+      <div class="cab-step__num">2</div>
+      <div class="cab-step__title">Order</div>
+      <div class="cab-step__desc">Add to cart. Your exact specs are locked in at checkout.</div>
+    </div>
+
+    <div class="cab-step">
+      <div class="cab-step__num">3</div>
+      <div class="cab-step__title">Delivered</div>
+      <div class="cab-step__desc">CNC-cut in our shop and shipped flat-packed with hardware.</div>
+    </div>
+
+  </div>
+</div>
+
+{%- comment -%} Scroll anchor — separate from section id used by JS {%- endcomment -%}
+<div id="cc-configurator" style="scroll-margin-top:20px;"></div>
+
+<section class="cabinet-configurator" id="cabinet-configurator">
 
   {%- comment -%} Left panel: dropdowns {%- endcomment -%}
   <div class="cab-panel cab-panel--options">
@@ -70,6 +106,25 @@
   </div>
 
 </section>
+
+{%- comment -%} Feature callouts ────────────────────────────────────────── {%- endcomment -%}
+<div class="cab-callouts">
+  <div class="cab-callout">
+    <div class="cab-callout__icon">&#10022;</div>
+    <div class="cab-callout__title">Made to Order</div>
+    <div class="cab-callout__desc">Every cabinet is cut to your exact dimensions in our CNC shop.</div>
+  </div>
+  <div class="cab-callout">
+    <div class="cab-callout__icon">&#10022;</div>
+    <div class="cab-callout__title">Free Shipping</div>
+    <div class="cab-callout__desc">Flat-packed and shipped to your door at no extra cost.</div>
+  </div>
+  <div class="cab-callout">
+    <div class="cab-callout__icon">&#10022;</div>
+    <div class="cab-callout__title">Ships in 5&ndash;7 Days</div>
+    <div class="cab-callout__desc">Quick turnaround from order to delivery.</div>
+  </div>
+</div>
 
 <style>
   .cabinet-configurator {
@@ -228,6 +283,124 @@
     pointer-events: none;
   }
 
+  /* ── Hero ───────────────────────────────────────────────────────────────── */
+  .cab-hero {
+    text-align: center;
+    padding: 64px 24px 48px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .cab-hero__eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a96e;
+    margin-bottom: 14px;
+  }
+  .cab-hero__headline {
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 700;
+    color: #f0ede8;
+    line-height: 1.15;
+    margin: 0 0 14px;
+  }
+  .cab-hero__sub {
+    font-size: 0.85rem;
+    color: #888;
+    line-height: 1.7;
+    margin: 0 0 28px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cab-hero__cta {
+    display: inline-block;
+    background: #c9a96e;
+    color: #1c1c1c;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 3px;
+    transition: opacity 0.15s;
+  }
+  .cab-hero__cta:hover { opacity: 0.85; }
+
+  /* ── How it works ───────────────────────────────────────────────────────── */
+  .cab-steps {
+    padding: 0 24px 48px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .cab-steps__label {
+    margin-bottom: 28px;
+  }
+  .cab-steps__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+  .cab-step__num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #c9a96e;
+    background: #242424;
+    color: #c9a96e;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+  }
+  .cab-step__title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #f0ede8;
+    margin-bottom: 6px;
+  }
+  .cab-step__desc {
+    font-size: 0.65rem;
+    color: #888;
+    line-height: 1.6;
+  }
+
+  /* ── Feature callouts ───────────────────────────────────────────────────── */
+  .cab-callouts {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    max-width: 1100px;
+    margin: 32px auto 48px;
+    padding: 0 24px;
+  }
+  .cab-callout {
+    padding: 20px;
+    border: 1px solid #2e2e2e;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .cab-callout__icon {
+    font-size: 1.1rem;
+    color: #c9a96e;
+    margin-bottom: 10px;
+  }
+  .cab-callout__title {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #f0ede8;
+    margin-bottom: 6px;
+  }
+  .cab-callout__desc {
+    font-size: 0.62rem;
+    color: #888;
+    line-height: 1.6;
+  }
+
   /* ── Responsive ─────────────────────────────────────────────────────────── */
   @media (max-width: 768px) {
     .cabinet-configurator {
@@ -238,12 +411,35 @@
     .cab-panel:last-child { border-bottom: none; }
     .cab-panel--preview { min-height: 380px; }
     #cc-canvas { position: absolute; }
+    .cab-steps__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .cab-callouts {
+      grid-template-columns: 1fr;
+    }
+    .cab-hero {
+      padding: 40px 20px 32px;
+    }
   }
 </style>
 
 <script src="{{ 'three.min.js' | asset_url }}" defer></script>
 <script src="{{ 'three-orbit-controls.min.js' | asset_url }}" defer></script>
 <script src="{{ 'cabinet-configurator.js' | asset_url }}" defer></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var cta = document.querySelector('.cab-hero__cta');
+    if (cta) {
+      cta.addEventListener('click', function (e) {
+        e.preventDefault();
+        var target = document.getElementById('cc-configurator');
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+  });
+</script>
 
 {% schema %}
 {
