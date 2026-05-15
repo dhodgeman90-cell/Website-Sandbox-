@@ -19,7 +19,7 @@
   let widthSelect, depthSelect, colorSelect, atcBtn, priceEl, atcErrorEl;
 
   // ─── Three.js refs ────────────────────────────────────────────────────────
-  let scene, camera, renderer, cabinetGroup;
+  let scene, camera, renderer, cabinetGroup, controls;
 
   // ─── Scene setup (runs once) ──────────────────────────────────────────────
   function initScene(canvas) {
@@ -37,16 +37,21 @@
     camera.position.set(20, 28, 50);
     camera.lookAt(0, 17, 0);
 
-    // Warm directional light — casts shadows, positioned upper-front-right
-    const dirLight = new THREE.DirectionalLight(0xfff5e0, 1.2);
-    dirLight.position.set(30, 50, 40);
-    dirLight.castShadow = true;
-    dirLight.shadow.mapSize.width  = 1024;
-    dirLight.shadow.mapSize.height = 1024;
-    scene.add(dirLight);
+    // Key light — warm, upper front-right, casts soft shadows
+    const keyLight = new THREE.DirectionalLight(0xfff5e0, 1.1);
+    keyLight.position.set(30, 50, 40);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width  = 1024;
+    keyLight.shadow.mapSize.height = 1024;
+    scene.add(keyLight);
 
-    // Soft ambient fill
-    scene.add(new THREE.AmbientLight(0x606060, 0.8));
+    // Fill light — cooler, upper front-left, no shadows (lifts shadow side)
+    const fillLight = new THREE.DirectionalLight(0xd0e8ff, 0.4);
+    fillLight.position.set(-30, 40, 30);
+    scene.add(fillLight);
+
+    // Ambient base fill
+    scene.add(new THREE.AmbientLight(0x505060, 0.6));
 
     // Ground plane — receives the cabinet's shadow
     const ground = new THREE.Mesh(
@@ -96,13 +101,13 @@
     const GAP      = 0.25;
     const DRAWERS  = 4;
 
-    // Materials
-    const baseColor  = new THREE.Color(colorHex);
-    const bodyColor  = baseColor.clone().multiplyScalar(0.70);
+    // Materials — PBR (MeshStandardMaterial)
+    const baseColor = new THREE.Color(colorHex);
+    const bodyColor = baseColor.clone().multiplyScalar(0.65);
 
-    const bodyMat = new THREE.MeshPhongMaterial({ color: bodyColor, shininess: 30 });
-    const faceMat = new THREE.MeshPhongMaterial({ color: baseColor, shininess: 70 });
-    const pullMat = new THREE.MeshPhongMaterial({ color: 0xc9a96e,  shininess: 120 });
+    const bodyMat = new THREE.MeshStandardMaterial({ color: bodyColor, roughness: 0.55, metalness: 0.0 });
+    const faceMat = new THREE.MeshStandardMaterial({ color: baseColor, roughness: 0.25, metalness: 0.0 });
+    const pullMat = new THREE.MeshStandardMaterial({ color: 0xc9a96e, roughness: 0.35, metalness: 0.6 });
 
     function box(w, h, d, x, y, z, mat) {
       const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
