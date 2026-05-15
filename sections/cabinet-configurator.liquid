@@ -8,16 +8,11 @@
   {%- comment -%} Config data injected for JS — reads from cabinet_config metafields {%- endcomment -%}
   <script>
     window.cabinetConfig = {
-      widths:    {{ cfg.available_widths.value  | default: '[]' | json }},
-      depths:    {{ cfg.available_depths.value  | default: '[]' | json }},
-      colors:    {{ cfg.available_colors.value  | default: '[]' | json }},
-      basePrice: {{ cfg.base_price.value        | default: 0 }},
-      variantId: {{ cab_product.selected_or_first_available_variant.id | default: 0 }}
+      widths:   {{ cfg.available_widths.value | default: '[]' | json }},
+      depths:   {{ cfg.available_depths.value | default: '[]' | json }},
+      colors:   {{ cfg.available_colors.value | default: '[]' | json }},
+      variants: {{ cab_product.variants | json }}
     };
-    // DEBUG — remove after confirming product link works
-    console.log('section product setting:', {{ section.settings.product | json }});
-    console.log('product found:', {{ cab_product.title | default: 'nil' | json }});
-    console.log('variantId:', {{ cab_product.selected_or_first_available_variant.id | default: 0 }});
   </script>
 
   {%- comment -%} Left panel: dropdowns {%- endcomment -%}

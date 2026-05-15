@@ -3,8 +3,9 @@
 
   // ─── Config (injected by Liquid into window.cabinetConfig) ────────────────
   const cfg = window.cabinetConfig || {
-    widths: [], depths: [], colors: [], basePrice: 0, variantId: 0,
+    widths: [], depths: [], colors: [], variants: [],
   };
+
 
   // ─── State ────────────────────────────────────────────────────────────────
   const state = {
@@ -213,14 +214,14 @@
   function populateDropdowns() {
     cfg.widths.forEach(function (item) {
       const opt = document.createElement('option');
-      opt.value       = item.value;
+      opt.value       = String(item.value);
       opt.textContent = item.label;
       widthSelect.appendChild(opt);
     });
 
     cfg.depths.forEach(function (item) {
       const opt = document.createElement('option');
-      opt.value       = item.value;
+      opt.value       = String(item.value);
       opt.textContent = item.label;
       depthSelect.appendChild(opt);
     });
@@ -234,16 +235,22 @@
     });
   }
 
-  // ─── Price calculation ────────────────────────────────────────────────────
-  function calculatePrice() {
+  // ─── Find the Shopify variant matching current selections ─────────────────
+  // Shopify option1/option2 are strings; state.width/depth are numbers — use ==
+  function findVariant() {
     if (!state.width || !state.depth || !state.colorId) return null;
-    const wObj = cfg.widths.find(function (o) { return o.value === state.width; });
-    const dObj = cfg.depths.find(function (o) { return o.value === state.depth; });
-    const cObj = cfg.colors.find(function (o) { return o.id    === state.colorId; });
-    return cfg.basePrice
-      + (wObj ? (wObj.price_add || 0) : 0)
-      + (dObj ? (dObj.price_add || 0) : 0)
-      + (cObj ? (cObj.price_add || 0) : 0);
+    var colorId = state.colorId; // capture before callback so null-check holds
+    return (cfg.variants || []).find(/** @param {{ option1: string, option2: string, option3: string, price: number, id: number }} v */ function (v) {
+      return String(v.option1) == String(state.width)  &&
+             String(v.option2) == String(state.depth)  &&
+             v.option3.toLowerCase() === colorId.toLowerCase();
+    }) || null;
+  }
+
+  // ─── Price from variant (Shopify stores cents as integers) ────────────────
+  function calculatePrice() {
+    var v = findVariant();
+    return v ? v.price / 100 : null;
   }
 
   // ─── Update right-panel spec display ──────────────────────────────────────
@@ -279,13 +286,14 @@
 
     updateSpec();
     updatePrice();
-    atcBtn.disabled = !(state.width && state.depth && state.colorId);
+    atcBtn.disabled = !findVariant();
   }
 
   // ─── Add to Cart ──────────────────────────────────────────────────────────
   function addToCart() {
-    const price = calculatePrice();
-    if (price === null || !cfg.variantId) return;
+    var v     = findVariant();
+    var price = v ? v.price / 100 : null;
+    if (!v || price === null) return;
 
     atcBtn.disabled    = true;
     atcBtn.textContent = 'Adding…';
@@ -295,7 +303,7 @@
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        id:       cfg.variantId,
+        id:       v.id,
         quantity: 1,
         properties: {
           '_cabinet_width':        state.width,
@@ -326,8 +334,8 @@
   // ─── Init ─────────────────────────────────────────────────────────────────
   function init() {
     const section = document.getElementById('cabinet-configurator');
-    if (!cfg.variantId) {
-      section.innerHTML = '<p style="padding:40px;color:#888;text-align:center">No cabinet product assigned to this section.</p>';
+    if (!cfg.variants || cfg.variants.length === 0) {
+      section.innerHTML = '<p style="padding:40px;color:#888;text-align:center">No cabinet product assigned to this section, or product has no variants.</p>';
       return;
     }
 
