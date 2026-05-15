@@ -34,7 +34,7 @@
     const w = canvas.clientWidth  || 480;
     const h = canvas.clientHeight || 560;
     camera = new THREE.PerspectiveCamera(35, w / h, 0.1, 2000);
-    camera.position.set(20, 28, 50);
+    camera.position.set(40, 32, 55);
     camera.lookAt(0, 17, 0);
 
     // Key light — warm, upper front-right, casts soft shadows
@@ -175,15 +175,29 @@
       // Drawer face — sits flush with cabinet front
       box(W - 2*T - 0.125, DRAWER_H - 0.125, faceDepth, 0, y, faceZ, faceMat);
 
-      // Pull handle — centred on drawer, protrudes forward
-      box(W * 0.15, 0.45, 0.45, 0, y, faceZ + faceDepth / 2 + 0.35, pullMat);
+      // Bar handle — horizontal cylinder, gold, protrudes forward
+      const handleLen = W * 0.22;
+      const handleMesh = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.18, 0.18, handleLen, 12),
+        pullMat
+      );
+      handleMesh.rotation.z  = Math.PI / 2;
+      handleMesh.position.set(0, y, faceZ + faceDepth / 2 + 0.55);
+      handleMesh.castShadow    = true;
+      handleMesh.receiveShadow = true;
+      cabinetGroup.add(handleMesh);
     }
 
     scene.add(cabinetGroup);
 
-    // Reposition camera so the cabinet fills the canvas at this size
-    camera.position.set(W * 0.78, H * 0.88, D * 2.9);
-    camera.lookAt(0, H / 2, 0);
+    // 3/4 product-photography angle — shows front face, right side, and top
+    camera.position.set(W * 1.3, H * 0.8, D * 2.8);
+    if (controls) {
+      controls.target.set(0, H * 0.45, 0);
+      controls.update();
+    } else {
+      camera.lookAt(0, H * 0.45, 0);
+    }
   }
 
   // ─── Populate dropdowns from metafield config ─────────────────────────────
