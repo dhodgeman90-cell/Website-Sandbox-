@@ -212,21 +212,21 @@
 
   // ─── Populate dropdowns from metafield config ─────────────────────────────
   function populateDropdowns() {
-    cfg.widths.forEach(function (item) {
+    (Array.isArray(cfg.widths) ? cfg.widths : []).forEach(function (item) {
       const opt = document.createElement('option');
       opt.value       = String(item.value);
       opt.textContent = item.label;
       widthSelect.appendChild(opt);
     });
 
-    cfg.depths.forEach(function (item) {
+    (Array.isArray(cfg.depths) ? cfg.depths : []).forEach(function (item) {
       const opt = document.createElement('option');
       opt.value       = String(item.value);
       opt.textContent = item.label;
       depthSelect.appendChild(opt);
     });
 
-    cfg.colors.forEach(function (item) {
+    (Array.isArray(cfg.colors) ? cfg.colors : []).forEach(function (item) {
       const opt = document.createElement('option');
       opt.value        = item.id;
       opt.textContent  = item.label;

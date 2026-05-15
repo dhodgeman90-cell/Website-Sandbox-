@@ -7,7 +7,7 @@
   window.cabinetConfig = {
     widths:   {{ cfg.available_widths.value | default: '[]' | json }},
     depths:   {{ cfg.available_depths.value | default: '[]' | json }},
-    colors:   {{ cfg.available_colors.value | default: '[]' | json }},
+    colors:   {{ cfg.available_finishes.value | default: cfg.available_colors.value | default: '[]' | json }},
     variants: {{ cab_product.variants | json }}
   };
 </script>
