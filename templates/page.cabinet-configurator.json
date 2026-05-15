@@ -2,7 +2,9 @@
   "sections": {
     "main": {
       "type": "cabinet-configurator",
-      "settings": {}
+      "settings": {
+        "product": "baseball-card-cabinet"
+      }
     }
   },
   "order": ["main"]

@@ -1,82 +1,57 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Phill Anton Consulting — Which Package Is Right For You?</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --green: #74EA16;
-    --green-dim: rgba(116, 234, 22, 0.12);
-    --green-border: rgba(116, 234, 22, 0.35);
-    --navy: #18303D;
-    --navy-light: #1e3d4d;
-    --dark: #111c21;
-    --card: #18303D;
-    --border: rgba(255,255,255,0.08);
-    --text: rgba(255,255,255,0.88);
-    --muted: rgba(255,255,255,0.45);
-    --heading: #ffffff;
-  }
-
   body {
     background: #0f1e26;
-    color: var(--text);
-    font-family: 'Titillium Web', sans-serif;
+    color: rgba(255,255,255,0.88);
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
     min-height: 100vh;
     padding: 60px 40px;
   }
 
   .page { max-width: 780px; margin: 0 auto; }
 
-  /* ── Header ── */
-  .header {
-    text-align: center;
-    margin-bottom: 52px;
+  .header { text-align: center; margin-bottom: 52px; }
+
+  .brand-name {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 20px;
   }
 
-  .logo-wrap { margin-bottom: 28px; }
-
-  .logo-wrap img {
-    height: 52px;
-    width: auto;
-    filter: brightness(0) invert(1);
-  }
-
-  .header-rule {
-    width: 40px;
-    height: 3px;
-    background: var(--green);
-    margin: 0 auto 24px;
-  }
+  .header-rule { width: 40px; height: 3px; background: #74EA16; margin: 0 auto 24px; }
 
   .header h1 {
-    font-family: 'DM Sans', sans-serif;
     font-size: 30px;
     font-weight: 300;
-    color: var(--heading);
-    letter-spacing: -0.02em;
+    color: #ffffff;
+    letter-spacing: -0.01em;
     margin-bottom: 12px;
   }
 
   .header p {
     font-size: 14px;
-    color: var(--muted);
+    color: rgba(255,255,255,0.45);
     max-width: 520px;
     margin: 0 auto;
     line-height: 1.65;
   }
 
-  /* ── Customer info ── */
   .customer-block {
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: #18303D;
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 6px;
     padding: 28px 32px;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
@@ -88,29 +63,28 @@
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: rgba(255,255,255,0.45);
     margin-bottom: 8px;
   }
 
   .field input {
     width: 100%;
     background: #0f1e26;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 4px;
-    color: var(--heading);
-    font-family: 'Titillium Web', sans-serif;
+    color: #ffffff;
+    font-family: inherit;
     font-size: 14px;
     padding: 10px 14px;
     outline: none;
     transition: border-color 0.2s;
   }
 
-  .field input:focus { border-color: var(--green-border); }
+  .field input:focus { border-color: rgba(116,234,22,0.35); }
 
-  /* ── Section ── */
   .section {
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: #18303D;
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 6px;
     padding: 32px;
     margin-bottom: 20px;
@@ -121,127 +95,70 @@
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--green);
+    color: #74EA16;
     margin-bottom: 6px;
   }
 
-  .section h2 {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--heading);
-    margin-bottom: 24px;
-  }
+  .section h2 { font-size: 18px; font-weight: 500; color: #ffffff; margin-bottom: 24px; }
 
-  /* ── Question row ── */
   .question {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
     padding: 14px 0;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
   }
 
   .question:last-child { border-bottom: none; }
 
-  .q-number {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--muted);
-    width: 20px;
-    flex-shrink: 0;
-  }
-
-  .q-text {
-    font-size: 13px;
-    color: var(--text);
-    line-height: 1.5;
-    flex: 1;
-  }
+  .q-number { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.45); width: 20px; flex-shrink: 0; }
+  .q-text { font-size: 13px; color: rgba(255,255,255,0.88); line-height: 1.5; flex: 1; }
 
   .q-select {
     flex-shrink: 0;
     appearance: none;
     -webkit-appearance: none;
-    background: #0f1e26 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(255,255,255,0.3)'/%3E%3C/svg%3E") no-repeat right 12px center;
-    border: 1px solid var(--border);
+    background: #0f1e26;
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 4px;
-    color: var(--text);
-    font-family: 'Titillium Web', sans-serif;
+    color: rgba(255,255,255,0.88);
+    font-family: inherit;
     font-size: 13px;
-    padding: 8px 34px 8px 14px;
-    min-width: 120px;
+    padding: 8px 14px;
+    min-width: 100px;
     cursor: pointer;
     outline: none;
     transition: border-color 0.2s;
   }
 
-  .q-select:focus { border-color: var(--green-border); }
-
-  .q-select.answered-yes { border-color: var(--green); color: var(--green); }
+  .q-select:focus { border-color: rgba(116,234,22,0.35); }
+  .q-select.answered-yes { border-color: #74EA16; color: #74EA16; }
   .q-select.answered-no  { border-color: rgba(255,255,255,0.2); }
 
-  /* ── Result panel ── */
   .result-panel {
-    background: var(--green-dim);
-    border: 1px solid var(--green-border);
+    background: rgba(116,234,22,0.08);
+    border: 1px solid rgba(116,234,22,0.35);
     border-radius: 6px;
     padding: 32px;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     text-align: center;
   }
 
-  .result-panel .result-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 8px;
-  }
+  .result-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #74EA16; margin-bottom: 8px; }
+  .result-tier { font-size: 26px; font-weight: 600; color: #ffffff; margin-bottom: 8px; }
+  .result-desc { font-size: 13px; color: rgba(255,255,255,0.55); margin-bottom: 14px; line-height: 1.65; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .result-price { font-size: 22px; font-weight: 300; color: #ffffff; }
+  .result-price span { font-size: 12px; color: rgba(255,255,255,0.45); }
 
-  .result-panel .result-tier {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 26px;
-    font-weight: 600;
-    color: var(--heading);
-    margin-bottom: 6px;
-  }
-
-  .result-panel .result-desc {
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 14px;
-    line-height: 1.6;
-  }
-
-  .result-panel .result-price {
-    display: inline-block;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 22px;
-    font-weight: 300;
-    color: var(--heading);
-  }
-
-  .result-panel .result-price span {
-    font-size: 12px;
-    color: var(--muted);
-    font-family: 'Titillium Web', sans-serif;
-  }
-
-  /* ── Print button ── */
-  .actions {
-    text-align: center;
-    margin-bottom: 48px;
-  }
+  .actions { text-align: center; margin-bottom: 48px; }
 
   .btn-print {
-    background: var(--green);
+    background: #74EA16;
     color: #0f1e26;
-    font-family: 'DM Sans', sans-serif;
+    font-family: inherit;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.06em;
     padding: 12px 32px;
     border: none;
@@ -251,115 +168,47 @@
   }
 
   .btn-print:hover { opacity: 0.85; }
+  .print-hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 10px; }
 
-  .print-hint {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 10px;
-  }
+  .footer { text-align: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .footer p { font-size: 11px; color: rgba(255,255,255,0.25); letter-spacing: 0.05em; line-height: 1.7; }
 
-  /* ── Footer ── */
-  .footer {
-    text-align: center;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
-  }
-
-  .footer p {
-    font-size: 11px;
-    color: rgba(255,255,255,0.25);
-    letter-spacing: 0.06em;
-    line-height: 1.7;
-  }
-
-  .footer a { color: var(--green); text-decoration: none; }
-
-  /* ── Print styles ── */
   @media print {
-    body {
-      background: #ffffff;
-      color: #111111;
-      padding: 30px;
-      font-size: 12px;
-    }
-
-    :root {
-      --text: #111111;
-      --heading: #000000;
-      --muted: #555555;
-      --card: #f4f4f4;
-      --border: #cccccc;
-      --green: #3a7d02;
-      --green-dim: #eaf7dc;
-      --green-border: #a3d96b;
-    }
-
-    .header h1 { font-size: 22px; color: #000000; }
-    .header p { color: #555555; }
-    .logo-wrap img { filter: none; }
+    body { background: #ffffff; color: #111111; padding: 30px; }
+    .brand-name { color: #555555; }
     .header-rule { background: #3a7d02; }
-
-    .customer-block {
-      background: #f4f4f4;
-      border-color: #cccccc;
-    }
-
-    .field input {
-      background: #ffffff;
-      border-color: #aaaaaa;
-      color: #111111;
-    }
-
-    .section {
-      background: #f4f4f4;
-      border-color: #cccccc;
-      break-inside: avoid;
-    }
-
+    .header h1 { color: #000000; }
+    .header p { color: #555555; }
+    .customer-block { background: #f4f4f4; border-color: #cccccc; }
+    .field input { background: #ffffff; border-color: #aaaaaa; color: #111111; }
+    .section { background: #f4f4f4; border-color: #cccccc; break-inside: avoid; }
     .section-label { color: #3a7d02; }
     .section h2 { color: #000000; }
-
-    .q-text { color: #111111; }
     .q-number { color: #777777; }
-
-    .q-select {
-      background: #ffffff;
-      border-color: #aaaaaa;
-      color: #111111;
-    }
-
-    .result-panel {
-      background: #eaf7dc;
-      border-color: #a3d96b;
-    }
-
-    .result-panel .result-label { color: #3a7d02; }
-    .result-panel .result-tier { color: #000000; }
-    .result-panel .result-desc { color: #444444; }
-    .result-panel .result-price { color: #000000; }
-    .result-panel .result-price span { color: #555555; }
-
+    .q-text { color: #111111; }
+    .q-select { background: #ffffff; border-color: #aaaaaa; color: #111111; }
+    .q-select.answered-yes { border-color: #3a7d02; color: #3a7d02; }
+    .result-panel { background: #eaf7dc; border-color: #a3d96b; }
+    .result-label { color: #3a7d02; }
+    .result-tier { color: #000000; }
+    .result-desc { color: #444444; }
+    .result-price { color: #000000; }
+    .result-price span { color: #555555; }
     .actions { display: none; }
-
     .footer p { color: #888888; }
-    .footer a { color: #3a7d02; }
   }
 </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- Header -->
   <div class="header">
-    <div class="logo-wrap">
-      <img src="https://www.phillanton.com/cdn/shop/files/Phill_Logo.png?v=1703093064&width=300" alt="Phill Anton Consulting">
-    </div>
+    <div class="brand-name">Phill Anton Consulting</div>
     <div class="header-rule"></div>
     <h1>Which Package Is Right For You?</h1>
     <p>Answer the questions below to help us understand what you need. We'll recommend the package that best fits your goals — no obligation, just clarity.</p>
   </div>
 
-  <!-- Customer info -->
   <div class="customer-block">
     <div class="field">
       <label>Your Name</label>
@@ -371,262 +220,142 @@
     </div>
   </div>
 
-  <!-- Section 1 -->
   <div class="section">
     <div class="section-label">Section 1 of 3</div>
     <h2>Your Website</h2>
-
     <div class="question">
       <span class="q-number">01</span>
       <span class="q-text">Do you want customers to be able to request a quote through your website?</span>
-      <select class="q-select" id="q1" onchange="handleChange(this, 1)">
-        <option value="">— Select —</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+      <select class="q-select" id="q1" onchange="handleChange(this,1)"><option value="">— Select —</option><option value="yes">Yes</option><option value="no">No</option></select>
     </div>
-
     <div class="question">
       <span class="q-number">02</span>
       <span class="q-text">Do you want customers to select their door profile, size, and finish before submitting an enquiry?</span>
-      <select class="q-select" id="q2" onchange="handleChange(this, 2)">
-        <option value="">— Select —</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+      <select class="q-select" id="q2" onchange="handleChange(this,2)"><option value="">— Select —</option><option value="yes">Yes</option><option value="no">No</option></select>
     </div>
-
     <div class="question">
       <span class="q-number">03</span>
       <span class="q-text">Do you want customers to see a live price estimate on screen as they make their selections?</span>
-      <select class="q-select" id="q3" onchange="handleChange(this, 3)">
-        <option value="">— Select —</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+      <select class="q-select" id="q3" onchange="handleChange(this,3)"><option value="">— Select —</option><option value="yes">Yes</option><option value="no">No</option></select>
     </div>
-
     <div class="question">
       <span class="q-number">04</span>
       <span class="q-text">Do you need customers to pay for orders directly through your website?</span>
-      <select class="q-select" id="q4" onchange="handleChange(this, 4)">
-        <option value="">— Select —</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+      <select class="q-select" id="q4" onchange="handleChange(this,4)"><option value="">— Select —</option><option value="yes">Yes</option><option value="no">No</option></select>
     </div>
-
     <div class="question">
       <span class="q-number">05</span>
       <span class="q-text">Do you sell to trade customers (builders, developers, kitchen companies) as well as homeowners?</span>
-      <select class="q-select" id="q5" onchange="handleChange(this, 5)">
-        <option value="">— Select —</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+      <select class="q-select" id="q5" onchange="handleChange(this,5)"><option value="">— Select —</option><option value="yes">Yes</option><option value="no">No</option></select>
     </div>
-
     <div class="question">
       <span class="q-number">06</span>
       <span class="q-text">Do you need a separate login or pricing area specifically for trade customers?</span>
-      <select class="q-select" id="q6" onchange="handleChange(this, 6)">
-        <option value="">— Select —</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+      <select class="q-select" id="q6" onchange="handleChange(this,6)"><option value="">— Select —</option><option value="yes">Yes</option><option value="no">No</option></select>
     </div>
   </div>
 
-  <!-- Section 2 -->
   <div class="section">
     <div class="section-label">Section 2 of 3</div>
     <h2>Brand &amp; Identity</h2>
-
     <div class="question">
       <span class="q-number">07</span>
       <span class="q-text">Do you currently have a professional logo you are satisfied with?</span>
-      <select class="q-select" id="q7" onchange="handleChange(this, 7)">
-        <option value="">— Select —</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+      <select class="q-select" id="q7" onchange="handleChange(this,7)"><option value="">— Select —</option><option value="yes">Yes</option><option value="no">No</option></select>
     </div>
-
     <div class="question">
       <span class="q-number">08</span>
       <span class="q-text">Do you need a logo and colour palette designed as part of this project?</span>
-      <select class="q-select" id="q8" onchange="handleChange(this, 8)">
-        <option value="">— Select —</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+      <select class="q-select" id="q8" onchange="handleChange(this,8)"><option value="">— Select —</option><option value="yes">Yes</option><option value="no">No</option></select>
     </div>
-
     <div class="question">
       <span class="q-number">09</span>
       <span class="q-text">Do you post regularly on social media (Facebook, Instagram, etc.)?</span>
-      <select class="q-select" id="q9" onchange="handleChange(this, 9)">
-        <option value="">— Select —</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+      <select class="q-select" id="q9" onchange="handleChange(this,9)"><option value="">— Select —</option><option value="yes">Yes</option><option value="no">No</option></select>
     </div>
-
     <div class="question">
       <span class="q-number">10</span>
       <span class="q-text">Do you need more than 5 ready-made social media post templates?</span>
-      <select class="q-select" id="q10" onchange="handleChange(this, 10)">
-        <option value="">— Select —</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+      <select class="q-select" id="q10" onchange="handleChange(this,10)"><option value="">— Select —</option><option value="yes">Yes</option><option value="no">No</option></select>
     </div>
-
     <div class="question">
       <span class="q-number">11</span>
       <span class="q-text">Do you need social media profile images designed for all platforms?</span>
-      <select class="q-select" id="q11" onchange="handleChange(this, 11)">
-        <option value="">— Select —</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+      <select class="q-select" id="q11" onchange="handleChange(this,11)"><option value="">— Select —</option><option value="yes">Yes</option><option value="no">No</option></select>
     </div>
-
     <div class="question">
       <span class="q-number">12</span>
       <span class="q-text">Do you need an HTML email signature that matches your website design?</span>
-      <select class="q-select" id="q12" onchange="handleChange(this, 12)">
-        <option value="">— Select —</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+      <select class="q-select" id="q12" onchange="handleChange(this,12)"><option value="">— Select —</option><option value="yes">Yes</option><option value="no">No</option></select>
     </div>
   </div>
 
-  <!-- Section 3 -->
   <div class="section">
     <div class="section-label">Section 3 of 3</div>
     <h2>Long-Term Requirements</h2>
-
     <div class="question">
       <span class="q-number">13</span>
       <span class="q-text">Do you need downloadable product spec sheets or technical documents available on your website?</span>
-      <select class="q-select" id="q13" onchange="handleChange(this, 13)">
-        <option value="">— Select —</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+      <select class="q-select" id="q13" onchange="handleChange(this,13)"><option value="">— Select —</option><option value="yes">Yes</option><option value="no">No</option></select>
     </div>
-
     <div class="question">
       <span class="q-number">14</span>
       <span class="q-text">Do you need a full brand guidelines document — print-ready PDF covering logo rules, typography, and colour usage?</span>
-      <select class="q-select" id="q14" onchange="handleChange(this, 14)">
-        <option value="">— Select —</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+      <select class="q-select" id="q14" onchange="handleChange(this,14)"><option value="">— Select —</option><option value="yes">Yes</option><option value="no">No</option></select>
     </div>
-
     <div class="question">
       <span class="q-number">15</span>
       <span class="q-text">Do you have an in-house IT team who will take over management of the site after launch?</span>
-      <select class="q-select" id="q15" onchange="handleChange(this, 15)">
-        <option value="">— Select —</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+      <select class="q-select" id="q15" onchange="handleChange(this,15)"><option value="">— Select —</option><option value="yes">Yes</option><option value="no">No</option></select>
     </div>
   </div>
 
-  <!-- Result -->
-  <div class="result-panel" id="result">
+  <div class="result-panel">
     <div class="result-label">Recommended Package</div>
     <div class="result-tier" id="result-tier">Tier 1 — Shell</div>
     <div class="result-desc" id="result-desc">A clean, professional website with your door range, about page, contact page, and enquiry form. Perfect as a starting point.</div>
     <div class="result-price" id="result-price">~$2,000 <span>AUD inc. GST</span></div>
   </div>
 
-  <!-- Print -->
   <div class="actions">
     <button class="btn-print" onclick="window.print()">Save as PDF to Email Back</button>
     <p class="print-hint">In the print dialog, choose "Save as PDF" as the destination.</p>
   </div>
 
-  <!-- Footer -->
   <div class="footer">
-    <p>
-      Phill Anton Consulting &nbsp;·&nbsp; <a href="https://www.phillanton.com">phillanton.com</a><br>
-      To discuss your requirements, get in touch via the website or reply directly to this email.
-    </p>
+    <p>Phill Anton Consulting &nbsp;&middot;&nbsp; phillanton.com<br>To discuss your requirements, get in touch via the website or reply directly to this email.</p>
   </div>
 
 </div>
-
 <script>
-  const answers = {};
-
-  const tiers = [
-    {
-      num: 1,
-      name: 'Tier 1 — Shell',
-      desc: 'A clean, professional website with your door range, about page, contact page, and enquiry form. Perfect as a starting point.',
-      price: '~$2,000'
-    },
-    {
-      num: 2,
-      name: 'Tier 2 — Smart Quote',
-      desc: 'Everything in Tier 1 plus a structured quote form where customers select profile, size, and finish before submitting.',
-      price: '~$3,500'
-    },
-    {
-      num: 3,
-      name: 'Tier 3 — Live Estimator',
-      desc: 'Everything in Tier 2 plus a live price calculator — and a brand kit including logo, colour palette, icon mark, and 5 social templates.',
-      price: '~$6,500'
-    },
-    {
-      num: 4,
-      name: 'Tier 4 — Full E-Commerce',
-      desc: 'Everything in Tier 3 plus cart, checkout, and payment processing — plus an extended brand kit with 15 social templates, profile images, and email signature.',
-      price: '~$10,000'
-    },
-    {
-      num: 5,
-      name: 'Tier 5 — Trade & Pro Portal',
-      desc: 'Everything in Tier 4 plus a trade login, spec downloads, and a complete brand identity system with print-ready guidelines and a full ZIP handover package.',
-      price: '~$14,000'
-    }
+  var answers = {};
+  var tiers = [
+    { name: 'Tier 1 — Shell', desc: 'A clean, professional website with your door range, about page, contact page, and enquiry form. Perfect as a starting point.', price: '~$2,000' },
+    { name: 'Tier 2 — Smart Quote', desc: 'Everything in Tier 1 plus a structured quote form where customers select profile, size, and finish before submitting.', price: '~$3,500' },
+    { name: 'Tier 3 — Live Estimator', desc: 'Everything in Tier 2 plus a live price calculator, and a brand kit including logo, colour palette, icon mark, and 5 social templates.', price: '~$6,500' },
+    { name: 'Tier 4 — Full E-Commerce', desc: 'Everything in Tier 3 plus cart, checkout, and payment processing, and an extended brand kit with 15 social templates, profile images, and email signature.', price: '~$10,000' },
+    { name: 'Tier 5 — Trade & Pro Portal', desc: 'Everything in Tier 4 plus a trade login, spec downloads, and a complete brand identity system with print-ready guidelines and a full ZIP handover package.', price: '~$14,000' }
   ];
-
   function score() {
-    const yes = (q) => answers[q] === 'yes';
-
-    let tier = 1;
-
-    if (yes('q1') || yes('q2'))                              tier = Math.max(tier, 2);
-    if (yes('q3') || yes('q8') || yes('q9'))                 tier = Math.max(tier, 3);
-    if (yes('q4') || yes('q10') || yes('q11') || yes('q12')) tier = Math.max(tier, 4);
-    if (yes('q5') || yes('q6') || yes('q13') || yes('q14') || yes('q15')) tier = Math.max(tier, 5);
-
-    return tier;
+    var y = function(q) { return answers[q] === 'yes'; };
+    var t = 1;
+    if (y('q1')||y('q2')) t = Math.max(t,2);
+    if (y('q3')||y('q8')||y('q9')) t = Math.max(t,3);
+    if (y('q4')||y('q10')||y('q11')||y('q12')) t = Math.max(t,4);
+    if (y('q5')||y('q6')||y('q13')||y('q14')||y('q15')) t = Math.max(t,5);
+    return t;
   }
-
   function updateResult() {
-    const t = tiers[score() - 1];
-    document.getElementById('result-tier').textContent  = t.name;
-    document.getElementById('result-desc').textContent  = t.desc;
-    document.getElementById('result-price').innerHTML   = t.price + ' <span>AUD inc. GST</span>';
+    var t = tiers[score()-1];
+    document.getElementById('result-tier').textContent = t.name;
+    document.getElementById('result-desc').textContent = t.desc;
+    document.getElementById('result-price').innerHTML = t.price + ' <span>AUD inc. GST</span>';
   }
-
   function handleChange(el, num) {
-    const val = el.value;
-    answers['q' + num] = val;
-
-    el.classList.remove('answered-yes', 'answered-no');
-    if (val === 'yes') el.classList.add('answered-yes');
-    if (val === 'no')  el.classList.add('answered-no');
-
+    answers['q'+num] = el.value;
+    el.classList.remove('answered-yes','answered-no');
+    if (el.value==='yes') el.classList.add('answered-yes');
+    if (el.value==='no') el.classList.add('answered-no');
     updateResult();
   }
 </script>
