@@ -30,11 +30,13 @@
   function initScene(canvas) {
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type    = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.enabled   = true;
+    renderer.shadowMap.type      = THREE.PCFSoftShadowMap;
+    renderer.toneMapping         = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 0.9;
 
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x7a4030);
+    scene.background = new THREE.Color(0xb87048);
 
     var w = canvas.clientWidth  || 480;
     var h = canvas.clientHeight || 560;
@@ -68,18 +70,18 @@
     floor.receiveShadow = true;
     scene.add(floor);
 
-    // Back wall — brick-brown. Z=-14 puts it just behind any cabinet depth.
+    // Back wall — terracotta brick. Z=-14 puts it just behind any cabinet depth.
     var backWall = new THREE.Mesh(
       new THREE.PlaneGeometry(400, 300),
-      new THREE.MeshBasicMaterial({ color: 0x7a4030 })
+      new THREE.MeshLambertMaterial({ color: 0xb87048 })
     );
     backWall.position.set(0, 150, -14);
     scene.add(backWall);
 
-    // Left wall — light grey, X=-22 gives a few inches clearance beside cabinet.
+    // Left wall — warm grey, X=-22 gives a few inches clearance beside cabinet.
     var leftWall = new THREE.Mesh(
       new THREE.PlaneGeometry(400, 300),
-      new THREE.MeshBasicMaterial({ color: 0xb8b4ae })
+      new THREE.MeshLambertMaterial({ color: 0xc8c4be })
     );
     leftWall.position.set(-22, 150, 0);
     leftWall.rotation.y = Math.PI / 2;
