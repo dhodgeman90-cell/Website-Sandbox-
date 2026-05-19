@@ -85,12 +85,12 @@
     var w = canvas.clientWidth  || 480;
     var h = canvas.clientHeight || 560;
     camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 2000);
-    camera.position.set(38, 40, 62);
-    camera.lookAt(-10, 17, 0);
+    camera.position.set(-35, 40, 62);
+    camera.lookAt(10, 17, 0);
 
-    // Key light — matches natural window light from the left in the photo
+    // Key light — from left (window side), matching the photo's natural lighting
     var keyLight = new THREE.DirectionalLight(0xfff8f0, 1.3);
-    keyLight.position.set(-20, 60, 40);
+    keyLight.position.set(-40, 60, 30);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.width  = 1024;
     keyLight.shadow.mapSize.height = 1024;
@@ -282,10 +282,10 @@
       box(HANDLE_LEN, HANDLE_T, HANDLE_T, 0, cy, handleZ, handleMat);
     }
 
-    // Shift group so back face sits at world Z=-13 (against back wall at Z=-14)
-    // and X=-10 so the cabinet appears in front of the brick wall in the photo.
+    // Back face at world Z=-13. X=+10 places cabinet in front of brick wall
+    // (right side of photo), matching the left-side camera perspective.
     cabinetGroup.position.z = -13 + (D / 2 + PLINTH_EXT);
-    cabinetGroup.position.x = -10;
+    cabinetGroup.position.x = 10;
     scene.add(cabinetGroup);
     // Camera stays fixed — set once in initScene(), never repositioned here
   }
