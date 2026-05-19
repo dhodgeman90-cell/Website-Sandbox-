@@ -35,8 +35,24 @@ declare global {
     };
   }
 
+  interface CabinetVariant {
+    id: number;
+    price: number;
+    option1: string;
+    option2: string;
+    option3: string;
+  }
+
+  interface CabinetConfig {
+    widths: Array<{ value: number; label: string }>;
+    depths: Array<{ value: number; label: string }>;
+    colors: Array<{ id: string; label: string; hex: string }>;
+    variants: CabinetVariant[];
+  }
+
   interface Window {
     Shopify: Shopify;
+    cabinetConfig?: CabinetConfig;
   }
 
   declare const Shopify: Shopify;
