@@ -86,7 +86,7 @@
     var h = canvas.clientHeight || 560;
     camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 2000);
     camera.position.set(38, 40, 62);
-    camera.lookAt(0, 17, 0);
+    camera.lookAt(-10, 17, 0);
 
     // Key light — matches natural window light from the left in the photo
     var keyLight = new THREE.DirectionalLight(0xfff8f0, 1.3);
@@ -282,9 +282,10 @@
       box(HANDLE_LEN, HANDLE_T, HANDLE_T, 0, cy, handleZ, handleMat);
     }
 
-    // Shift group so the back face of the plinth always sits at world Z=-13,
-    // flush against the back wall at Z=-14, regardless of cabinet depth.
+    // Shift group so back face sits at world Z=-13 (against back wall at Z=-14)
+    // and X=-10 so the cabinet appears in front of the brick wall in the photo.
     cabinetGroup.position.z = -13 + (D / 2 + PLINTH_EXT);
+    cabinetGroup.position.x = -10;
     scene.add(cabinetGroup);
     // Camera stays fixed — set once in initScene(), never repositioned here
   }
