@@ -55,7 +55,7 @@
     renderer.shadowMap.enabled  = true;
     renderer.shadowMap.type     = THREE.PCFSoftShadowMap;
     renderer.toneMapping        = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.05;
+    renderer.toneMappingExposure = 0.65;
     renderer.outputEncoding     = THREE.sRGBEncoding;
 
     scene = new THREE.Scene();
@@ -229,15 +229,21 @@
 
     const isMaple   = !!(colorId && colorId.toLowerCase() === 'maple');
     const baseColor = new THREE.Color(colorHex);
-    const bodyColor = baseColor.clone().multiplyScalar(0.65);
 
     // UV tiling — keeps grain scale proportional to real cabinet dimensions
     const repeatX = W / 24;
     const repeatY = H / 34.5;
 
-    const bodyMat          = makeWoodMat(bodyColor,                            0.55, repeatX, repeatY, isMaple);
-    const faceMat          = makeWoodMat(baseColor,                            0.25, repeatX, repeatY, isMaple);
-    const recessedPanelMat = makeWoodMat(baseColor.clone().multiplyScalar(0.85), 0.35, repeatX, repeatY, isMaple);
+    // For maple: use neutral greys so the photo texture drives the colour — not the hex swatch.
+    // texture × white = texture as-is; texture × 0.65 grey = darker body panels.
+    // For painted finishes: no texture, so the selected hex colour is used directly.
+    const faceColorVal  = isMaple ? new THREE.Color(1.00, 1.00, 1.00) : baseColor;
+    const bodyColorVal  = isMaple ? new THREE.Color(0.65, 0.65, 0.65) : baseColor.clone().multiplyScalar(0.65);
+    const panelColorVal = isMaple ? new THREE.Color(0.85, 0.85, 0.85) : baseColor.clone().multiplyScalar(0.85);
+
+    const bodyMat          = makeWoodMat(bodyColorVal,  0.55, repeatX, repeatY, isMaple);
+    const faceMat          = makeWoodMat(faceColorVal,  0.25, repeatX, repeatY, isMaple);
+    const recessedPanelMat = makeWoodMat(panelColorVal, 0.35, repeatX, repeatY, isMaple);
     const pullMat          = new THREE.MeshStandardMaterial({
       color: 0xc9a96e, roughness: 0.35, metalness: 0.6,
     });
