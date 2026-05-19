@@ -10,6 +10,10 @@
     colors:   {{ cfg.available_finishes.value | default: cfg.available_colors.value | default: '[]' | json }},
     variants: {{ cab_product.variants | json }}
   };
+  window.cabinetAssets = {
+    woodMaple:       {{ 'wood-maple.webp' | asset_url | json }},
+    woodMapleNormal: {{ 'wood-maple-normal.webp' | asset_url | json }}
+  };
 </script>
 
 {%- comment -%} Hero ─────────────────────────────────────────────────────── {%- endcomment -%}
@@ -426,6 +430,14 @@
 
 <script src="{{ 'three.min.js' | asset_url }}" defer></script>
 <script src="{{ 'three-orbit-controls.min.js' | asset_url }}" defer></script>
+<script src="{{ 'three-CopyShader.js' | asset_url }}" defer></script>
+<script src="{{ 'three-LuminosityHighPassShader.js' | asset_url }}" defer></script>
+<script src="{{ 'three-EffectComposer.js' | asset_url }}" defer></script>
+<script src="{{ 'three-MaskPass.js' | asset_url }}" defer></script>
+<script src="{{ 'three-ShaderPass.js' | asset_url }}" defer></script>
+<script src="{{ 'three-RenderPass.js' | asset_url }}" defer></script>
+<script src="{{ 'three-SSAOPass.js' | asset_url }}" defer></script>
+<script src="{{ 'three-UnrealBloomPass.js' | asset_url }}" defer></script>
 <script src="{{ 'cabinet-configurator.js' | asset_url }}" defer></script>
 
 <script>
