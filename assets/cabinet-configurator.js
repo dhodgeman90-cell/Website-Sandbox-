@@ -19,150 +19,88 @@
   let widthSelect, depthSelect, colorSelect, atcBtn, priceEl, atcErrorEl;
 
   // ─── Three.js refs ────────────────────────────────────────────────────────
-  let scene, camera, renderer, cabinetGroup, controls, composer;
+  let scene, camera, renderer, cabinetGroup;
 
   // ─── Texture refs (loaded once, reused by every buildCabinet call) ────────
-  let woodColorMap  = null;
-  let woodNormalMap = null;
-
-  // ─── Env map (generated once at initScene time) ───────────────────────────
-  function buildEnvMap() {
-    const pmremGen = new THREE.PMREMGenerator(renderer);
-    pmremGen.compileEquirectangularShader();
-
-    // Simple 2-tone gradient: warm amber above, cool dark below.
-    // Gives metallic surfaces something to reflect without loading an image.
-    const data = new Uint8Array([
-      255, 236, 180, 255,   // top-left:  warm amber
-      255, 236, 180, 255,   // top-right: warm amber
-       18,  18,  36, 255,   // bot-left:  deep cool dark
-       18,  18,  36, 255,   // bot-right: deep cool dark
-    ]);
-    const gradTex = new THREE.DataTexture(data, 2, 2, THREE.RGBAFormat);
-    gradTex.mapping    = THREE.EquirectangularReflectionMapping;
-    gradTex.needsUpdate = true;
-
-    const envMap = pmremGen.fromEquirectangular(gradTex).texture;
-    pmremGen.dispose();
-    gradTex.dispose();
-    return envMap;
-  }
+  let woodColorMap    = null;
+  let woodNormalMap   = null;
+  let woodRoughnessMap = null;
 
   // ─── Scene setup (runs once) ──────────────────────────────────────────────
   function initScene(canvas) {
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled  = true;
-    renderer.shadowMap.type     = THREE.PCFSoftShadowMap;
-    renderer.toneMapping = THREE.NoToneMapping;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type    = THREE.PCFSoftShadowMap;
 
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xddd9d4);
+    scene.background = new THREE.Color(0x8b6355); // brick-brown fallback colour
 
-    // Build and assign the environment map (gives metallic handles reflections)
-    try { scene.environment = buildEnvMap(); } catch (e) { /* env map optional */ }
-
-    const w = canvas.clientWidth  || 480;
-    const h = canvas.clientHeight || 560;
-    camera = new THREE.PerspectiveCamera(35, w / h, 0.1, 2000);
-    camera.position.set(40, 32, 55);
+    var w = canvas.clientWidth  || 480;
+    var h = canvas.clientHeight || 560;
+    camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 2000);
+    camera.position.set(38, 48, 62);
     camera.lookAt(0, 17, 0);
 
-    // Key light — warm, upper front-right, high-res soft shadows
-    const keyLight = new THREE.DirectionalLight(0xfff5e0, 1.1);
-    keyLight.position.set(30, 50, 40);
+    // Key light — overhead front-right, soft shadows
+    var keyLight = new THREE.DirectionalLight(0xfff5e0, 1.4);
+    keyLight.position.set(20, 60, 40);
     keyLight.castShadow = true;
-    keyLight.shadow.mapSize.width  = 2048;
-    keyLight.shadow.mapSize.height = 2048;
-    keyLight.shadow.bias       = -0.0005;
-    keyLight.shadow.normalBias =  0.02;
+    keyLight.shadow.mapSize.width  = 1024;
+    keyLight.shadow.mapSize.height = 1024;
+    keyLight.shadow.bias = -0.001;
     scene.add(keyLight);
 
-    // Fill light — cooler, upper front-left
-    const fillLight = new THREE.DirectionalLight(0xd0e8ff, 0.4);
-    fillLight.position.set(-30, 40, 30);
+    // Fill light — left side, weak, keeps left face readable
+    var fillLight = new THREE.DirectionalLight(0xd0e8ff, 0.35);
+    fillLight.position.set(-30, 30, 20);
     scene.add(fillLight);
 
-    // Hemisphere light — warm amber sky, cool deep blue ground
-    // Replaces flat AmbientLight; lifts shadows naturally
-    scene.add(new THREE.HemisphereLight(0xfff0d0, 0x202040, 0.7));
+    // Ambient — no face is completely dark
+    scene.add(new THREE.AmbientLight(0xfff8f0, 0.4));
 
-    // Rim light — behind-left, traces cabinet silhouette against dark bg
-    const rimLight = new THREE.DirectionalLight(0xffd090, 0.25);
-    rimLight.position.set(-35, 30, -40);
-    scene.add(rimLight);
-
-    // Ground plane — receives cabinet shadow
-    const ground = new THREE.Mesh(
-      new THREE.PlaneGeometry(600, 600),
-      new THREE.MeshLambertMaterial({ color: 0xc8c4bf, transparent: true, opacity: 0.85 })
+    // Floor — warm tan, receives shadows
+    var floor = new THREE.Mesh(
+      new THREE.PlaneGeometry(400, 400),
+      new THREE.MeshLambertMaterial({ color: 0xc4a878 })
     );
-    ground.rotation.x = -Math.PI / 2;
-    ground.receiveShadow = true;
-    scene.add(ground);
+    floor.rotation.x = -Math.PI / 2;
+    floor.receiveShadow = true;
+    scene.add(floor);
 
-    // OrbitControls
-    controls = new THREE.OrbitControls(camera, canvas);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.08;
-    controls.enablePan     = false;
-    controls.minDistance   = 25;
-    controls.maxDistance   = 180;
+    // Back wall — brick-brown, large enough to fill background at all sizes
+    var backWall = new THREE.Mesh(
+      new THREE.PlaneGeometry(400, 300),
+      new THREE.MeshBasicMaterial({ color: 0x8b6355 })
+    );
+    backWall.position.set(0, 150, -25);
+    scene.add(backWall);
 
-    // ── Post-processing pipeline ───────────────────────────────────────────
-    // Detect low-end devices: skip SSAO only if both weak CPU AND narrow canvas
-    const isLowEnd = (navigator.hardwareConcurrency || 8) <= 4 &&
-                     canvas.clientWidth < 600;
-
-    try {
-      if (typeof THREE.EffectComposer !== 'undefined' && typeof THREE.RenderPass !== 'undefined') {
-        composer = new THREE.EffectComposer(renderer);
-        composer.addPass(new THREE.RenderPass(scene, camera));
-
-        if (!isLowEnd && typeof THREE.SSAOPass !== 'undefined') {
-          try {
-            const ssaoPass = new THREE.SSAOPass(scene, camera, w, h);
-            ssaoPass.kernelRadius = 8;
-            ssaoPass.minDistance  = 0.002;
-            ssaoPass.maxDistance  = 0.08;
-            composer.addPass(ssaoPass);
-          } catch (e) { /* SSAO unsupported — bloom still applies */ }
-        }
-
-        if (typeof THREE.UnrealBloomPass !== 'undefined') {
-          try {
-            const bloomPass = new THREE.UnrealBloomPass(
-              new THREE.Vector2(w, h),
-              0.18,   // strength
-              0.4,    // radius
-              0.85    // threshold
-            );
-            composer.addPass(bloomPass);
-          } catch (e) { /* bloom unsupported */ }
-        }
-      }
-    } catch (e) {
-      composer = null; // fall back to direct renderer.render
-    }
+    // Left wall — light grey, visible to the left of the cabinet
+    var leftWall = new THREE.Mesh(
+      new THREE.PlaneGeometry(400, 300),
+      new THREE.MeshBasicMaterial({ color: 0xc8c4be })
+    );
+    leftWall.position.set(-32, 150, 0);
+    leftWall.rotation.y = Math.PI / 2;
+    scene.add(leftWall);
 
     // Resize handler
     function onResize() {
-      const cw = canvas.clientWidth;
-      const ch = canvas.clientHeight;
+      var cw = canvas.clientWidth;
+      var ch = canvas.clientHeight;
       if (cw === 0 || ch === 0) return;
       renderer.setSize(cw, ch, false);
-      if (composer) composer.setSize(cw, ch);
       camera.aspect = cw / ch;
       camera.updateProjectionMatrix();
     }
     window.addEventListener('resize', onResize);
     onResize();
 
-    // Render loop — uses composer instead of renderer.render
+    // Render loop — simple direct render, no composer
     (function animate() {
       requestAnimationFrame(animate);
-      controls.update();
-      if (composer) { composer.render(); } else { renderer.render(scene, camera); }
+      renderer.render(scene, camera);
     }());
   }
 
@@ -192,7 +130,16 @@
       normTex.center.set(0.5, 0.5);
       normTex.repeat.set(repeatY, repeatX);
       mat.normalMap   = normTex;
-      mat.normalScale = new THREE.Vector2(0.6, 0.6);
+      mat.normalScale = new THREE.Vector2(0.8, 0.8);
+    }
+
+    if (isMaple && woodRoughnessMap) {
+      const roughTex = woodRoughnessMap.clone();
+      roughTex.needsUpdate = true;
+      roughTex.rotation = Math.PI / 2;
+      roughTex.center.set(0.5, 0.5);
+      roughTex.repeat.set(repeatY, repeatX);
+      mat.roughnessMap = roughTex;
     }
 
     return mat;
@@ -204,8 +151,9 @@
       cabinetGroup.traverse(function (obj) {
         if (obj.isMesh) {
           obj.geometry.dispose();
-          if (obj.material.map)       obj.material.map.dispose();
-          if (obj.material.normalMap) obj.material.normalMap.dispose();
+          if (obj.material.map)          obj.material.map.dispose();
+          if (obj.material.normalMap)    obj.material.normalMap.dispose();
+          if (obj.material.roughnessMap) obj.material.roughnessMap.dispose();
           obj.material.dispose();
         }
       });
@@ -213,116 +161,100 @@
     }
     cabinetGroup = new THREE.Group();
 
-    const W    = widthIn;
-    const H    = 34.5;
-    const D    = depthIn;
-    const T    = 0.75;
-    const toeH = 4.5;
-    const toeRec = 3.5;
+    var W = widthIn;
+    var H = 34.5;
+    var D = depthIn;
 
-    const DRAWER_H = 7.25;
-    const GAP      = 0.25;
-    const DRAWERS  = 4;
+    // All measurements in inches; 1 Three.js unit = 1 inch
+    var WALL_T     = 0.75;   // carcass wall / shelf thickness
+    var PLINTH_H   = 3.0;    // base plinth height
+    var PLINTH_EXT = 0.75;   // plinth extends this far beyond body on each side
+    var TOP_H      = 0.75;   // top cap thickness
+    var TOP_EXT    = 0.5;    // top cap overhang beyond body on each side
+    var DRAWERS    = 4;
+    var DRAWER_GAP = 0.2;    // reveal gap between drawer faces
+    var RAIL_W     = 1.0;    // drawer frame rail height
+    var STILE_W    = 1.0;    // drawer frame stile width
+    var RECESS     = 0.12;   // recessed panel depth behind frame
+    var HANDLE_LEN = 4.5;    // bar handle length
+    var HANDLE_T   = 0.35;   // bar handle cross-section (square)
 
-    // Recessed panel constants (inches)
-    const RAIL_W  = 1.0;   // height of top/bottom rails
-    const STILE_W = 1.0;   // width of left/right stiles
-    const RECESS  = 0.15;  // how far the panel centre is set back from frame
+    // Drawer height: divide usable interior height equally
+    var drawerAreaH = H - PLINTH_H - TOP_H - WALL_T;
+    var drawerH     = (drawerAreaH - (DRAWERS - 1) * DRAWER_GAP) / DRAWERS;
 
-    const isMaple   = !!(colorId && colorId.toLowerCase() === 'maple');
-    const baseColor = new THREE.Color(colorHex);
+    var isMaple   = !!(colorId && colorId.toLowerCase() === 'maple');
+    var baseColor = new THREE.Color(colorHex);
+    var repeatX   = W / 24;
+    var repeatY   = H / 34.5;
 
-    // UV tiling — keeps grain scale proportional to real cabinet dimensions
-    const repeatX = W / 24;
-    const repeatY = H / 34.5;
+    var faceColorVal  = isMaple ? new THREE.Color(1.00, 1.00, 1.00) : baseColor;
+    var bodyColorVal  = isMaple ? new THREE.Color(0.92, 0.90, 0.88) : baseColor.clone().multiplyScalar(0.70);
+    var panelColorVal = isMaple ? new THREE.Color(0.86, 0.84, 0.82) : baseColor.clone().multiplyScalar(0.88);
 
-    // For maple: use neutral greys so the photo texture drives the colour — not the hex swatch.
-    // texture × white = texture as-is; texture × 0.65 grey = darker body panels.
-    // For painted finishes: no texture, so the selected hex colour is used directly.
-    const faceColorVal  = isMaple ? new THREE.Color(1.00, 1.00, 1.00) : baseColor;
-    const bodyColorVal  = isMaple ? new THREE.Color(0.65, 0.65, 0.65) : baseColor.clone().multiplyScalar(0.65);
-    const panelColorVal = isMaple ? new THREE.Color(0.85, 0.85, 0.85) : baseColor.clone().multiplyScalar(0.85);
-
-    const bodyMat          = makeWoodMat(bodyColorVal,  0.55, repeatX, repeatY, isMaple);
-    const faceMat          = makeWoodMat(faceColorVal,  0.25, repeatX, repeatY, isMaple);
-    const recessedPanelMat = makeWoodMat(panelColorVal, 0.35, repeatX, repeatY, isMaple);
-    const pullMat          = new THREE.MeshStandardMaterial({
-      color: 0xc9a96e, roughness: 0.35, metalness: 0.6,
+    var bodyMat  = makeWoodMat(bodyColorVal,  0.60, repeatX, repeatY, isMaple);
+    var faceMat  = makeWoodMat(faceColorVal,  0.42, repeatX, repeatY, isMaple);
+    var panelMat = makeWoodMat(panelColorVal, 0.55, repeatX, repeatY, isMaple);
+    var handleMat = new THREE.MeshStandardMaterial({
+      color: 0x909090, roughness: 0.20, metalness: 0.90,
     });
 
     function box(w, h, d, x, y, z, mat) {
-      const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+      var m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
       m.position.set(x, y, z);
       m.castShadow    = true;
       m.receiveShadow = true;
       cabinetGroup.add(m);
     }
 
-    // ── Shell panels ──────────────────────────────────────────────────────
-    box(W, T, D,  0,          H - T / 2,  0,          bodyMat); // top
-    box(W, T, D,  0,          toeH + T/2, 0,          bodyMat); // bottom
-    box(T, H, D, -W/2 + T/2, H / 2,      0,          bodyMat); // left side
-    box(T, H, D,  W/2 - T/2, H / 2,      0,          bodyMat); // right side
-    box(W, H, T,  0,          H / 2,     -D/2 + T/2, bodyMat); // back
+    // ── Base plinth — wider and deeper than body ────────────────────────────
+    box(W + 2*PLINTH_EXT, PLINTH_H, D + 2*PLINTH_EXT,
+        0, PLINTH_H / 2, 0,
+        bodyMat);
 
-    // ── Toe kick ──────────────────────────────────────────────────────────
-    const toeZ = D / 2 - toeRec + T / 2;
-    box(W - 2*T, toeH, T, 0, toeH / 2, toeZ, bodyMat);
+    // ── Carcass shell ────────────────────────────────────────────────────────
+    var bodyY0 = PLINTH_H;
+    var bodyY1 = H - TOP_H;
+    var bodyH  = bodyY1 - bodyY0;
+    var bodyCY = bodyY0 + bodyH / 2;
 
-    // ── Drawer faces: recessed panel compound geometry ────────────────────
-    const faceW     = W - 2*T - 0.125;
-    const faceDepth = T * 0.5;
-    const faceZ     = D / 2;
+    box(W, WALL_T, D, 0, bodyY0 + WALL_T / 2,  0, bodyMat); // bottom shelf
+    box(W, WALL_T, D, 0, bodyY1 - WALL_T / 2,  0, bodyMat); // top shelf
+    box(WALL_T, bodyH, D, -W/2 + WALL_T/2, bodyCY, 0, bodyMat); // left side
+    box(WALL_T, bodyH, D,  W/2 - WALL_T/2, bodyCY, 0, bodyMat); // right side
+    box(W, bodyH, WALL_T, 0, bodyCY, -D/2 + WALL_T/2, bodyMat); // back panel
 
-    for (let i = 0; i < DRAWERS; i++) {
-      const baseY  = toeH + i * (DRAWER_H + GAP);
-      const cy     = baseY + DRAWER_H / 2;        // centre Y of this drawer
-      const innerH = DRAWER_H - 2 * RAIL_W - 0.125;
-      const innerW = faceW - 2 * STILE_W;
+    // ── Top cap — thin slab, slight overhang on all sides ───────────────────
+    box(W + 2*TOP_EXT, TOP_H, D + 2*TOP_EXT,
+        0, H - TOP_H / 2, 0,
+        bodyMat);
 
-      // Top rail
-      box(faceW,  RAIL_W, faceDepth,
-          0,  baseY + DRAWER_H - RAIL_W / 2,  faceZ,  faceMat);
+    // ── Drawer faces ─────────────────────────────────────────────────────────
+    var faceW = W - 2*WALL_T;
+    var faceT = WALL_T * 0.5;
+    var faceZ = D / 2 + faceT / 2;
 
-      // Bottom rail
-      box(faceW,  RAIL_W, faceDepth,
-          0,  baseY + RAIL_W / 2,  faceZ,  faceMat);
+    for (var i = 0; i < DRAWERS; i++) {
+      var baseY  = bodyY0 + WALL_T + i * (drawerH + DRAWER_GAP);
+      var cy     = baseY + drawerH / 2;
+      var innerH = drawerH - 2 * RAIL_W;
+      var innerW = faceW   - 2 * STILE_W;
 
-      // Left stile
-      box(STILE_W,  innerH,  faceDepth,
-          -faceW / 2 + STILE_W / 2,  cy,  faceZ,  faceMat);
+      box(faceW, RAIL_W, faceT, 0, baseY + drawerH - RAIL_W/2, faceZ, faceMat); // top rail
+      box(faceW, RAIL_W, faceT, 0, baseY + RAIL_W/2,           faceZ, faceMat); // bottom rail
+      box(STILE_W, innerH, faceT, -faceW/2 + STILE_W/2, cy, faceZ, faceMat);    // left stile
+      box(STILE_W, innerH, faceT,  faceW/2 - STILE_W/2, cy, faceZ, faceMat);    // right stile
 
-      // Right stile
-      box(STILE_W,  innerH,  faceDepth,
-           faceW / 2 - STILE_W / 2,  cy,  faceZ,  faceMat);
+      // Recessed centre panel
+      box(innerW, innerH, faceT * 0.5, 0, cy, faceZ - RECESS, panelMat);
 
-      // Recessed centre panel (pushed back by RECESS, shallower depth)
-      box(innerW,  innerH,  faceDepth * 0.5,
-          0,  cy,  faceZ - RECESS,  recessedPanelMat);
-
-      // Pull handle — horizontal cylinder, gold, protrudes forward
-      const handleLen  = W * 0.22;
-      const handleMesh = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.18, 0.18, handleLen, 12),
-        pullMat
-      );
-      handleMesh.rotation.z = Math.PI / 2;
-      handleMesh.position.set(0, cy, faceZ + faceDepth / 2 + 0.55);
-      handleMesh.castShadow    = true;
-      handleMesh.receiveShadow = true;
-      cabinetGroup.add(handleMesh);
+      // Bar handle — rectangular bar, centred on drawer, protrudes from face
+      var handleZ = faceZ + faceT/2 + 0.25 + HANDLE_T/2;
+      box(HANDLE_LEN, HANDLE_T, HANDLE_T, 0, cy, handleZ, handleMat);
     }
 
     scene.add(cabinetGroup);
-
-    // 3/4 product-photography angle
-    camera.position.set(W * 2.5, H * 0.9, D * 5.5);
-    if (controls) {
-      controls.target.set(0, H * 0.45, 0);
-      controls.update();
-    } else {
-      camera.lookAt(0, H * 0.45, 0);
-    }
+    // Camera stays fixed — set once in initScene(), never repositioned here
   }
 
   // ─── Populate dropdowns ───────────────────────────────────────────────────
@@ -478,8 +410,8 @@
     var defaultD = (cfg.depths[0] && cfg.depths[0].value) ? cfg.depths[0].value : 18;
     buildCabinet(defaultW, defaultD, '#888888', '');
 
-    // Load both textures; rebuild once both are ready
-    var texturesPending = 2;
+    // Load all three textures; rebuild once all are ready
+    var texturesPending = 3;
     function tryRebuild() {
       if (--texturesPending <= 0) {
         buildCabinet(
@@ -498,7 +430,6 @@
         tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
         tryRebuild();
       }, undefined, function () {
-        // Texture failed to load — degrade gracefully (flat colour remains)
         tryRebuild();
       });
 
@@ -508,6 +439,16 @@
       }, undefined, function () {
         tryRebuild();
       });
+
+      woodRoughnessMap = loader.load(window.cabinetAssets.woodMapleRoughness, function (tex) {
+        tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+        tryRebuild();
+      }, undefined, function () {
+        tryRebuild();
+      });
+    } else {
+      // No assets object — degrade all three gracefully
+      texturesPending = 0;
     }
 
     [widthSelect, depthSelect, colorSelect].forEach(function (el) {
