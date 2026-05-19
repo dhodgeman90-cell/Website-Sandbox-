@@ -11,15 +11,15 @@
     variants: {{ cab_product.variants | json }}
   };
   window.cabinetAssets = {
-    woodMaple:       {{ 'wood-maple.webp' | asset_url | json }},
-    woodMapleNormal: {{ 'wood-maple-normal.webp' | asset_url | json }}
+    woodMaple:          {{ 'wood-maple.webp' | asset_url | json }},
+    woodMapleNormal:    {{ 'wood-maple-normal.webp' | asset_url | json }},
+    woodMapleRoughness: {{ 'wood-maple-roughness.webp' | asset_url | json }}
   };
 </script>
 
 {%- comment -%} Hero ─────────────────────────────────────────────────────── {%- endcomment -%}
 <div class="cab-hero">
-  <div class="cab-hero__eyebrow">Made to Order &middot; CNC Precision</div>
-  <h1 class="cab-hero__headline">Build Your Baseball Card Cabinet</h1>
+  <h1 class="cab-hero__headline">Build Your Cabinet</h1>
   <p class="cab-hero__sub">Choose your width, depth, and finish. We cut it to spec in our CNC shop and ship it to your door.</p>
   <a href="#cc-configurator" class="cab-hero__cta">Start Configuring &#8595;</a>
 </div>
