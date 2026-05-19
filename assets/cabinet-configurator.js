@@ -34,7 +34,7 @@
     renderer.shadowMap.type    = THREE.PCFSoftShadowMap;
 
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x8b6355); // brick-brown fallback colour
+    scene.background = new THREE.Color(0x7a4030);
 
     var w = canvas.clientWidth  || 480;
     var h = canvas.clientHeight || 560;
@@ -68,20 +68,20 @@
     floor.receiveShadow = true;
     scene.add(floor);
 
-    // Back wall — brick-brown, large enough to fill background at all sizes
+    // Back wall — brick-brown. Z=-14 puts it just behind any cabinet depth.
     var backWall = new THREE.Mesh(
       new THREE.PlaneGeometry(400, 300),
-      new THREE.MeshBasicMaterial({ color: 0x8b6355 })
+      new THREE.MeshBasicMaterial({ color: 0x7a4030 })
     );
-    backWall.position.set(0, 150, -25);
+    backWall.position.set(0, 150, -14);
     scene.add(backWall);
 
-    // Left wall — light grey, visible to the left of the cabinet
+    // Left wall — light grey, X=-22 gives a few inches clearance beside cabinet.
     var leftWall = new THREE.Mesh(
       new THREE.PlaneGeometry(400, 300),
-      new THREE.MeshBasicMaterial({ color: 0xc8c4be })
+      new THREE.MeshBasicMaterial({ color: 0xb8b4ae })
     );
-    leftWall.position.set(-32, 150, 0);
+    leftWall.position.set(-22, 150, 0);
     leftWall.rotation.y = Math.PI / 2;
     scene.add(leftWall);
 
@@ -253,6 +253,9 @@
       box(HANDLE_LEN, HANDLE_T, HANDLE_T, 0, cy, handleZ, handleMat);
     }
 
+    // Shift group so the back face of the plinth always sits at world Z=-13,
+    // flush against the back wall at Z=-14, regardless of cabinet depth.
+    cabinetGroup.position.z = -13 + (D / 2 + PLINTH_EXT);
     scene.add(cabinetGroup);
     // Camera stays fixed — set once in initScene(), never repositioned here
   }
