@@ -112,9 +112,9 @@
     controls.maxDistance   = 180;
 
     // ── Post-processing pipeline ───────────────────────────────────────────
-    // Detect low-end devices: skip SSAO on small/low-DPR screens or weak CPUs
-    const isLowEnd = (navigator.hardwareConcurrency || 4) <= 4 ||
-                     canvas.clientWidth < 480;
+    // Detect low-end devices: skip SSAO only if both weak CPU AND narrow canvas
+    const isLowEnd = (navigator.hardwareConcurrency || 8) <= 4 &&
+                     canvas.clientWidth < 600;
 
     if (typeof THREE.EffectComposer !== 'undefined' && typeof THREE.RenderPass !== 'undefined') {
       composer = new THREE.EffectComposer(renderer);
