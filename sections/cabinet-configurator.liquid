@@ -84,7 +84,6 @@
   {%- comment -%} Centre panel: Three.js 3D preview {%- endcomment -%}
   <div class="cab-panel cab-panel--preview">
     <canvas id="cc-canvas"></canvas>
-    <div class="cab-rotate-hint">&#8635; Drag to rotate</div>
   </div>
 
   {%- comment -%} Right panel: spec + price + cart {%- endcomment -%}
@@ -277,15 +276,6 @@
     text-align: center;
   }
 
-  .cab-rotate-hint {
-    position: absolute;
-    bottom: 10px;
-    right: 12px;
-    font-size: 0.55rem;
-    color: #444;
-    letter-spacing: 0.06em;
-    pointer-events: none;
-  }
 
   /* ── Hero ───────────────────────────────────────────────────────────────── */
   .cab-hero {
@@ -429,15 +419,6 @@
 </style>
 
 <script src="{{ 'three.min.js' | asset_url }}" defer></script>
-<script src="{{ 'three-orbit-controls.min.js' | asset_url }}" defer></script>
-<script src="{{ 'three-CopyShader.js' | asset_url }}" defer></script>
-<script src="{{ 'three-LuminosityHighPassShader.js' | asset_url }}" defer></script>
-<script src="{{ 'three-EffectComposer.js' | asset_url }}" defer></script>
-<script src="{{ 'three-MaskPass.js' | asset_url }}" defer></script>
-<script src="{{ 'three-ShaderPass.js' | asset_url }}" defer></script>
-<script src="{{ 'three-RenderPass.js' | asset_url }}" defer></script>
-<script src="{{ 'three-SSAOPass.js' | asset_url }}" defer></script>
-<script src="{{ 'three-UnrealBloomPass.js' | asset_url }}" defer></script>
 <script src="{{ 'cabinet-configurator.js' | asset_url }}" defer></script>
 
 <script>
