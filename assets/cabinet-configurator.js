@@ -113,29 +113,30 @@
 
     // ── Post-processing pipeline ───────────────────────────────────────────
     // Detect low-end devices: skip SSAO on small/low-DPR screens or weak CPUs
-    const isLowEnd = window.devicePixelRatio < 2 &&
-                     (canvas.clientWidth < 500 ||
-                      (navigator.hardwareConcurrency || 4) <= 2);
+    const isLowEnd = (navigator.hardwareConcurrency || 4) <= 4 ||
+                     canvas.clientWidth < 480;
 
-    composer = new THREE.EffectComposer(renderer);
-    composer.addPass(new THREE.RenderPass(scene, camera));
+    if (typeof THREE.EffectComposer !== 'undefined' && typeof THREE.RenderPass !== 'undefined') {
+      composer = new THREE.EffectComposer(renderer);
+      composer.addPass(new THREE.RenderPass(scene, camera));
 
-    if (!isLowEnd && typeof THREE.SSAOPass !== 'undefined') {
-      const ssaoPass = new THREE.SSAOPass(scene, camera, w, h);
-      ssaoPass.kernelRadius = 8;
-      ssaoPass.minDistance  = 0.002;
-      ssaoPass.maxDistance  = 0.08;
-      composer.addPass(ssaoPass);
-    }
+      if (!isLowEnd && typeof THREE.SSAOPass !== 'undefined') {
+        const ssaoPass = new THREE.SSAOPass(scene, camera, w, h);
+        ssaoPass.kernelRadius = 8;
+        ssaoPass.minDistance  = 0.002;
+        ssaoPass.maxDistance  = 0.08;
+        composer.addPass(ssaoPass);
+      }
 
-    if (typeof THREE.UnrealBloomPass !== 'undefined') {
-      const bloomPass = new THREE.UnrealBloomPass(
-        new THREE.Vector2(w, h),
-        0.18,   // strength  — subtle, not game-y
-        0.4,    // radius
-        0.85    // threshold — only the brightest pixels bloom
-      );
-      composer.addPass(bloomPass);
+      if (typeof THREE.UnrealBloomPass !== 'undefined') {
+        const bloomPass = new THREE.UnrealBloomPass(
+          new THREE.Vector2(w, h),
+          0.18,   // strength  — subtle, not game-y
+          0.4,    // radius
+          0.85    // threshold — only the brightest pixels bloom
+        );
+        composer.addPass(bloomPass);
+      }
     }
 
     // Resize handler
@@ -144,7 +145,7 @@
       const ch = canvas.clientHeight;
       if (cw === 0 || ch === 0) return;
       renderer.setSize(cw, ch, false);
-      composer.setSize(cw, ch);
+      if (composer) composer.setSize(cw, ch);
       camera.aspect = cw / ch;
       camera.updateProjectionMatrix();
     }
@@ -155,7 +156,7 @@
     (function animate() {
       requestAnimationFrame(animate);
       controls.update();
-      composer.render();
+      if (composer) { composer.render(); } else { renderer.render(scene, camera); }
     }());
   }
 
@@ -189,7 +190,17 @@
 
   // ─── Cabinet builder ──────────────────────────────────────────────────────
   function buildCabinet(widthIn, depthIn, colorHex, colorId) {
-    if (cabinetGroup) scene.remove(cabinetGroup);
+    if (cabinetGroup) {
+      cabinetGroup.traverse(function (obj) {
+        if (obj.isMesh) {
+          obj.geometry.dispose();
+          if (obj.material.map)       obj.material.map.dispose();
+          if (obj.material.normalMap) obj.material.normalMap.dispose();
+          obj.material.dispose();
+        }
+      });
+      scene.remove(cabinetGroup);
+    }
     cabinetGroup = new THREE.Group();
 
     const W    = widthIn;
@@ -475,7 +486,8 @@
         tryRebuild();
       });
 
-      woodNormalMap = loader.load(window.cabinetAssets.woodMapleNormal, function () {
+      woodNormalMap = loader.load(window.cabinetAssets.woodMapleNormal, function (tex) {
+        tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
         tryRebuild();
       }, undefined, function () {
         tryRebuild();
