@@ -26,6 +26,40 @@
   let woodNormalMap   = null;
   let woodRoughnessMap = null;
 
+  // ─── Env map (generated once — gives PBR materials realistic IBL) ──────────
+  function buildEnvMap() {
+    var pmremGen = new THREE.PMREMGenerator(renderer);
+    pmremGen.compileEquirectangularShader();
+    var W = 64, H = 32;
+    var data = new Uint8Array(W * H * 4);
+    for (var row = 0; row < H; row++) {
+      var t = row / (H - 1);
+      var r, g, b;
+      if (t < 0.3) {
+        var s = t / 0.3;
+        r = Math.round(255 + (220 - 255) * s);
+        g = Math.round(245 + (210 - 245) * s);
+        b = Math.round(235 + (200 - 235) * s);
+      } else {
+        var s2 = (t - 0.3) / 0.7;
+        r = Math.round(220 + (100 - 220) * s2);
+        g = Math.round(210 + (90  - 210) * s2);
+        b = Math.round(200 + (80  - 200) * s2);
+      }
+      for (var col = 0; col < W; col++) {
+        var i = (row * W + col) * 4;
+        data[i] = r; data[i+1] = g; data[i+2] = b; data[i+3] = 255;
+      }
+    }
+    var gradTex = new THREE.DataTexture(data, W, H, THREE.RGBAFormat);
+    gradTex.mapping     = THREE.EquirectangularReflectionMapping;
+    gradTex.needsUpdate = true;
+    var envMap = pmremGen.fromEquirectangular(gradTex).texture;
+    pmremGen.dispose();
+    gradTex.dispose();
+    return envMap;
+  }
+
   // ─── Scene setup (runs once) ──────────────────────────────────────────────
   function initScene(canvas) {
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
@@ -36,56 +70,49 @@
     renderer.toneMappingExposure = 0.9;
 
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xb87048);
+    scene.background = new THREE.Color(0x8a7060); // fallback until photo loads
+
+    // Load room background photo
+    if (window.cabinetAssets && window.cabinetAssets.roomBg) {
+      new THREE.TextureLoader().load(window.cabinetAssets.roomBg, function (tex) {
+        scene.background = tex;
+      });
+    }
+
+    // IBL env map — makes PBR wood materials look physically real
+    try { scene.environment = buildEnvMap(); } catch (e) { /* optional */ }
 
     var w = canvas.clientWidth  || 480;
     var h = canvas.clientHeight || 560;
     camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 2000);
-    camera.position.set(38, 48, 62);
+    camera.position.set(38, 40, 62);
     camera.lookAt(0, 17, 0);
 
-    // Key light — overhead front-right, soft shadows
-    var keyLight = new THREE.DirectionalLight(0xfff5e0, 1.4);
-    keyLight.position.set(20, 60, 40);
+    // Key light — matches natural window light from the left in the photo
+    var keyLight = new THREE.DirectionalLight(0xfff8f0, 1.3);
+    keyLight.position.set(-20, 60, 40);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.width  = 1024;
     keyLight.shadow.mapSize.height = 1024;
     keyLight.shadow.bias = -0.001;
     scene.add(keyLight);
 
-    // Fill light — left side, weak, keeps left face readable
-    var fillLight = new THREE.DirectionalLight(0xd0e8ff, 0.35);
-    fillLight.position.set(-30, 30, 20);
+    // Fill light — right side, warm
+    var fillLight = new THREE.DirectionalLight(0xffe8d0, 0.4);
+    fillLight.position.set(30, 30, 20);
     scene.add(fillLight);
 
-    // Ambient — no face is completely dark
-    scene.add(new THREE.AmbientLight(0xfff8f0, 0.4));
+    // Ambient
+    scene.add(new THREE.AmbientLight(0xfff8f0, 0.5));
 
-    // Floor — warm tan, receives shadows
-    var floor = new THREE.Mesh(
+    // Shadow-catcher floor — invisible except where the cabinet casts a shadow
+    var shadowFloor = new THREE.Mesh(
       new THREE.PlaneGeometry(400, 400),
-      new THREE.MeshLambertMaterial({ color: 0xc4a878 })
+      new THREE.ShadowMaterial({ opacity: 0.25 })
     );
-    floor.rotation.x = -Math.PI / 2;
-    floor.receiveShadow = true;
-    scene.add(floor);
-
-    // Back wall — terracotta brick. Z=-14 puts it just behind any cabinet depth.
-    var backWall = new THREE.Mesh(
-      new THREE.PlaneGeometry(400, 300),
-      new THREE.MeshLambertMaterial({ color: 0xb87048 })
-    );
-    backWall.position.set(0, 150, -14);
-    scene.add(backWall);
-
-    // Left wall — warm grey, X=-22 gives a few inches clearance beside cabinet.
-    var leftWall = new THREE.Mesh(
-      new THREE.PlaneGeometry(400, 300),
-      new THREE.MeshLambertMaterial({ color: 0xc8c4be })
-    );
-    leftWall.position.set(-22, 150, 0);
-    leftWall.rotation.y = Math.PI / 2;
-    scene.add(leftWall);
+    shadowFloor.rotation.x = -Math.PI / 2;
+    shadowFloor.receiveShadow = true;
+    scene.add(shadowFloor);
 
     // Resize handler
     function onResize() {
@@ -99,7 +126,7 @@
     window.addEventListener('resize', onResize);
     onResize();
 
-    // Render loop — simple direct render, no composer
+    // Render loop
     (function animate() {
       requestAnimationFrame(animate);
       renderer.render(scene, camera);
