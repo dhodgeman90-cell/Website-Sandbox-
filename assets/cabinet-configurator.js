@@ -57,7 +57,7 @@
     renderer.toneMapping = THREE.NoToneMapping;
 
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x1c1c1c);
+    scene.background = new THREE.Color(0xddd9d4);
 
     // Build and assign the environment map (gives metallic handles reflections)
     try { scene.environment = buildEnvMap(); } catch (e) { /* env map optional */ }
@@ -95,7 +95,7 @@
     // Ground plane — receives cabinet shadow
     const ground = new THREE.Mesh(
       new THREE.PlaneGeometry(600, 600),
-      new THREE.MeshLambertMaterial({ color: 0x141414, transparent: true, opacity: 0.75 })
+      new THREE.MeshLambertMaterial({ color: 0xc8c4bf, transparent: true, opacity: 0.85 })
     );
     ground.rotation.x = -Math.PI / 2;
     ground.receiveShadow = true;
@@ -179,14 +179,18 @@
     if (isMaple && woodColorMap) {
       const colTex = woodColorMap.clone();
       colTex.needsUpdate = true;
-      colTex.repeat.set(repeatX, repeatY);
+      colTex.rotation = Math.PI / 2;
+      colTex.center.set(0.5, 0.5);
+      colTex.repeat.set(repeatY, repeatX);
       mat.map = colTex;
     }
 
     if (isMaple && woodNormalMap) {
       const normTex = woodNormalMap.clone();
       normTex.needsUpdate = true;
-      normTex.repeat.set(repeatX, repeatY);
+      normTex.rotation = Math.PI / 2;
+      normTex.center.set(0.5, 0.5);
+      normTex.repeat.set(repeatY, repeatX);
       mat.normalMap   = normTex;
       mat.normalScale = new THREE.Vector2(0.6, 0.6);
     }
