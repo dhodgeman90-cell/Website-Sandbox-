@@ -201,7 +201,7 @@
     scene.add(cabinetGroup);
 
     // 3/4 product-photography angle — shows front face, right side, and top
-    camera.position.set(W * 1.3, H * 0.8, D * 2.8);
+    camera.position.set(W * 1.9, H * 1.1, D * 3.8);
     if (controls) {
       controls.target.set(0, H * 0.45, 0);
       controls.update();
@@ -280,9 +280,9 @@
     state.colorLabel = (colorOpt && colorOpt.value) ? colorOpt.textContent        : null;
     state.colorHex   = (colorOpt && colorOpt.value) ? colorOpt.dataset.hex || null : null;
 
-    if (state.width && state.depth && state.colorHex) {
-      buildCabinet(state.width, state.depth, state.colorHex);
-    }
+    var fallbackW = (cfg.widths[0] && cfg.widths[0].value) ? cfg.widths[0].value : 24;
+    var fallbackD = (cfg.depths[0] && cfg.depths[0].value) ? cfg.depths[0].value : 18;
+    buildCabinet(state.width || fallbackW, state.depth || fallbackD, state.colorHex || '#888888');
 
     updateSpec();
     updatePrice();
