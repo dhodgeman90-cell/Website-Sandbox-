@@ -54,9 +54,7 @@
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled  = true;
     renderer.shadowMap.type     = THREE.PCFSoftShadowMap;
-    renderer.toneMapping        = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.65;
-    renderer.outputEncoding     = THREE.sRGBEncoding;
+    renderer.toneMapping = THREE.NoToneMapping;
 
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0x1c1c1c);
@@ -494,7 +492,6 @@
 
       woodColorMap = loader.load(window.cabinetAssets.woodMaple, function (tex) {
         tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-        tex.encoding = THREE.sRGBEncoding;
         tryRebuild();
       }, undefined, function () {
         // Texture failed to load — degrade gracefully (flat colour remains)
