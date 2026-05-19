@@ -62,7 +62,7 @@
     scene.background = new THREE.Color(0x1c1c1c);
 
     // Build and assign the environment map (gives metallic handles reflections)
-    scene.environment = buildEnvMap();
+    try { scene.environment = buildEnvMap(); } catch (e) { /* env map optional */ }
 
     const w = canvas.clientWidth  || 480;
     const h = canvas.clientHeight || 560;
@@ -116,27 +116,35 @@
     const isLowEnd = (navigator.hardwareConcurrency || 8) <= 4 &&
                      canvas.clientWidth < 600;
 
-    if (typeof THREE.EffectComposer !== 'undefined' && typeof THREE.RenderPass !== 'undefined') {
-      composer = new THREE.EffectComposer(renderer);
-      composer.addPass(new THREE.RenderPass(scene, camera));
+    try {
+      if (typeof THREE.EffectComposer !== 'undefined' && typeof THREE.RenderPass !== 'undefined') {
+        composer = new THREE.EffectComposer(renderer);
+        composer.addPass(new THREE.RenderPass(scene, camera));
 
-      if (!isLowEnd && typeof THREE.SSAOPass !== 'undefined') {
-        const ssaoPass = new THREE.SSAOPass(scene, camera, w, h);
-        ssaoPass.kernelRadius = 8;
-        ssaoPass.minDistance  = 0.002;
-        ssaoPass.maxDistance  = 0.08;
-        composer.addPass(ssaoPass);
-      }
+        if (!isLowEnd && typeof THREE.SSAOPass !== 'undefined') {
+          try {
+            const ssaoPass = new THREE.SSAOPass(scene, camera, w, h);
+            ssaoPass.kernelRadius = 8;
+            ssaoPass.minDistance  = 0.002;
+            ssaoPass.maxDistance  = 0.08;
+            composer.addPass(ssaoPass);
+          } catch (e) { /* SSAO unsupported — bloom still applies */ }
+        }
 
-      if (typeof THREE.UnrealBloomPass !== 'undefined') {
-        const bloomPass = new THREE.UnrealBloomPass(
-          new THREE.Vector2(w, h),
-          0.18,   // strength  — subtle, not game-y
-          0.4,    // radius
-          0.85    // threshold — only the brightest pixels bloom
-        );
-        composer.addPass(bloomPass);
+        if (typeof THREE.UnrealBloomPass !== 'undefined') {
+          try {
+            const bloomPass = new THREE.UnrealBloomPass(
+              new THREE.Vector2(w, h),
+              0.18,   // strength
+              0.4,    // radius
+              0.85    // threshold
+            );
+            composer.addPass(bloomPass);
+          } catch (e) { /* bloom unsupported */ }
+        }
       }
+    } catch (e) {
+      composer = null; // fall back to direct renderer.render
     }
 
     // Resize handler
@@ -449,11 +457,12 @@
     priceEl      = document.getElementById('cab-price');
     atcErrorEl   = document.getElementById('cab-atc-error');
 
+    populateDropdowns();
+
     const canvas = document.getElementById('cc-canvas');
     if (!canvas) return;
 
     initScene(canvas);
-    populateDropdowns();
 
     // Build the cabinet immediately with flat colour so the canvas is never blank.
     // When textures finish loading the cabinet is rebuilt with full detail.
