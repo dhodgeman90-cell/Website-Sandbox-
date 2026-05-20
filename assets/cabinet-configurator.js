@@ -101,6 +101,11 @@
           drawerAnim.elapsed = 0;
         }
         break;
+
+      default:
+        drawerAnim.phase   = 'waiting';
+        drawerAnim.elapsed = 0;
+        break;
     }
 
     topDrawerGroup.position.z = drawerAnim.offset;
@@ -186,6 +191,7 @@
   // scratch to reflect the new width, depth, or colour selection.
   function buildCabinet(widthIn, depthIn, colorHex) {
     if (cabinetGroup) scene.remove(cabinetGroup);
+    topDrawerGroup = null;
     cabinetGroup = new THREE.Group();
 
     // Real-world dimensions (inches, 1 unit = 1 inch in Three.js world)
