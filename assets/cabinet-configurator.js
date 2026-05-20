@@ -23,6 +23,18 @@
   // ─── Three.js refs ────────────────────────────────────────────────────────
   let scene, camera, renderer, cabinetGroup, controls;
 
+  // ─── PBR texture cache ────────────────────────────────────────────────────
+  var textures = { mapleColor: null, mapleNormal: null, mapleRoughness: null };
+
+  // ─── PBR texture loader ───────────────────────────────────────────────────
+  function loadTextures() {
+    var urls = (cfg.textureUrls) || {};
+    var loader = new THREE.TextureLoader();
+    if (urls.mapleColor)     loader.load(urls.mapleColor,     function(t) { textures.mapleColor = t; });
+    if (urls.mapleNormal)    loader.load(urls.mapleNormal,    function(t) { textures.mapleNormal = t; });
+    if (urls.mapleRoughness) loader.load(urls.mapleRoughness, function(t) { textures.mapleRoughness = t; });
+  }
+
   // ─── Scene setup (runs once) ──────────────────────────────────────────────
   function initScene(canvas) {
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
@@ -354,6 +366,7 @@
     if (!canvas) return;
 
     initScene(canvas);
+    loadTextures();
     populateDropdowns();
 
     // Render a neutral grey cabinet immediately so the canvas is never blank
