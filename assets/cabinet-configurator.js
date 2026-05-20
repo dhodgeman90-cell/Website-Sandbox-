@@ -1,3 +1,4 @@
+// @ts-nocheck
 (function () {
   'use strict';
 
@@ -281,9 +282,9 @@
     state.colorLabel = (colorOpt && colorOpt.value) ? colorOpt.textContent        : null;
     state.colorHex   = (colorOpt && colorOpt.value) ? colorOpt.dataset.hex || null : null;
 
-    if (state.width && state.depth) {
-      buildCabinet(state.width, state.depth, state.colorHex || '#888888');
-    }
+    var w = state.width  || (cfg.widths[0]  && cfg.widths[0].value)  || 24;
+    var d = state.depth  || (cfg.depths[0]  && cfg.depths[0].value)  || 12;
+    buildCabinet(w, d, state.colorHex || '#888888');
 
     updateSpec();
     updatePrice();
