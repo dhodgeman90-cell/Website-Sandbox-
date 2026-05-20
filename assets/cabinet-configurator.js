@@ -106,34 +106,6 @@
     }());
   }
 
-  // ─── Maple wood grain texture (Canvas-generated, no external image needed) ─
-  function buildMapleTexture() {
-    var c = document.createElement('canvas');
-    c.width  = 256;
-    c.height = 512;
-    var ctx = c.getContext('2d');
-
-    // Base maple tone
-    ctx.fillStyle = '#c8a050';
-    ctx.fillRect(0, 0, 256, 512);
-
-    // Randomised grain streaks — vertical, varying width and opacity
-    for (var i = 0; i < 100; i++) {
-      var x      = Math.random() * 256;
-      var segY   = Math.random() * 512;
-      var segH   = 60 + Math.random() * 320;
-      var w      = 0.5 + Math.random() * 2.5;
-      var isLight = Math.random() < 0.38;
-      var opacity = 0.04 + Math.random() * 0.10;
-      ctx.fillStyle = isLight
-        ? 'rgba(255,210,130,' + opacity + ')'
-        : 'rgba(50,25,0,'     + opacity + ')';
-      ctx.fillRect(x, segY, w, segH);
-    }
-
-    return new THREE.CanvasTexture(c);
-  }
-
   // ─── Cabinet builder ──────────────────────────────────────────────────────
   // Called every time a dropdown changes. Rebuilds all cabinet meshes from
   // scratch to reflect the new width, depth, or colour selection.
@@ -162,13 +134,22 @@
     const faceMat = new THREE.MeshStandardMaterial({ color: baseColor, roughness: 0.25, metalness: 0.0 });
     const pullMat = new THREE.MeshStandardMaterial({ color: 0xc9a96e, roughness: 0.35, metalness: 0.6 });
 
-    // Apply wood grain texture for maple finish
+    // Apply PBR textures for maple finish
     if (state.colorId && state.colorId.toLowerCase() === 'maple') {
-      var mapleMap = buildMapleTexture();
-      bodyMat.map = mapleMap;
-      faceMat.map = mapleMap;
-      bodyMat.needsUpdate = true;
-      faceMat.needsUpdate = true;
+      if (textures.mapleColor && textures.mapleNormal && textures.mapleRoughness) {
+        [textures.mapleColor, textures.mapleNormal, textures.mapleRoughness].forEach(function(t) {
+          t.wrapS = t.wrapT = THREE.RepeatWrapping;
+          t.repeat.set(W / 12, H / 12);
+        });
+        bodyMat.map          = textures.mapleColor;
+        bodyMat.normalMap    = textures.mapleNormal;
+        bodyMat.roughnessMap = textures.mapleRoughness;
+        bodyMat.color.set(0xffffff);
+        faceMat.map          = textures.mapleColor;
+        faceMat.normalMap    = textures.mapleNormal;
+        faceMat.roughnessMap = textures.mapleRoughness;
+        faceMat.color.set(0xffffff);
+      }
     }
 
     function box(w, h, d, x, y, z, mat) {
