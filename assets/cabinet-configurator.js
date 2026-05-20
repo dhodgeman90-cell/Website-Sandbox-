@@ -140,6 +140,7 @@
         [textures.mapleColor, textures.mapleNormal, textures.mapleRoughness].forEach(function(t) {
           t.wrapS = t.wrapT = THREE.RepeatWrapping;
           t.repeat.set(W / 12, H / 12);
+          t.needsUpdate = true;
         });
         bodyMat.map          = textures.mapleColor;
         bodyMat.normalMap    = textures.mapleNormal;
