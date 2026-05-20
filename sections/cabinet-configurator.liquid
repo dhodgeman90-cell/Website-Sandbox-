@@ -6,9 +6,14 @@
 <script>
   window.cabinetConfig = {
     widths:   {{ cfg.available_widths.value | default: '[]' | json }},
-    depths:   [{"value":12,"label":"12\""}, {"value":15,"label":"15\""}, {"value":18,"label":"18\""}, {"value":21,"label":"21\""}, {"value":24,"label":"24\""}],
+    depths:   [{"value":12,"label":"12\""}, {"value":15,"label":"15\""}, {"value":18,"label":"18\""}, {"value":21,"label":"21\""}, {"value":28,"label":"28\""}],
     colors:   {{ cfg.available_finishes.value | default: cfg.available_colors.value | default: '[]' | json }},
-    variants: {{ cab_product.variants | json }}
+    variants: {{ cab_product.variants | json }},
+    textureUrls: {
+      mapleColor:     {{ 'wood-maple (2).webp' | asset_url | json }},
+      mapleNormal:    {{ 'Wood048_2K-JPG_NormalGL.webp' | asset_url | json }},
+      mapleRoughness: {{ 'Wood048_2K-JPG_Roughness.webp' | asset_url | json }}
+    }
   };
 </script>
 
