@@ -201,7 +201,7 @@
     scene.add(cabinetGroup);
 
     // 3/4 product-photography angle — always far enough back to show full cabinet height
-    const camZ = Math.max(H * 1.8, D * 3.0);
+    const camZ = Math.max(H * 2.4, D * 3.5);
     camera.position.set(W * 1.3, H * 0.75, camZ);
     if (controls) {
       controls.target.set(0, H * 0.45, 0);
