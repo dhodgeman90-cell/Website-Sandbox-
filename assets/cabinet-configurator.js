@@ -280,8 +280,8 @@
     state.colorLabel = (colorOpt && colorOpt.value) ? colorOpt.textContent        : null;
     state.colorHex   = (colorOpt && colorOpt.value) ? colorOpt.dataset.hex || null : null;
 
-    if (state.width && state.depth && state.colorHex) {
-      buildCabinet(state.width, state.depth, state.colorHex);
+    if (state.width && state.depth) {
+      buildCabinet(state.width, state.depth, state.colorHex || '#888888');
     }
 
     updateSpec();
