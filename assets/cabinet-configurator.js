@@ -24,12 +24,12 @@
   let scene, camera, renderer, cabinetGroup, controls;
 
   // ─── PBR texture cache ────────────────────────────────────────────────────
-  var textures = { mapleColor: null, mapleNormal: null, mapleRoughness: null };
+  const textures = { mapleColor: null, mapleNormal: null, mapleRoughness: null };
 
   // ─── PBR texture loader ───────────────────────────────────────────────────
   function loadTextures() {
-    var urls = (cfg.textureUrls) || {};
-    var loader = new THREE.TextureLoader();
+    const urls = (cfg.textureUrls) || {};
+    const loader = new THREE.TextureLoader();
     if (urls.mapleColor)     loader.load(urls.mapleColor,     function(t) { textures.mapleColor = t; });
     if (urls.mapleNormal)    loader.load(urls.mapleNormal,    function(t) { textures.mapleNormal = t; });
     if (urls.mapleRoughness) loader.load(urls.mapleRoughness, function(t) { textures.mapleRoughness = t; });
