@@ -10,17 +10,12 @@
     colors:   {{ cfg.available_finishes.value | default: cfg.available_colors.value | default: '[]' | json }},
     variants: {{ cab_product.variants | json }}
   };
-  window.cabinetAssets = {
-    woodMaple:          {{ 'wood-maple.webp' | asset_url | json }},
-    woodMapleNormal:    {{ 'wood-maple-normal.webp' | asset_url | json }},
-    woodMapleRoughness: {{ 'wood-maple-roughness.webp' | asset_url | json }},
-    roomBg:             {{ 'Brick wall.png' | asset_url | json }}
-  };
 </script>
 
 {%- comment -%} Hero ─────────────────────────────────────────────────────── {%- endcomment -%}
 <div class="cab-hero">
-  <h1 class="cab-hero__headline">Build Your Cabinet</h1>
+  <div class="cab-hero__eyebrow">Made to Order &middot; CNC Precision</div>
+  <h1 class="cab-hero__headline">Build Your Baseball Card Cabinet</h1>
   <p class="cab-hero__sub">Choose your width, depth, and finish. We cut it to spec in our CNC shop and ship it to your door.</p>
   <a href="#cc-configurator" class="cab-hero__cta">Start Configuring &#8595;</a>
 </div>
@@ -85,6 +80,7 @@
   {%- comment -%} Centre panel: Three.js 3D preview {%- endcomment -%}
   <div class="cab-panel cab-panel--preview">
     <canvas id="cc-canvas"></canvas>
+    <div class="cab-rotate-hint">&#8635; Drag to rotate</div>
   </div>
 
   {%- comment -%} Right panel: spec + price + cart {%- endcomment -%}
@@ -277,6 +273,15 @@
     text-align: center;
   }
 
+  .cab-rotate-hint {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    font-size: 0.55rem;
+    color: #444;
+    letter-spacing: 0.06em;
+    pointer-events: none;
+  }
 
   /* ── Hero ───────────────────────────────────────────────────────────────── */
   .cab-hero {
@@ -420,6 +425,7 @@
 </style>
 
 <script src="{{ 'three.min.js' | asset_url }}" defer></script>
+<script src="{{ 'three-orbit-controls.min.js' | asset_url }}" defer></script>
 <script src="{{ 'cabinet-configurator.js' | asset_url }}" defer></script>
 
 <script>
