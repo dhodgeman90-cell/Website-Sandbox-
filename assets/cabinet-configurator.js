@@ -7,11 +7,6 @@
     widths: [], depths: [], colors: [], variants: [],
   };
 
-  // ─── Color overlay map (color id → CSS hex) ───────────────────────────────
-  const colorMap = {
-    'graphite': '#636363',
-    'white':    '#f5f3ef',
-  };
 
   // ─── State ────────────────────────────────────────────────────────────────
   const state = {
@@ -69,8 +64,10 @@
   function updateColorOverlay() {
     var overlay = document.getElementById('cab-color-overlay');
     if (!overlay) return;
-    var hex = state.colorId ? colorMap[state.colorId.toLowerCase()] : null;
-    overlay.style.backgroundColor = hex || '';
+    var colorData = state.colorId
+      ? (cfg.colors || []).find(function (c) { return c.id.toLowerCase() === state.colorId.toLowerCase(); })
+      : null;
+    overlay.style.backgroundColor = (colorData && colorData.hex) || '';
   }
 
   // ─── Update right-panel spec display ──────────────────────────────────────
