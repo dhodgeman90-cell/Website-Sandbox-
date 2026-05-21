@@ -4,8 +4,13 @@
 
   // ─── Config (injected by Liquid into window.cabinetConfig) ────────────────
   const cfg = window.cabinetConfig || {
-    widths: [], depths: [], colors: [], variants: [],
+    widths: [], depths: [], colors: [], variants: [], defaultImageSrc: '',
   };
+
+  // ─── Asset folder URL (strip filename from default src) ───────────────────
+  const assetFolder = cfg.defaultImageSrc
+    ? cfg.defaultImageSrc.split('cabinet-hero-flat.jpg')[0]
+    : '';
 
 
   // ─── State ────────────────────────────────────────────────────────────────
@@ -60,14 +65,18 @@
     return v ? v.price / 100 : null;
   }
 
-  // ─── Update colour overlay on preview image ───────────────────────────────
-  function updateColorOverlay() {
-    var overlay = document.getElementById('cab-color-overlay');
-    if (!overlay) return;
-    var colorData = state.colorId
-      ? (cfg.colors || []).find(function (c) { return c.id.toLowerCase() === state.colorId.toLowerCase(); })
-      : null;
-    overlay.style.backgroundColor = (colorData && colorData.hex) || '';
+  // ─── Swap preview image when colour changes ───────────────────────────────
+  function updatePreviewImage() {
+    var img = document.getElementById('cab-preview-img');
+    if (!img) return;
+    var newSrc = state.colorId
+      ? assetFolder + 'cabinet-hero-' + state.colorId + '.jpg'
+      : cfg.defaultImageSrc;
+    if (img.src === newSrc) return;
+    img.style.opacity = '0';
+    img.onload = function () { img.style.opacity = '1'; };
+    img.onerror = function () { img.src = cfg.defaultImageSrc; img.style.opacity = '1'; };
+    img.src = newSrc;
   }
 
   // ─── Update right-panel spec display ──────────────────────────────────────
@@ -98,7 +107,7 @@
 
     updateSpec();
     updatePrice();
-    updateColorOverlay();
+    updatePreviewImage();
     atcBtn.disabled = !findVariant();
   }
 

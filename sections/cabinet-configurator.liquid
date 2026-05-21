@@ -5,10 +5,11 @@
 
 <script>
   window.cabinetConfig = {
-    widths:   {{ cfg.available_widths.value | default: '[]' | json }},
-    depths:   [{"value":12,"label":"12\""}, {"value":15,"label":"15\""}, {"value":18,"label":"18\""}, {"value":21,"label":"21\""}, {"value":28,"label":"28\""}],
-    colors:   {{ cfg.available_finishes.value | default: cfg.available_colors.value | default: '[]' | json }},
-    variants: {{ cab_product.variants | json }}
+    widths:          {{ cfg.available_widths.value | default: '[]' | json }},
+    depths:          [{"value":12,"label":"12\""}, {"value":15,"label":"15\""}, {"value":18,"label":"18\""}, {"value":21,"label":"21\""}, {"value":28,"label":"28\""}],
+    colors:          {{ cfg.available_finishes.value | default: cfg.available_colors.value | default: '[]' | json }},
+    variants:        {{ cab_product.variants | json }},
+    defaultImageSrc: {{ 'cabinet-hero-flat.jpg' | asset_url | json }}
   };
 </script>
 
@@ -78,10 +79,7 @@
 
   {%- comment -%} Centre panel: product image {%- endcomment -%}
   <div class="cab-panel cab-panel--preview">
-    <div class="cab-preview-wrap">
-      <img src="{{ 'cabinet-hero-flat.jpg' | asset_url }}" alt="4-drawer flat-panel cabinet" class="cab-preview-img" width="1334" height="1179">
-      <div class="cab-color-overlay" id="cab-color-overlay"></div>
-    </div>
+    <img id="cab-preview-img" src="{{ 'cabinet-hero-flat.jpg' | asset_url }}" alt="4-drawer flat-panel cabinet" class="cab-preview-img" width="1334" height="1179">
   </div>
 
   {%- comment -%} Right panel: spec + price + cart {%- endcomment -%}
@@ -195,26 +193,13 @@
     overflow: hidden;
   }
 
-  .cab-preview-wrap {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-
   .cab-preview-img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-  }
-
-  .cab-color-overlay {
-    position: absolute;
-    inset: 0;
-    mix-blend-mode: multiply;
-    pointer-events: none;
-    transition: background-color 0.3s ease;
+    transition: opacity 0.2s ease;
   }
 
   /* ── Right panel: spec + price + cart ───────────────────────────────────── */
