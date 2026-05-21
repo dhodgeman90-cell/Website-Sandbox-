@@ -8,12 +8,7 @@
     widths:   {{ cfg.available_widths.value | default: '[]' | json }},
     depths:   [{"value":12,"label":"12\""}, {"value":15,"label":"15\""}, {"value":18,"label":"18\""}, {"value":21,"label":"21\""}, {"value":28,"label":"28\""}],
     colors:   {{ cfg.available_finishes.value | default: cfg.available_colors.value | default: '[]' | json }},
-    variants: {{ cab_product.variants | json }},
-    textureUrls: {
-      mapleColor:     {{ 'wood-maple (2).webp' | asset_url | json }},
-      mapleNormal:    {{ 'Wood048_2K-JPG_NormalGL.webp' | asset_url | json }},
-      mapleRoughness: {{ 'Wood048_2K-JPG_Roughness.webp' | asset_url | json }}
-    }
+    variants: {{ cab_product.variants | json }}
   };
 </script>
 
@@ -33,7 +28,7 @@
     <div class="cab-step">
       <div class="cab-step__num">1</div>
       <div class="cab-step__title">Configure</div>
-      <div class="cab-step__desc">Pick your size and finish. See it in 3D as you go.</div>
+      <div class="cab-step__desc">Pick your size and finish from the options below.</div>
     </div>
 
     <div class="cab-step">
@@ -82,10 +77,9 @@
     </div>
   </div>
 
-  {%- comment -%} Centre panel: Three.js 3D preview {%- endcomment -%}
+  {%- comment -%} Centre panel: product image {%- endcomment -%}
   <div class="cab-panel cab-panel--preview">
-    <canvas id="cc-canvas"></canvas>
-    <div class="cab-rotate-hint">&#8635; Drag to rotate</div>
+    <img src="{{ 'cabinet-hero-flat.jpg' | asset_url }}" alt="4-drawer flat-panel cabinet" class="cab-preview-img" width="1334" height="1179">
   </div>
 
   {%- comment -%} Right panel: spec + price + cart {%- endcomment -%}
@@ -193,19 +187,18 @@
   }
   .cab-select option { background: #242424; }
 
-  /* ── Centre panel: Three.js canvas ──────────────────────────────────────── */
+  /* ── Centre panel: product image ────────────────────────────────────────── */
   .cab-panel--preview {
     padding: 0;
-    position: relative;
     overflow: hidden;
   }
 
-  #cc-canvas {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+  .cab-preview-img {
+    display: block;
     width: 100%;
     height: 100%;
-    display: block;
+    object-fit: cover;
+    object-position: center;
   }
 
   /* ── Right panel: spec + price + cart ───────────────────────────────────── */
@@ -276,16 +269,6 @@
     font-size: 0.6rem;
     color: #555;
     text-align: center;
-  }
-
-  .cab-rotate-hint {
-    position: absolute;
-    bottom: 10px;
-    right: 12px;
-    font-size: 0.55rem;
-    color: #444;
-    letter-spacing: 0.06em;
-    pointer-events: none;
   }
 
   /* ── Hero ───────────────────────────────────────────────────────────────── */
@@ -415,7 +398,6 @@
     .cab-panel { border-right: none; border-bottom: 1px solid #2e2e2e; }
     .cab-panel:last-child { border-bottom: none; }
     .cab-panel--preview { min-height: 380px; }
-    #cc-canvas { position: absolute; }
     .cab-steps__grid {
       grid-template-columns: 1fr;
       gap: 20px;
@@ -429,9 +411,7 @@
   }
 </style>
 
-<script src="{{ 'three.min.js' | asset_url }}" defer></script>
-<script src="{{ 'three-orbit-controls.min.js' | asset_url }}" defer></script>
-<script src="{{ 'cabinet-configurator.js' | asset_url }}?v=2" defer></script>
+<script src="{{ 'cabinet-configurator.js' | asset_url }}?v=3" defer></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
