@@ -7,6 +7,12 @@
     widths: [], depths: [], colors: [], variants: [],
   };
 
+  // ─── Color overlay map (color id → CSS hex) ───────────────────────────────
+  const colorMap = {
+    'graphite': '#636363',
+    'white':    '#f5f3ef',
+  };
+
   // ─── State ────────────────────────────────────────────────────────────────
   const state = {
     width:      null,
@@ -59,6 +65,14 @@
     return v ? v.price / 100 : null;
   }
 
+  // ─── Update colour overlay on preview image ───────────────────────────────
+  function updateColorOverlay() {
+    var overlay = document.getElementById('cab-color-overlay');
+    if (!overlay) return;
+    var hex = state.colorId ? colorMap[state.colorId.toLowerCase()] : null;
+    overlay.style.backgroundColor = hex || '';
+  }
+
   // ─── Update right-panel spec display ──────────────────────────────────────
   function updateSpec() {
     document.getElementById('spec-width').textContent = state.width  ? state.width  + '″' : '—';
@@ -87,6 +101,7 @@
 
     updateSpec();
     updatePrice();
+    updateColorOverlay();
     atcBtn.disabled = !findVariant();
   }
 

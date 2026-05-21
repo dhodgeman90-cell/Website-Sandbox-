@@ -78,7 +78,10 @@
 
   {%- comment -%} Centre panel: product image {%- endcomment -%}
   <div class="cab-panel cab-panel--preview">
-    <img src="{{ 'cabinet-hero-flat.jpg' | asset_url }}" alt="4-drawer flat-panel cabinet" class="cab-preview-img" width="1334" height="1179">
+    <div class="cab-preview-wrap">
+      <img src="{{ 'cabinet-hero-flat.jpg' | asset_url }}" alt="4-drawer flat-panel cabinet" class="cab-preview-img" width="1334" height="1179">
+      <div class="cab-color-overlay" id="cab-color-overlay"></div>
+    </div>
   </div>
 
   {%- comment -%} Right panel: spec + price + cart {%- endcomment -%}
@@ -192,12 +195,26 @@
     overflow: hidden;
   }
 
+  .cab-preview-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
   .cab-preview-img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
+  }
+
+  .cab-color-overlay {
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    transition: background-color 0.3s ease;
   }
 
   /* ── Right panel: spec + price + cart ───────────────────────────────────── */
