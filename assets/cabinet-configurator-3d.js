@@ -11,6 +11,7 @@
   // ─── State ────────────────────────────────────────────────────────────────
   const state = {
     width:      null,
+    widthLabel: null,
     depth:      null,
     colorId:    null,
     colorLabel: null,
@@ -259,7 +260,7 @@
 
   // ─── Update right-panel spec display ──────────────────────────────────────
   function updateSpec() {
-    document.getElementById('spec-width').textContent = state.width  ? state.width  + '″' : '—';
+    document.getElementById('spec-width').textContent = state.widthLabel || '—';
     document.getElementById('spec-depth').textContent = state.depth  ? state.depth  + '″' : '—';
     document.getElementById('spec-color').textContent = state.colorLabel || '—';
   }
@@ -274,18 +275,18 @@
 
   // ─── Dropdown change handler ──────────────────────────────────────────────
   function onSelectChange() {
-    const rawW     = parseInt(widthSelect.value, 10);
-    const rawD     = parseInt(depthSelect.value, 10);
+    const widthOpt = widthSelect.options[widthSelect.selectedIndex];
     const colorOpt = colorSelect.options[colorSelect.selectedIndex];
 
-    state.width      = isNaN(rawW)            ? null : rawW;
-    state.depth      = isNaN(rawD)            ? null : rawD;
-    state.colorId    = colorSelect.value      || null;
+    state.width      = widthSelect.value || null;
+    state.widthLabel = (widthOpt && widthOpt.value) ? widthOpt.textContent : null;
+    state.depth      = depthSelect.value  || null;
+    state.colorId    = colorSelect.value  || null;
     state.colorLabel = (colorOpt && colorOpt.value) ? colorOpt.textContent        : null;
     state.colorHex   = (colorOpt && colorOpt.value) ? colorOpt.dataset.hex || null : null;
 
-    var w = state.width  || (cfg.widths[0]  && cfg.widths[0].value)  || 24;
-    var d = state.depth  || (cfg.depths[0]  && cfg.depths[0].value)  || 12;
+    var w = parseFloat(state.width  || (cfg.widths[0]  && cfg.widths[0].value)  || 24);
+    var d = parseFloat(state.depth  || (cfg.depths[0]  && cfg.depths[0].value)  || 12);
     buildCabinet(w, d, state.colorHex || '#888888');
 
     updateSpec();
