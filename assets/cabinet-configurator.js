@@ -9,7 +9,7 @@
 
   // ─── Asset folder URL (strip filename from default src) ───────────────────
   const assetFolder = cfg.defaultImageSrc
-    ? cfg.defaultImageSrc.split('cabinet-hero-graphite.jpg')[0]
+    ? cfg.defaultImageSrc.substring(0, cfg.defaultImageSrc.lastIndexOf('/') + 1)
     : '';
 
 
