@@ -9,7 +9,7 @@
     depths:          [{"value":"13","label":"13\""}, {"value":"16","label":"16\""}, {"value":"19","label":"19\""}, {"value":"22","label":"22\""}],
     colors:          {{ cfg.available_finishes.value | default: cfg.available_colors.value | default: '[]' | json }},
     variants:        {{ cab_product.variants | json }},
-    defaultImageSrc: {{ 'cabinet-hero-graphite.jpg' | asset_url | json }}
+    defaultImageSrc: {{ 'black-cabinet-hero-mdf.jpg' | asset_url | json }}
   };
 </script>
 
@@ -79,7 +79,7 @@
 
   {%- comment -%} Centre panel: product image {%- endcomment -%}
   <div class="cab-panel cab-panel--preview">
-    <img id="cab-preview-img" src="{{ 'cabinet-hero-graphite.jpg' | asset_url }}" alt="4-drawer flat-panel cabinet" class="cab-preview-img" width="1334" height="1179">
+    <img id="cab-preview-img" src="{{ 'black-cabinet-hero-mdf.jpg' | asset_url }}" alt="4-drawer flat-panel cabinet" class="cab-preview-img" width="1334" height="1179">
   </div>
 
   {%- comment -%} Right panel: spec + price + cart {%- endcomment -%}
