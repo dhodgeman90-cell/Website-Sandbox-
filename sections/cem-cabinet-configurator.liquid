@@ -15,6 +15,45 @@
 
 <div class="cem-page">
 
+{%- comment -%} CEM Header ──────────────────────────────────────────────── {%- endcomment -%}
+<header class="cem-header">
+  <div class="cem-header__inner">
+    <div class="cem-header__logo">
+      <svg class="cem-header__logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="20" cy="20" r="18" stroke="white" stroke-width="1.5" fill="none"/>
+        <circle cx="20" cy="20" r="4" fill="white"/>
+        {% for i in (0..11) %}
+        <rect x="19" y="2" width="2" height="6" rx="1" fill="white" transform="rotate({{ i | times: 30 }} 20 20)"/>
+        {% endfor %}
+      </svg>
+      <div class="cem-header__logo-text">
+        <span class="cem-header__logo-top">CUTTING EDGE</span>
+        <span class="cem-header__logo-bottom">MILLWORKS</span>
+      </div>
+    </div>
+    <nav class="cem-header__nav">
+      <a href="https://www.cuttingedgemill.works/#home" class="cem-nav-link">Home</a>
+      <a href="https://www.cuttingedgemill.works/#portfolio" class="cem-nav-link">Portfolio</a>
+      <a href="https://www.cuttingedgemill.works/#services" class="cem-nav-link cem-nav-link--active">Services</a>
+      <a href="https://www.cuttingedgemill.works/#contact" class="cem-nav-link">Contact</a>
+    </nav>
+    <div class="cem-header__social">
+      <a href="#" class="cem-social-link" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="#" class="cem-social-link" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="tel:9499100590" class="cem-social-link" aria-label="Phone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1.14h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.72a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </a>
+      <a href="mailto:cuttingedgemw@gmail.com" class="cem-social-link" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
 {%- comment -%} Hero ─────────────────────────────────────────────────────── {%- endcomment -%}
 <div class="cab-hero">
   <h1 class="cab-hero__headline">Build Your Cabinet</h1>
@@ -128,6 +167,12 @@
 </div>
 
 <style>
+  /* ── Hide Oxford Wood Works chrome on this page ────────────────────────── */
+  .shopify-section-header,
+  .shopify-section-announcement-bar,
+  footer.footer,
+  .footer { display: none !important; }
+
   /* ── CEM colour tokens ──────────────────────────────────────────────────── */
   /* page bg:        #dce8e4  (light mint)                                    */
   /* panel bg:       #ffffff  (white)                                          */
@@ -410,6 +455,119 @@
     line-height: 1.6;
   }
 
+  /* ── CEM Header ─────────────────────────────────────────────────────────── */
+  .cem-header {
+    background: #3a5754;
+    width: 100%;
+  }
+  .cem-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    gap: 24px;
+  }
+  .cem-header__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .cem-header__logo-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+  .cem-header__logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  .cem-header__logo-top {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #ffffff;
+  }
+  .cem-header__logo-bottom {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #ffffff;
+  }
+  .cem-header__nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+  }
+  .cem-nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .cem-nav-link:hover { color: #5bbfba; }
+  .cem-nav-link--active { color: #5bbfba; }
+  .cem-header__social {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  .cem-social-link {
+    color: #ffffff;
+    transition: color 0.15s;
+    display: flex;
+    align-items: center;
+  }
+  .cem-social-link:hover { color: #5bbfba; }
+
+  /* ── CEM Footer ─────────────────────────────────────────────────────────── */
+  .cem-footer {
+    background: #3a5754;
+    margin-top: 48px;
+  }
+  .cem-footer__inner {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 36px 24px;
+    gap: 32px;
+  }
+  .cem-footer__name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #ffffff;
+    margin-bottom: 4px;
+  }
+  .cem-footer__tagline {
+    font-size: 0.65rem;
+    color: #5bbfba;
+    font-style: italic;
+  }
+  .cem-footer__contact {
+    font-size: 0.65rem;
+    color: #b0ccc8;
+    line-height: 1.8;
+  }
+  .cem-footer__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cem-footer__nav a {
+    color: #b0ccc8;
+    text-decoration: none;
+    font-size: 0.7rem;
+    transition: color 0.15s;
+  }
+  .cem-footer__nav a:hover { color: #ffffff; }
+
   /* ── Responsive ─────────────────────────────────────────────────────────── */
   @media (max-width: 768px) {
     .cem-page .cabinet-configurator {
@@ -429,6 +587,12 @@
     .cem-page .cab-hero {
       padding: 40px 20px 32px;
     }
+    .cem-header__nav { display: none; }
+    .cem-header__social { gap: 10px; }
+    .cem-footer__inner {
+      flex-direction: column;
+      gap: 24px;
+    }
   }
 </style>
 
@@ -446,6 +610,27 @@
     }
   });
 </script>
+
+{%- comment -%} CEM Footer ──────────────────────────────────────────────── {%- endcomment -%}
+<footer class="cem-footer">
+  <div class="cem-footer__inner">
+    <div class="cem-footer__brand">
+      <div class="cem-footer__name">CUTTING EDGE MILLWORKS</div>
+      <div class="cem-footer__tagline">Your Vision. Come to Life.</div>
+    </div>
+    <div class="cem-footer__contact">
+      <div>33208 Paseo Cerveza, Suite E</div>
+      <div>San Juan Capistrano, CA 92675</div>
+      <div>(949) 910-0590 &middot; cuttingedgemw@gmail.com</div>
+    </div>
+    <nav class="cem-footer__nav">
+      <a href="https://www.cuttingedgemill.works/#home">Home</a>
+      <a href="https://www.cuttingedgemill.works/#portfolio">Portfolio</a>
+      <a href="https://www.cuttingedgemill.works/#services">Services</a>
+      <a href="https://www.cuttingedgemill.works/#contact">Contact</a>
+    </nav>
+  </div>
+</footer>
 
 </div>
 
