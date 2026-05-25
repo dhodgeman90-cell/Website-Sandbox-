@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "cem-cabinet-configurator",
+      "settings": {
+        "product": "baseball-card-cabinet"
+      }
+    }
+  },
+  "order": ["main"]
+}
