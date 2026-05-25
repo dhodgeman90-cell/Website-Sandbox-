@@ -19,17 +19,7 @@
 <header class="cem-header">
   <div class="cem-header__inner">
     <div class="cem-header__logo">
-      <svg class="cem-header__logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="20" cy="20" r="18" stroke="white" stroke-width="1.5" fill="none"/>
-        <circle cx="20" cy="20" r="4" fill="white"/>
-        {% for i in (0..11) %}
-        <rect x="19" y="2" width="2" height="6" rx="1" fill="white" transform="rotate({{ i | times: 30 }} 20 20)"/>
-        {% endfor %}
-      </svg>
-      <div class="cem-header__logo-text">
-        <span class="cem-header__logo-top">CUTTING EDGE</span>
-        <span class="cem-header__logo-bottom">MILLWORKS</span>
-      </div>
+      <img src="https://www.cuttingedgemill.works/wp-content/uploads/2019/05/CuttingEdgeLogoWhite.png" alt="Cutting Edge Millworks" class="cem-header__logo-img" width="180" height="50">
     </div>
     <nav class="cem-header__nav">
       <a href="https://www.cuttingedgemill.works/#home" class="cem-nav-link">Home</a>
@@ -468,32 +458,12 @@
     gap: 24px;
   }
   .cem-header__logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
     flex-shrink: 0;
   }
-  .cem-header__logo-icon {
-    width: 40px;
-    height: 40px;
-    flex-shrink: 0;
-  }
-  .cem-header__logo-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-  }
-  .cem-header__logo-top {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    color: #ffffff;
-  }
-  .cem-header__logo-bottom {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    color: #ffffff;
+  .cem-header__logo-img {
+    display: block;
+    height: 50px;
+    width: auto;
   }
   .cem-header__nav {
     display: flex;
