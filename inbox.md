@@ -1,8 +1,7 @@
-# Task Inbox
+# Task Inbox — RETIRED
 
-Add tasks here anytime — on desktop or from your phone via the GitHub app.
-Format: `- [] Your task description`
-Claude reads this at the start of every session and will summarize what's waiting.
+This file is no longer used. Tasks are now managed in the Todoist "VS Code" project.
+Tasks added here will not be read at session start.
 
 ---
 
@@ -16,7 +15,7 @@ Claude reads this at the start of every session and will summarize what's waitin
 
 ## T-Shirt Business
 <!-- Tasks for Etsy + Printify designs and listings -->
-[ ] i want to test this on my phone. if this test was successful, i want you to simply mark this item as completed 
+[x] i want to test this on my phone. if this test was successful, i want you to simply mark this item as completed 
 ## Time Tracker
 <!-- Tasks for the PySide6 desktop app (C:\VS Code\Time Tracker) -->
 
