@@ -17,7 +17,7 @@ Claude reads this at the start of every session and will summarize what's waitin
 ## T-Shirt Business
 <!-- Tasks for Etsy + Printify designs and listings -->
 - [x] Research top selling clothing trends this week 
-
+[ ] i want to test this on my phone. if this test was successful, i want you to simply mark this item as completed 
 ## Time Tracker
 <!-- Tasks for the PySide6 desktop app (C:\VS Code\Time Tracker) -->
 
