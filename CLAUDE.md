@@ -23,6 +23,7 @@ This site must be easy to manage long-term. No shortcuts. No bandaids. Do it pro
 | Shopify CLI | Local theme preview and deployment |
 | Claude Code | Design and development assistant |
 | App Embed Blocks | How configurator + calculator are embedded (NOT raw iframes) |
+| Todoist | Task inbox — read by Claude at session start via MCP |
 
 **GitHub repo:** https://github.com/dhodgeman90-cell/Website-Sandbox-
 **Shopify store URL:** ywbx1x-1n.myshopify.com
@@ -52,6 +53,7 @@ This site must be easy to manage long-term. No shortcuts. No bandaids. Do it pro
 ```
 /
 ├── CLAUDE.md                        ← this file
+├── inbox.md                         ← retired (replaced by Todoist "VS Code" project)
 ├── assets/                          ← CSS, JS, images, fonts
 ├── config/
 │   └── settings_data.json           ← brand colors, fonts, theme settings
@@ -108,11 +110,17 @@ Do this every time you work on the site:
 ```
 1. Open PowerShell
 2. Type: cd "c:\VS Code\Website Fuckery"
-3. Type: code .           (VS Code opens in the right folder)
-4. In the VS Code terminal: shopify theme dev --store ywbx1x-1n.myshopify.com
-5. Browser opens at http://localhost:9292 — this is your live preview
-6. Launch Claude Code and start working
+3. Type: git pull                         (grab any tasks added from your phone)
+4. Type: code .           (VS Code opens in the right folder)
+5. In the VS Code terminal: shopify theme dev --store ywbx1x-1n.myshopify.com
+6. Browser opens at http://localhost:9292 — this is your live preview
+7. Launch Claude Code and start working
 ```
+
+**At the start of every session, read open tasks from the Todoist "VS Code" project before doing anything else.**
+Use the Todoist MCP tools to fetch tasks grouped by section, summarize what's waiting, and ask which project to start with or suggest a logical work order based on urgency and dependencies.
+When tasks are completed during the session, mark them done in Todoist using the MCP tools — do not just acknowledge them verbally.
+To expand to additional Todoist projects in future, update this instruction to list the extra project names.
 
 ---
 
