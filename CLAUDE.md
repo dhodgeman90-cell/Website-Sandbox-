@@ -1,11 +1,9 @@
-# Oxford Wood Works — Claude Code Guide
+# The Apex Archive — Claude Code Guide
 
 ## Project Overview
 
-**Client:** Phill Anton
-**Site:** Oxford Wood Works — ecommerce store selling CNC-cut MDF doors
-**Designs:** Licensed from https://www.phillanton.com/pages/mdf-doors
-**Permission:** Phill Anton has explicitly granted permission to reference his website and use imagery (adapted to Oxford Wood Works style)
+**Client:** The Apex Archive buyer
+**Site:** The Apex Archive — ecommerce store selling trading card storage cabinets
 **Aesthetic:** Modern and minimal — clean lines, generous white space, premium feel
 **Owner skill level:** Beginner — always explain commands before running them
 
@@ -34,12 +32,13 @@ This site must be easy to manage long-term. No shortcuts. No bandaids. Do it pro
 
 - **Style:** Modern minimal
 - **Colors:** Dark Premium palette — confirmed session 1
-  - Background: `#1c1c1c` (near-black)
-  - Cards/secondary: `#242424`
+  - Background: `#1e1410` (near-black)
+  - Cards/secondary: `#2c1e12`
   - Heading text: `#f0ede8` (warm cream)
-  - Body text: `#d4cfc9`
+  - Body text: `#b5a898`
   - Accent/gold: `#c9a96e`
-  - Borders: `#2e2e2e`
+  - Borders: `#3d2a18`
+  - Parchment strip: `#e8dfc8`
 - **Font:** Inter (already set in theme — clean geometric sans-serif)
 - **Spacing:** Generous — never crowded, never cluttered
 - **Images:** Sourced from phillanton.com, adapted to Oxford Wood Works color palette
@@ -117,8 +116,9 @@ Do this every time you work on the site:
 7. Launch Claude Code and start working
 ```
 
-**At the start of every session, read open tasks from the Todoist "VS Code" project before doing anything else.**
+**At the start of every session, read open tasks from the Todoist "VS Code" project (ID: 6gmJg3J4gfj7fvwP) before doing anything else.**
 Use the Todoist MCP tools to fetch tasks grouped by section, summarize what's waiting, and ask which project to start with or suggest a logical work order based on urgency and dependencies.
+Sections in this project: Apex Archive | CEM Configurator | T-Shirt Business | Time Tracker | Admin / General
 When tasks are completed during the session, mark them done in Todoist using the MCP tools — do not just acknowledge them verbally.
 To expand to additional Todoist projects in future, update this instruction to list the extra project names.
 
@@ -168,8 +168,7 @@ Shopify Admin → Online Store → Customize → App embeds (left sidebar)
 4. **Always explain commands** before running them — the user is a beginner
 5. **Always keep the design modern and minimal** — when in doubt, remove, don't add
 6. **No shortcuts, no bandaids** — do it properly or flag the issue and ask
-7. **Reference phillanton.com** for product imagery and design inspiration
-8. **Ask before any destructive action** — deleting files, resetting themes, force pushing
+7. **Ask before any destructive action** — deleting files, resetting themes, force pushing
 
 ---
 
