@@ -111,24 +111,6 @@
 
 </section>
 
-{%- comment -%} Feature callouts ────────────────────────────────────────── {%- endcomment -%}
-<div class="cab-callouts">
-  <div class="cab-callout">
-    <div class="cab-callout__icon">&#10022;</div>
-    <div class="cab-callout__title">Made to Order</div>
-    <div class="cab-callout__desc">Every cabinet is cut to your exact dimensions in our CNC shop.</div>
-  </div>
-  <div class="cab-callout">
-    <div class="cab-callout__icon">&#10022;</div>
-    <div class="cab-callout__title">Free Shipping</div>
-    <div class="cab-callout__desc">Flat-packed and shipped to your door at no extra cost.</div>
-  </div>
-  <div class="cab-callout">
-    <div class="cab-callout__icon">&#10022;</div>
-    <div class="cab-callout__title">Ships in 5&ndash;7 Days</div>
-    <div class="cab-callout__desc">Quick turnaround from order to delivery.</div>
-  </div>
-</div>
 
 <style>
   .cabinet-configurator {
@@ -373,38 +355,6 @@
     line-height: 1.6;
   }
 
-  /* ── Feature callouts ───────────────────────────────────────────────────── */
-  .cab-callouts {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
-    max-width: 1100px;
-    margin: 32px auto 48px;
-    padding: 0 24px;
-  }
-  .cab-callout {
-    padding: 20px;
-    border: 1px solid #2e2e2e;
-    border-radius: 6px;
-    text-align: center;
-  }
-  .cab-callout__icon {
-    font-size: 1.1rem;
-    color: #c9a96e;
-    margin-bottom: 10px;
-  }
-  .cab-callout__title {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #f0ede8;
-    margin-bottom: 6px;
-  }
-  .cab-callout__desc {
-    font-size: 0.62rem;
-    color: #888;
-    line-height: 1.6;
-  }
-
   /* ── Responsive ─────────────────────────────────────────────────────────── */
   @media (max-width: 768px) {
     .cabinet-configurator {
@@ -418,9 +368,6 @@
     .cab-steps__grid {
       grid-template-columns: 1fr;
       gap: 20px;
-    }
-    .cab-callouts {
-      grid-template-columns: 1fr;
     }
     .cab-hero {
       padding: 40px 20px 32px;
