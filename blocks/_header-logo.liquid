@@ -65,12 +65,15 @@
         style: logo_style
       %}
     {% else %}
-      <img
-        src="{{ 'apex-archive-logo.png' | asset_url }}"
-        alt="{{ shop.name }}"
-        class="header-logo__image"
-        style="height: 60px; width: auto; display: block; border-radius: 50%;"
-      >
+      <span style="display:block;width:60px;height:60px;border-radius:50%;overflow:hidden;flex-shrink:0;">
+        <img
+          src="{{ 'apex-archive-logo.png' | asset_url }}"
+          alt="{{ shop.name }}"
+          width="72"
+          height="72"
+          style="width:120%;height:120%;margin:-10%;display:block;object-fit:cover;"
+        >
+      </span>
     {% endif %}
   </span>
 
