@@ -63,13 +63,13 @@
     <div class="logo-block__image-wrapper">
       {{ logo_image }}
     </div>
-  {% elsif 'oxford-wood-works-logo.svg' != blank %}
+  {% elsif 'apex-archive-logo.png' != blank %}
     <div class="logo-block__image-wrapper">
       <img
-        src="{{ 'oxford-wood-works-logo.svg' | asset_url }}"
+        src="{{ 'apex-archive-logo.png' | asset_url }}"
         alt="{{ shop.name }}"
         class="logo-block__image"
-        style="height: 70px; width: auto;"
+        style="height: 70px; width: auto; border-radius: 50%;"
       >
     </div>
   {% else %}
