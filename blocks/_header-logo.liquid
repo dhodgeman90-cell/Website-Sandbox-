@@ -71,7 +71,7 @@
         class="header-logo__image"
         width="203"
         height="135"
-        style="height: 135px; width: auto; display: block;"
+        style="height: 135px; width: auto; display: block; transform: scale(2); transform-origin: center; position: relative; z-index: 10;"
       >
     {% endif %}
   </span>
@@ -94,6 +94,11 @@
 </a>
 
 {% stylesheet %}
+  .header-logo,
+  .header-logo__image-container {
+    overflow: visible;
+  }
+
   .header-logo {
     display: flex;
     height: 100%;
