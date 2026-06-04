@@ -207,16 +207,15 @@
   .oww-form-header__logo-wrap {
     position: relative;
     height: 200px;
-    display: flex;
-    align-items: center;
     overflow: visible;
   }
 
   .oww-form-header__logo {
     display: block;
-    max-width: 400px;
-    height: auto;
-    flex-shrink: 0;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
     filter: brightness(0) invert(1) sepia(1) brightness(0.91);
   }
 
