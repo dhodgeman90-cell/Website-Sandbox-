@@ -20,7 +20,7 @@
           class="oww-form-header__logo"
           width="400"
           height="400"
-          style="border-radius: 50%; width: 400px; height: 400px; object-fit: cover;"
+          style="border-radius: 50%; width: 400px; height: 400px; object-fit: contain;"
         >
         <p class="oww-form-header__url">ApexCardArchive@gmail.com</p>
       </div>
@@ -206,8 +206,9 @@
 
   .oww-form-header__logo {
     display: block;
-    max-width: 200px;
+    max-width: 400px;
     height: auto;
+    flex-shrink: 0;
   }
 
   .oww-form-header__url {
