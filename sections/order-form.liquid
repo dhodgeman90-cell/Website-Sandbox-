@@ -204,18 +204,25 @@
     justify-content: space-between;
   }
 
+  .oww-form-header__logo-wrap {
+    position: relative;
+  }
+
   .oww-form-header__logo {
     display: block;
     max-width: 400px;
     height: auto;
     flex-shrink: 0;
+    filter: brightness(1.8);
   }
 
   .oww-form-header__url {
     font-size: 10px;
     color: #888;
-    margin: 6px 0 0;
     letter-spacing: 0.5px;
+    position: absolute;
+    top: 100%;
+    left: 0;
   }
 
   .oww-form-header__order-label {
