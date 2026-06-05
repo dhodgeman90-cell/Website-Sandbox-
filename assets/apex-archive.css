@@ -33,6 +33,30 @@ footer {
   border-top: 1px solid #c9a96e;
 }
 
+/* Footer grid — pin logo column to fixed width so text + email have room */
+@media screen and (min-width: 990px) {
+  footer .footer-content {
+    grid-template-columns: 160px 1fr 1fr !important;
+    align-items: start !important;
+    gap: 32px !important;
+  }
+}
+
+/* Logo in footer — constrain to column, match header visual scale */
+footer .logo-block {
+  width: 160px !important;
+  max-width: 160px !important;
+}
+
+footer .logo-block .logo-block__image,
+footer .logo-block .logo-block__image-wrapper img {
+  max-height: 120px !important;
+  height: auto !important;
+  width: auto !important;
+  max-width: 100% !important;
+  object-fit: contain;
+}
+
 /* Email signup — visible on dark background */
 footer .email-signup__input-group--integrated {
   border-color: #b5a898 !important;
