@@ -28,7 +28,11 @@ footer a:hover {
   color: #f0ede8;
 }
 
-/* Gold accent band — top of footer, matching header bottom border */
+/* Gold accent band — header bottom and footer top, matching pair */
+.header__row--top {
+  border-bottom-color: #c9a96e !important;
+}
+
 footer {
   border-top: 1px solid #c9a96e;
 }
