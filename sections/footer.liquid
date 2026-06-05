@@ -1,8 +1,8 @@
 
 
-<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div class="section-background color-{{ section.settings.color_scheme }} footer-dark"></div>
 <div
-  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }} footer-dark"
 >
   {% liquid
     assign total_blocks = section.blocks.size
@@ -111,6 +111,14 @@
       align-items: center;
       gap: 48px;
     }
+  }
+  .footer-dark {
+    background-color: #1c1c1c !important;
+    --color-background: #1c1c1c !important;
+    --color-foreground: #b5a898;
+    --color-foreground-heading: #f0ede8;
+    --color-border: #3a3a3a;
+    color: #b5a898 !important;
   }
 {% endstylesheet %}
 

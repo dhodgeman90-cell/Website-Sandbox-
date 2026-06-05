@@ -64,7 +64,7 @@
       {{ logo_image }}
     </div>
   {% elsif 'apex-archive-logo.png' != blank %}
-    <div class="logo-block__image-wrapper" style="background: #e8dfc8; border-radius: 6px; padding: 8px 14px;">
+    <div class="logo-block__image-wrapper">
       <img
         src="{{ 'apex-archive-logo.png' | asset_url }}"
         alt="{{ shop.name }}"

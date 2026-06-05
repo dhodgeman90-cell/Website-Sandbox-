@@ -1,0 +1,37 @@
+/* Apex Archive custom overrides */
+
+/* Footer — dark scheme */
+footer .section-background,
+footer .section {
+  background-color: #1c1c1c !important;
+  --color-background: #1c1c1c;
+  --color-foreground: #b5a898;
+  --color-foreground-heading: #f0ede8;
+  --color-border: #3a3a3a;
+  color: #b5a898;
+}
+
+footer h1,
+footer h2,
+footer h3,
+footer h4,
+footer h5,
+footer h6 {
+  color: #f0ede8;
+}
+
+footer a {
+  color: #b5a898;
+}
+
+footer a:hover {
+  color: #f0ede8;
+}
+
+/* Email signup — visible on dark background */
+footer .email-signup-block input,
+footer .email-signup-block [type="email"] {
+  border-color: #b5a898 !important;
+  background-color: #262626 !important;
+  color: #f0ede8 !important;
+}

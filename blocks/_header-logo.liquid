@@ -66,12 +66,12 @@
       %}
     {% else %}
       <img
-        src="{{ 'apex-archive-logo.png' | asset_url }}"
+        src="{{ 'apex-archive-logo-new.png' | asset_url }}"
         alt="{{ shop.name }}"
         class="header-logo__image"
-        width="203"
-        height="135"
-        style="height: 135px; width: auto; display: block; transform: scale(2); transform-origin: center; position: relative; z-index: 10;"
+        width="1024"
+        height="1024"
+        style="height: 90px; width: auto; display: block; transform: translateX(100px) translateY(15px) scale(2.2); transform-origin: center;"
       >
     {% endif %}
   </span>
@@ -97,6 +97,11 @@
   .header-logo,
   .header-logo__image-container {
     overflow: visible;
+  }
+
+  .header__row--top,
+  .header__row--bottom {
+    border-bottom-color: #c9a96e;
   }
 
   .header-logo {
