@@ -70,8 +70,8 @@
   function updatePreviewImage() {
     var img = document.getElementById('cab-preview-img');
     if (!img) return;
-    var newSrc = state.colorId
-      ? assetFolder + 'cabinet-hero-' + state.colorId + '.jpg'
+    var newSrc = (state.colorId && cfg.imageUrls && cfg.imageUrls[state.colorId])
+      ? cfg.imageUrls[state.colorId]
       : cfg.defaultImageSrc;
     if (img.src === newSrc) return;
     img.style.opacity = '0';
