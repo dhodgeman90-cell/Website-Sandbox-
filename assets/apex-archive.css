@@ -28,10 +28,22 @@ footer a:hover {
   color: #f0ede8;
 }
 
+/* Gold accent band — top of footer, matching header bottom border */
+footer {
+  border-top: 1px solid #c9a96e;
+}
+
 /* Email signup — visible on dark background */
-footer .email-signup-block input,
-footer .email-signup-block [type="email"] {
+footer .email-signup__input-group--integrated {
   border-color: #b5a898 !important;
   background-color: #262626 !important;
+}
+
+footer .email-signup__input {
   color: #f0ede8 !important;
+}
+
+footer .email-signup__input::placeholder {
+  color: #b5a898 !important;
+  opacity: 1;
 }
