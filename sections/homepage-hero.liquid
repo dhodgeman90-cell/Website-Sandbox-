@@ -1,6 +1,45 @@
-<section class="homepage-hero">
-  <div class="homepage-hero__bg" style="background-image: url('{{ 'cnc-hero.jpg' | asset_url }}');"></div>
+<section
+  class="homepage-hero{% if section.settings.enable_ken_burns %} homepage-hero--kenburns{% endif %}"
+  id="homepage-hero-{{ section.id }}"
+>
+  <div class="homepage-hero__slides">
+    {%- assign slide_count = 0 -%}
+    {%- for block in section.blocks -%}
+      {%- if block.settings.image_filename != blank -%}
+        {%- assign slide_count = slide_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if slide_count > 0 -%}
+      {%- assign rendered = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.settings.image_filename != blank -%}
+          <div
+            class="homepage-hero__slide{% if rendered == 0 %} is-active{% endif %}"
+            aria-hidden="true"
+            {{ block.shopify_attributes }}
+          >
+            <div
+              class="homepage-hero__slide-img"
+              style="background-image: url('{{ block.settings.image_filename | asset_url }}');"
+            ></div>
+          </div>
+          {%- assign rendered = rendered | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- comment -%} Fallback so the hero is never empty {%- endcomment -%}
+      <div class="homepage-hero__slide is-active" aria-hidden="true">
+        <div
+          class="homepage-hero__slide-img"
+          style="background-image: url('{{ 'cnc-hero.jpg' | asset_url }}');"
+        ></div>
+      </div>
+    {%- endif -%}
+  </div>
+
   <div class="homepage-hero__fade"></div>
+
   <div class="homepage-hero__content">
     <p class="homepage-hero__eyebrow">✦ The Crown Jewel of Your Collection ✦</p>
     <h1 class="homepage-hero__headline">Elite Trading Card<br>Storage Cabinets</h1>
@@ -11,6 +50,25 @@
     </div>
   </div>
 </section>
+
+<script>
+  (function () {
+    var root = document.getElementById('homepage-hero-{{ section.id }}');
+    if (!root) return;
+    var slides = root.querySelectorAll('.homepage-hero__slide');
+    if (slides.length <= 1) return;
+
+    var seconds = {{ section.settings.slide_duration | default: 6 }};
+    var duration = seconds * 1000;
+    var current = 0;
+
+    setInterval(function () {
+      slides[current].classList.remove('is-active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('is-active');
+    }, duration);
+  })();
+</script>
 
 {% stylesheet %}
   .homepage-hero {
@@ -23,12 +81,54 @@
     overflow: hidden;
   }
 
-  .homepage-hero__bg {
+  .homepage-hero__slides {
+    position: absolute;
+    inset: 0;
+    opacity: 0.70;
+  }
+
+  .homepage-hero__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+  }
+
+  .homepage-hero__slide.is-active {
+    opacity: 1;
+  }
+
+  .homepage-hero__slide-img {
     position: absolute;
     inset: 0;
     background-size: cover;
     background-position: center center;
-    opacity: 0.70;
+    transform-origin: center center;
+    will-change: transform;
+  }
+
+  /* Ken Burns — only when enabled in the theme editor */
+  @keyframes homepage-hero-kenburns {
+    from {
+      transform: scale(1) translate(0, 0);
+    }
+    to {
+      transform: scale(1.12) translate(-2%, -1%);
+    }
+  }
+
+  .homepage-hero--kenburns .homepage-hero__slide-img {
+    animation: homepage-hero-kenburns 14s ease-in-out infinite alternate;
+    animation-play-state: paused;
+  }
+
+  .homepage-hero--kenburns .homepage-hero__slide.is-active .homepage-hero__slide-img {
+    animation-play-state: running;
+  }
+
+  /* Alternate the zoom direction so it never feels repetitive */
+  .homepage-hero--kenburns .homepage-hero__slide:nth-child(even) .homepage-hero__slide-img {
+    animation-direction: alternate-reverse;
   }
 
   .homepage-hero__fade {
@@ -108,6 +208,14 @@
     border: 1px solid rgba(255, 255, 255, 0.5);
   }
 
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .homepage-hero__slide-img {
+      animation: none !important;
+      transform: none !important;
+    }
+  }
+
   @media screen and (max-width: 749px) {
     .homepage-hero {
       min-height: 75vh;
@@ -133,6 +241,59 @@
 {% schema %}
 {
   "name": "Homepage Hero",
-  "settings": []
+  "settings": [
+    {
+      "type": "range",
+      "id": "slide_duration",
+      "label": "Seconds per slide",
+      "min": 4,
+      "max": 10,
+      "step": 1,
+      "default": 6,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_ken_burns",
+      "label": "Enable Ken Burns zoom effect",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Cabinet image",
+      "settings": [
+        {
+          "type": "text",
+          "id": "image_filename",
+          "label": "Image filename (in /assets)",
+          "info": "Example: cabinet-hero-walnut.jpg"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Slide label (editor only)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Homepage Hero",
+      "blocks": [
+        { "type": "slide", "settings": { "image_filename": "cabinet-hero-main.jpg", "label": "Main" } },
+        { "type": "slide", "settings": { "image_filename": "cabinet-hero-maple.jpg", "label": "Maple" } },
+        { "type": "slide", "settings": { "image_filename": "cabinet-hero-walnut.jpg", "label": "Walnut" } },
+        { "type": "slide", "settings": { "image_filename": "cabinet-hero-black.jpg", "label": "Black" } },
+        { "type": "slide", "settings": { "image_filename": "cabinet-hero-white.jpg", "label": "White" } },
+        { "type": "slide", "settings": { "image_filename": "cabinet-hero-mdf.jpg", "label": "MDF" } },
+        { "type": "slide", "settings": { "image_filename": "cabinet-hero-wired-mercury.jpg", "label": "Wired Mercury" } },
+        { "type": "slide", "settings": { "image_filename": "cabinet-hero-lakeshore-oak.jpg", "label": "Lakeshore Oak" } },
+        { "type": "slide", "settings": { "image_filename": "cabinet-hero-acquedotti.jpg", "label": "Acquedotti" } }
+      ]
+    }
+  ]
 }
 {% endschema %}
