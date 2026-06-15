@@ -116,11 +116,7 @@ Do this every time you work on the site:
 7. Launch Claude Code and start working
 ```
 
-**At the start of every session, read open tasks from the Todoist "VS Code" project (ID: 6gmJg3J4gfj7fvwP) before doing anything else.**
-Use the Todoist MCP tools to fetch tasks grouped by section, summarize what's waiting, and ask which project to start with or suggest a logical work order based on urgency and dependencies.
-Sections in this project: Apex Archive | CEM Configurator | T-Shirt Business | Time Tracker | Admin / General
-When tasks are completed during the session, mark them done in Todoist using the MCP tools — do not just acknowledge them verbally.
-To expand to additional Todoist projects in future, update this instruction to list the extra project names.
+**Session-start routine** (reading the Todoist "VS Code" project across all ventures) now lives in the workspace hub at `C:\VS Code\CLAUDE.md`, which loads automatically every session. The steps above remain the Apex-Archive-specific way to start the live Shopify preview.
 
 ---
 
@@ -157,17 +153,6 @@ Two custom apps will be embedded in the storefront:
 
 To reposition an embed once installed:
 Shopify Admin → Online Store → Customize → App embeds (left sidebar)
-
----
-
-## Working Style
-
-These apply to every session and every prompt, across every project:
-
-1. **Enterprise-level by default** — approach each task the way a top-tier professional team would. Tell me how the "big dogs" do it: the proper, scalable, industry-standard approach, not a quick hack.
-2. **Search the internet for recent context** — when a task depends on current information (pricing, library/tool versions, best practices, "how are people doing X now," recent news), look up very recent news and real examples before answering instead of relying on memory. Skip the search for purely internal code tasks (renames, local refactors) where there's nothing online to find — but if I miss one you wanted, say "search it" and I will.
-3. **No shortcuts, no Band-Aids, no guessing** — especially when debugging or fixing. Find the real root cause and fix it properly, or flag the issue and ask. Never patch over a problem.
-4. **Don't reflexively agree** — only agree when I'm genuinely certain. If I'm not sure, say so, push back, and verify rather than just validating what you said.
 
 ---
 
