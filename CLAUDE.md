@@ -160,6 +160,17 @@ Shopify Admin → Online Store → Customize → App embeds (left sidebar)
 
 ---
 
+## Working Style
+
+These apply to every session and every prompt, across every project:
+
+1. **Enterprise-level by default** — approach each task the way a top-tier professional team would. Tell me how the "big dogs" do it: the proper, scalable, industry-standard approach, not a quick hack.
+2. **Search the internet for recent context** — when a task depends on current information (pricing, library/tool versions, best practices, "how are people doing X now," recent news), look up very recent news and real examples before answering instead of relying on memory. Skip the search for purely internal code tasks (renames, local refactors) where there's nothing online to find — but if I miss one you wanted, say "search it" and I will.
+3. **No shortcuts, no Band-Aids, no guessing** — especially when debugging or fixing. Find the real root cause and fix it properly, or flag the issue and ask. Never patch over a problem.
+4. **Don't reflexively agree** — only agree when I'm genuinely certain. If I'm not sure, say so, push back, and verify rather than just validating what you said.
+
+---
+
 ## Rules for Claude
 
 1. **Never use raw iframes** — always use App Embed Blocks for embedded apps
