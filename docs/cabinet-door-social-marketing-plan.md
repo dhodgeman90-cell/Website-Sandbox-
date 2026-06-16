@@ -190,8 +190,8 @@ stand-ins:
 
 | Concept image | Use |
 |---------------|-----|
-| ![Primed doors hero](../assets/ad-mockup-primed-doors-hero.png) | Concept C hero — clean primed-stack with headline space on top *(final ad should swap in a real photo showing the shaker profile)* |
-| ![CNC process reel cover](../assets/ad-mockup-cnc-process-reel.png) | Concept A "Process / Flatness" Reel & TikTok cover — ready to use |
+| ![Primed doors hero](../assets/ad-mockup-primed-doors-hero.jpg) | Concept C hero — clean primed-stack with headline space on top *(final ad should swap in a real photo showing the shaker profile)* |
+| ![CNC process reel cover](../assets/ad-mockup-cnc-process-reel.jpg) | Concept A "Process / Flatness" Reel & TikTok cover — ready to use |
 
 ### Concept A — "Flatness Test" (Reel / TikTok) · Pillar: Consistency
 - **Visual:** Hands lay a straightedge across a primed door; gap = zero. Repeat across a
