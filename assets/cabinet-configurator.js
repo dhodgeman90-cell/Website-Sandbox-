@@ -156,7 +156,7 @@
         properties: {
           '_cabinet_width':        state.width,
           '_cabinet_depth':        state.depth,
-          '_cabinet_height':       34.5,
+          '_cabinet_height':       36,
           '_cabinet_color':        state.colorId,
           '_cabinet_color_label':  state.colorLabel,
           '_cabinet_drawer_count': 4,

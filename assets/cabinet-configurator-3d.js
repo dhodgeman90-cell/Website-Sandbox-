@@ -132,7 +132,7 @@
 
     // Real-world dimensions (inches, 1 unit = 1 inch in Three.js world)
     const W       = widthIn;
-    const H       = 34.5;   // fixed overall height
+    const H       = 36;     // fixed overall height
     const D       = depthIn;
     const T       = 0.75;   // wall thickness — 3/4" MDF
     const toeH    = 4.5;    // toe kick height
@@ -313,7 +313,7 @@
         properties: {
           '_cabinet_width':        state.width,
           '_cabinet_depth':        state.depth,
-          '_cabinet_height':       34.5,
+          '_cabinet_height':       36,
           '_cabinet_color':        state.colorId,
           '_cabinet_color_label':  state.colorLabel,
           '_cabinet_drawer_count': 4,
