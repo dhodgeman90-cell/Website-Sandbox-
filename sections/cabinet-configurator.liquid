@@ -1,6 +1,8 @@
 {%- liquid
   assign cab_product = all_products[section.settings.product]
   assign cfg = cab_product.metafields.cabinet_config
+  assign backstop_product = all_products[section.settings.backstop_product]
+  assign backstop_variant = backstop_product.variants.first
 -%}
 
 <script>
@@ -9,6 +11,10 @@
     depths:          [{"value":"13","label":"13\""}, {"value":"16","label":"16\""}, {"value":"19","label":"19\""}, {"value":"22","label":"22\""}],
     colors:          {{ cfg.available_finishes.value | default: cfg.available_colors.value | default: '[]' | json }},
     variants:        {{ cab_product.variants | json }},
+    backstop: {
+      variantId: {{ backstop_variant.id | json }},                    // null if no add-on product is set
+      price:     {{ backstop_variant.price | default: 100 | json }}   // cents; falls back to $1
+    },
     defaultImageSrc: {{ 'cabinet-hero-main.jpg' | asset_url | json }},
     imageUrls: {
       'white':         {{ 'cabinet-hero-white-matte.jpg'          | asset_url | json }},
@@ -58,6 +64,11 @@
         <option value="">Select color&hellip;</option>
       </select>
     </div>
+
+    <div class="cab-option-group">
+      <label class="cab-option-label" for="cab-input-backstops">Additional Apex Backstops</label>
+      <input type="number" id="cab-input-backstops" class="cab-input" min="0" step="1" value="0" inputmode="numeric">
+    </div>
   </div>
 
   {%- comment -%} Centre panel: product image {%- endcomment -%}
@@ -75,6 +86,7 @@
       <div class="cab-spec-row"><dt>Height</dt> <dd>36&Prime;</dd></div>
       <div class="cab-spec-row"><dt>Color</dt>  <dd id="spec-color">—</dd></div>
       <div class="cab-spec-row"><dt>Drawers</dt><dd>4</dd></div>
+      <div class="cab-spec-row"><dt>Apex Backstops</dt><dd id="spec-backstops">0</dd></div>
       <div class="cab-spec-row"><dt>Penny-Sleeved</dt><dd id="spec-cap-penny">—</dd></div>
       <div class="cab-spec-row"><dt>Graded Cards</dt><dd id="spec-cap-graded">—</dd></div>
     </dl>
@@ -171,6 +183,23 @@
     border-color: #c9a96e;
   }
   .cab-select option { background: #262626; }
+
+  /* Numeric add-on field — matches .cab-select, no dropdown arrow */
+  .cab-input {
+    width: 100%;
+    background: #262626;
+    color: #f0ede8;
+    border: 1px solid #2e2e2e;
+    border-radius: 4px;
+    padding: 9px 12px;
+    font-family: inherit;
+    font-size: 0.8rem;
+    transition: border-color 0.15s;
+  }
+  .cab-input:focus {
+    outline: none;
+    border-color: #c9a96e;
+  }
 
   /* ── Centre panel: product image ────────────────────────────────────────── */
   .cab-panel--preview {
@@ -352,7 +381,7 @@
   }
 </style>
 
-<script src="{{ 'cabinet-configurator.js' | asset_url }}?v=3" defer></script>
+<script src="{{ 'cabinet-configurator.js' | asset_url }}?v=4" defer></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -377,6 +406,12 @@
       "id": "product",
       "label": "Cabinet product",
       "info": "Must have cabinet_config metafields populated"
+    },
+    {
+      "type": "product",
+      "id": "backstop_product",
+      "label": "Backstop add-on product",
+      "info": "Single $1 variant; added to cart once per backstop quantity"
     }
   ],
   "presets": [

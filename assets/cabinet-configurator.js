@@ -32,10 +32,17 @@
     depth:      null,
     colorId:    null,
     colorLabel: null,
+    backstops:  0,
   };
 
   // ─── DOM refs (assigned in init) ──────────────────────────────────────────
-  let widthSelect, depthSelect, colorSelect, atcBtn, priceEl, atcErrorEl;
+  let widthSelect, depthSelect, colorSelect, backstopInput, atcBtn, priceEl, atcErrorEl;
+
+  // ─── Per-unit price of an add-on backstop (dollars) ───────────────────────
+  // Source of truth is the Shopify add-on product; falls back to $1 if unset.
+  function backstopUnitPrice() {
+    return (cfg.backstop && cfg.backstop.price ? cfg.backstop.price : 100) / 100;
+  }
 
   // ─── Populate dropdowns from metafield config ─────────────────────────────
   function populateDropdowns() {
@@ -72,10 +79,11 @@
     }) || null;
   }
 
-  // ─── Price from variant (Shopify stores cents as integers) ────────────────
+  // ─── Price: variant + backstop add-ons (Shopify stores cents as integers) ──
   function calculatePrice() {
     var v = findVariant();
-    return v ? v.price / 100 : null;
+    if (!v) return null;
+    return v.price / 100 + state.backstops * backstopUnitPrice();
   }
 
   // ─── Swap preview image when colour changes ───────────────────────────────
@@ -97,6 +105,7 @@
     document.getElementById('spec-width').textContent = state.widthLabel || '—';
     document.getElementById('spec-depth').textContent = state.depth  ? state.depth  + '″' : '—';
     document.getElementById('spec-color').textContent = state.colorLabel || '—';
+    document.getElementById('spec-backstops').textContent = state.backstops;
     updateCapacity();
   }
 
@@ -137,32 +146,50 @@
     atcBtn.disabled = !findVariant();
   }
 
+  // ─── Backstop quantity change handler ─────────────────────────────────────
+  function onBackstopChange() {
+    var n = parseInt(backstopInput.value, 10);
+    if (isNaN(n) || n < 0) n = 0;
+    state.backstops = n;
+    updateSpec();
+    updatePrice();
+  }
+
   // ─── Add to Cart ──────────────────────────────────────────────────────────
   function addToCart() {
     var v     = findVariant();
-    var price = v ? v.price / 100 : null;
-    if (!v || price === null) return;
+    var total = calculatePrice();
+    if (!v || total === null) return;
 
     atcBtn.disabled    = true;
     atcBtn.textContent = 'Adding…';
     atcErrorEl.hidden  = true;
 
+    // Cabinet line item; total records the full price incl. backstops.
+    var items = [{
+      id:       v.id,
+      quantity: 1,
+      properties: {
+        '_cabinet_width':        state.width,
+        '_cabinet_depth':        state.depth,
+        '_cabinet_height':       36,
+        '_cabinet_color':        state.colorId,
+        '_cabinet_color_label':  state.colorLabel,
+        '_cabinet_drawer_count': 4,
+        '_cabinet_backstops':    state.backstops,
+        '_cabinet_price':        total.toFixed(2),
+      },
+    }];
+
+    // Add-on backstops as a separate line item so they actually bill.
+    if (state.backstops > 0 && cfg.backstop && cfg.backstop.variantId) {
+      items.push({ id: cfg.backstop.variantId, quantity: state.backstops });
+    }
+
     fetch('/cart/add.js', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        id:       v.id,
-        quantity: 1,
-        properties: {
-          '_cabinet_width':        state.width,
-          '_cabinet_depth':        state.depth,
-          '_cabinet_height':       36,
-          '_cabinet_color':        state.colorId,
-          '_cabinet_color_label':  state.colorLabel,
-          '_cabinet_drawer_count': 4,
-          '_cabinet_price':        price.toFixed(2),
-        },
-      }),
+      body: JSON.stringify({ items: items }),
     })
       .then(function (res) {
         if (!res.ok) return res.json().then(function (err) { throw err; });
@@ -187,18 +214,20 @@
       return;
     }
 
-    widthSelect  = document.getElementById('cab-select-width');
-    depthSelect  = document.getElementById('cab-select-depth');
-    colorSelect  = document.getElementById('cab-select-color');
-    atcBtn       = document.getElementById('cab-atc');
-    priceEl      = document.getElementById('cab-price');
-    atcErrorEl   = document.getElementById('cab-atc-error');
+    widthSelect   = document.getElementById('cab-select-width');
+    depthSelect   = document.getElementById('cab-select-depth');
+    colorSelect   = document.getElementById('cab-select-color');
+    backstopInput = document.getElementById('cab-input-backstops');
+    atcBtn        = document.getElementById('cab-atc');
+    priceEl       = document.getElementById('cab-price');
+    atcErrorEl    = document.getElementById('cab-atc-error');
 
     populateDropdowns();
 
     [widthSelect, depthSelect, colorSelect].forEach(function (el) {
       el.addEventListener('change', onSelectChange);
     });
+    backstopInput.addEventListener('input', onBackstopChange);
     atcBtn.addEventListener('click', addToCart);
   }
 
