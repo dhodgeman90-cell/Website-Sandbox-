@@ -100,6 +100,24 @@
     img.src = newSrc;
   }
 
+  // ─── Cursor-follow zoom on the preview image ──────────────────────────────
+  // Scale comes from CSS :hover; here we just move the zoom origin to the cursor
+  // so the image pans toward wherever the mouse is.
+  function setupImageZoom() {
+    var panel = document.querySelector('.cab-panel--preview');
+    var img   = document.getElementById('cab-preview-img');
+    if (!panel || !img) return;
+    panel.addEventListener('mousemove', function (e) {
+      var r = panel.getBoundingClientRect();
+      var x = ((e.clientX - r.left) / r.width)  * 100;
+      var y = ((e.clientY - r.top)  / r.height) * 100;
+      img.style.transformOrigin = x + '% ' + y + '%';
+    });
+    panel.addEventListener('mouseleave', function () {
+      img.style.transformOrigin = 'center center';
+    });
+  }
+
   // ─── Update right-panel spec display ──────────────────────────────────────
   function updateSpec() {
     document.getElementById('spec-width').textContent = state.widthLabel || '—';
@@ -229,6 +247,8 @@
     });
     backstopInput.addEventListener('input', onBackstopChange);
     atcBtn.addEventListener('click', addToCart);
+
+    setupImageZoom();
   }
 
   document.addEventListener('DOMContentLoaded', init);
