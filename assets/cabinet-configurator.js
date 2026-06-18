@@ -7,6 +7,18 @@
     widths: [], depths: [], colors: [], variants: [], defaultImageSrc: '',
   };
 
+  // ─── Card capacity by cabinet width × depth ───────────────────────────────
+  // Values from the published capacity table: [pennySleeved, gradedCards].
+  // Table columns are DRAWER depth (13/15/18/21"); the configurator selects
+  // CABINET depth (13/16/19/22"), which corresponds 1:1 by position.
+  const CARD_CAPACITY = {
+    '17.625': { '13': [5280, 704],  '16': [6720, 896],  '19': [8160, 1088],  '22': [9600, 1280] },
+    '21.375': { '13': [6600, 880],  '16': [8400, 1120], '19': [10200, 1360], '22': [12000, 1600] },
+    '25.125': { '13': [7920, 1056], '16': [10080, 1344], '19': [12240, 1632], '22': [14400, 1920] },
+    '28.875': { '13': [9240, 1232], '16': [11760, 1568], '19': [14280, 1904], '22': [16800, 2240] },
+    '32.625': { '13': [10560, 1408], '16': [13440, 1792], '19': [16320, 2176], '22': [19200, 2560] },
+  };
+
   // ─── Asset folder URL (strip filename from default src) ───────────────────
   const assetFolder = cfg.defaultImageSrc
     ? cfg.defaultImageSrc.substring(0, cfg.defaultImageSrc.lastIndexOf('/') + 1)
@@ -85,6 +97,19 @@
     document.getElementById('spec-width').textContent = state.widthLabel || '—';
     document.getElementById('spec-depth').textContent = state.depth  ? state.depth  + '″' : '—';
     document.getElementById('spec-color').textContent = state.colorLabel || '—';
+    updateCapacity();
+  }
+
+  // ─── Card capacity display (needs width + depth) ──────────────────────────
+  function updateCapacity() {
+    var pennyEl  = document.getElementById('spec-cap-penny');
+    var gradedEl = document.getElementById('spec-cap-graded');
+    if (!pennyEl || !gradedEl) return;
+    var cap = (state.width && state.depth && CARD_CAPACITY[state.width])
+      ? CARD_CAPACITY[state.width][state.depth]
+      : null;
+    pennyEl.textContent  = cap ? cap[0].toLocaleString('en-US') : '—';
+    gradedEl.textContent = cap ? cap[1].toLocaleString('en-US') : '—';
   }
 
   // ─── Update price display ─────────────────────────────────────────────────
