@@ -5,6 +5,12 @@
     <h1 class="about-page__title">Built for the<br>serious collector</h1>
   </div>
 
+  <div class="about-page__banner">
+    <img src="{{ 'apex-backstops-banner.webp' | asset_url }}"
+         alt="Apex Archive Backstops — angled card supports that keep every card upright, from full rows to your last card"
+         class="about-page__banner-img" width="1536" height="1024" loading="lazy">
+  </div>
+
   <div class="about-page__body">
     <div class="about-page__intro">
       <p>The Apex Archive was built around a single obsession: giving serious trading card collectors a storage solution worthy of their collection. Every cabinet we make is designed to protect, preserve, and showcase your graded slabs, top-loaders, and raw cards — the way they deserve to be displayed.</p>
@@ -82,6 +88,19 @@
     line-height: 1.15;
     margin: 0;
     letter-spacing: -0.02em;
+  }
+
+  .about-page__banner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 40px;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .about-page__banner-img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   .about-page__body {
@@ -217,6 +236,10 @@
   @media screen and (max-width: 749px) {
     .about-page__hero {
       padding: 48px 20px 36px;
+    }
+
+    .about-page__banner {
+      padding: 40px 20px;
     }
 
     .about-page__body {
