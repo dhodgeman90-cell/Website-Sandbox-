@@ -64,11 +64,6 @@
         <option value="">Select color&hellip;</option>
       </select>
     </div>
-
-    <div class="cab-option-group">
-      <label class="cab-option-label" for="cab-input-backstops">Additional Apex Backstops</label>
-      <input type="number" id="cab-input-backstops" class="cab-input" min="0" step="1" value="0" inputmode="numeric">
-    </div>
   </div>
 
   {%- comment -%} Centre panel: product image {%- endcomment -%}
@@ -90,6 +85,11 @@
       <div class="cab-spec-row"><dt>Penny-Sleeved</dt><dd id="spec-cap-penny">—</dd></div>
       <div class="cab-spec-row"><dt>Graded Cards</dt><dd id="spec-cap-graded">—</dd></div>
     </dl>
+
+    <div class="cab-option-group">
+      <label class="cab-option-label" for="cab-input-backstops">Additional Apex Backstops</label>
+      <input type="number" id="cab-input-backstops" class="cab-input" min="0" step="1" value="0" inputmode="numeric">
+    </div>
 
     <div class="cab-price-block">
       <div class="cab-price-label">Total</div>
