@@ -19,6 +19,22 @@
     '32.625': { '13': [10560, 1408], '16': [13440, 1792], '19': [16320, 2176], '22': [19200, 2560] },
   };
 
+  // ─── Apex Backstops included with each cabinet ────────────────────────────
+  // Included count = rows (by cabinet width) × backstops per row (by depth).
+  // Width keys are the configurator's exact values (nominal 17/21/25/28/32").
+  const BACKSTOP_ROWS_BY_WIDTH = {
+    '17.625': 4, '21.375': 5, '25.125': 6, '28.875': 7, '32.625': 8,
+  };
+  const BACKSTOPS_PER_ROW_BY_DEPTH = {
+    '13': 1, '16': 1, '19': 2, '22': 2,
+  };
+
+  function includedBackstops() {
+    if (!state.width || !state.depth) return 0;
+    return (BACKSTOP_ROWS_BY_WIDTH[state.width] || 0) *
+           (BACKSTOPS_PER_ROW_BY_DEPTH[state.depth] || 0);
+  }
+
   // ─── Asset folder URL (strip filename from default src) ───────────────────
   const assetFolder = cfg.defaultImageSrc
     ? cfg.defaultImageSrc.substring(0, cfg.defaultImageSrc.lastIndexOf('/') + 1)
@@ -123,7 +139,7 @@
     document.getElementById('spec-width').textContent = state.widthLabel || '—';
     document.getElementById('spec-depth').textContent = state.depth  ? state.depth  + '″' : '—';
     document.getElementById('spec-color').textContent = state.colorLabel || '—';
-    document.getElementById('spec-backstops').textContent = state.backstops;
+    document.getElementById('spec-backstops').textContent = includedBackstops() + state.backstops;
     updateCapacity();
   }
 
