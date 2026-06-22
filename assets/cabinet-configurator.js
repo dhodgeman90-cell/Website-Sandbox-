@@ -54,10 +54,13 @@
   // ─── DOM refs (assigned in init) ──────────────────────────────────────────
   let widthSelect, depthSelect, colorSelect, backstopInput, atcBtn, priceEl, atcErrorEl;
 
-  // ─── Per-unit price of an add-on backstop (dollars) ───────────────────────
-  // Source of truth is the Shopify add-on product; falls back to $1 if unset.
-  function backstopUnitPrice() {
-    return (cfg.backstop && cfg.backstop.price ? cfg.backstop.price : 100) / 100;
+  // ─── Backstops are sold in packs; one cart unit = one pack ────────────────
+  const PACK_SIZE = 12;
+
+  // ─── Price of one pack of backstops (dollars) ─────────────────────────────
+  // Source of truth is the Shopify add-on product variant; falls back to $10.
+  function backstopPackPrice() {
+    return (cfg.backstop && cfg.backstop.price ? cfg.backstop.price : 1000) / 100;
   }
 
   // ─── Populate dropdowns from metafield config ─────────────────────────────
@@ -99,7 +102,7 @@
   function calculatePrice() {
     var v = findVariant();
     if (!v) return null;
-    return v.price / 100 + state.backstops * backstopUnitPrice();
+    return v.price / 100 + (state.backstops / PACK_SIZE) * backstopPackPrice();
   }
 
   // ─── Swap preview image when colour changes ───────────────────────────────
@@ -184,6 +187,8 @@
   function onBackstopChange() {
     var n = parseInt(backstopInput.value, 10);
     if (isNaN(n) || n < 0) n = 0;
+    n = Math.round(n / PACK_SIZE) * PACK_SIZE;   // snap to whole packs of 12
+    backstopInput.value = n;
     state.backstops = n;
     updateSpec();
     updatePrice();
@@ -217,7 +222,7 @@
 
     // Add-on backstops as a separate line item so they actually bill.
     if (state.backstops > 0 && cfg.backstop && cfg.backstop.variantId) {
-      items.push({ id: cfg.backstop.variantId, quantity: state.backstops });
+      items.push({ id: cfg.backstop.variantId, quantity: state.backstops / PACK_SIZE });
     }
 
     fetch('/cart/add.js', {
@@ -261,7 +266,7 @@
     [widthSelect, depthSelect, colorSelect].forEach(function (el) {
       el.addEventListener('change', onSelectChange);
     });
-    backstopInput.addEventListener('input', onBackstopChange);
+    backstopInput.addEventListener('change', onBackstopChange);
     atcBtn.addEventListener('click', addToCart);
 
     setupImageZoom();

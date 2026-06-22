@@ -13,7 +13,7 @@
     variants:        {{ cab_product.variants | json }},
     backstop: {
       variantId: {{ backstop_variant.id | json }},                    // null if no add-on product is set
-      price:     {{ backstop_variant.price | default: 100 | json }}   // cents; falls back to $1
+      price:     {{ backstop_variant.price | default: 1000 | json }}  // cents per 12-pack; falls back to $10
     },
     defaultImageSrc: {{ 'cabinet-hero-main.jpg' | asset_url | json }},
     imageUrls: {
@@ -88,7 +88,8 @@
 
     <div class="cab-option-group">
       <label class="cab-option-label" for="cab-input-backstops">Additional Apex Backstops</label>
-      <input type="number" id="cab-input-backstops" class="cab-input" min="0" step="1" value="0" inputmode="numeric">
+      <input type="number" id="cab-input-backstops" class="cab-input" min="0" step="12" value="0" inputmode="numeric">
+      <p class="cab-input-note">Sold in packs of 12 &middot; $10 per pack</p>
     </div>
 
     <div class="cab-price-block">
@@ -199,6 +200,11 @@
   .cab-input:focus {
     outline: none;
     border-color: #c9a96e;
+  }
+  .cab-input-note {
+    margin: 6px 0 0;
+    font-size: 0.6rem;
+    color: #888;
   }
 
   /* ── Centre panel: product image ────────────────────────────────────────── */
@@ -387,7 +393,7 @@
   }
 </style>
 
-<script src="{{ 'cabinet-configurator.js' | asset_url }}?v=6" defer></script>
+<script src="{{ 'cabinet-configurator.js' | asset_url }}?v=7" defer></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -417,7 +423,7 @@
       "type": "product",
       "id": "backstop_product",
       "label": "Backstop add-on product",
-      "info": "Single $1 variant; added to cart once per backstop quantity"
+      "info": "Pack-of-12 variant ($10); one unit added per 12 backstops selected"
     }
   ],
   "presets": [
