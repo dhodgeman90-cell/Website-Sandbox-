@@ -15,11 +15,11 @@
       variantId: {{ backstop_variant.id | json }},                    // null if no add-on product is set
       price:     {{ backstop_variant.price | default: 1000 | json }}  // cents per 12-pack; falls back to $10
     },
-    defaultImageSrc: {{ 'cabinet-hero-main.jpg' | asset_url | json }},
+    defaultImageSrc: {{ 'office-cabinet-under-apex.png' | asset_url | json }},
     imageUrls: {
-      'white':         {{ 'cabinet-hero-white-matte.jpg'          | asset_url | json }},
-      'white-gloss':   {{ 'cabinet-hero-white-gloss.png'          | asset_url | json }},
-      'black-matte':   {{ 'cabinet-hero-black-matte.png'          | asset_url | json }},
+      'white':         {{ 'office-cabinet-under-apex-matte-white.png' | asset_url | json }},
+      'white-gloss':   {{ 'office-cabinet-under-apex-gloss-white.png' | asset_url | json }},
+      'black-matte':   {{ 'office-cabinet-under-apex-matte-black.png' | asset_url | json }},
       'black':         {{ 'cabinet-hero-black-gloss.jpg'          | asset_url | json }},
       'mdf':           {{ 'cabinet-hero-plum-creek-unfinished.jpg' | asset_url | json }},
       'acquedotti':    {{ 'cabinet-hero-acquedotti.jpg'           | asset_url | json }},
@@ -68,7 +68,7 @@
 
   {%- comment -%} Centre panel: product image {%- endcomment -%}
   <div class="cab-panel cab-panel--preview">
-    <img id="cab-preview-img" src="{{ 'cabinet-hero-main.jpg' | asset_url }}" alt="4-drawer flat-panel cabinet" class="cab-preview-img" width="1334" height="1179">
+    <img id="cab-preview-img" src="{{ 'office-cabinet-under-apex.png' | asset_url }}" alt="4-drawer flat-panel cabinet" class="cab-preview-img" width="1334" height="1179">
   </div>
 
   {%- comment -%} Right panel: spec + price + cart {%- endcomment -%}
@@ -82,6 +82,7 @@
       <div class="cab-spec-row"><dt>Color</dt>  <dd id="spec-color">—</dd></div>
       <div class="cab-spec-row"><dt>Drawers</dt><dd>4</dd></div>
       <div class="cab-spec-row"><dt>Apex Backstops</dt><dd id="spec-backstops">0</dd></div>
+      <div class="cab-spec-subhead">Capacity</div>
       <div class="cab-spec-row"><dt>Penny-Sleeved</dt><dd id="spec-cap-penny">—</dd></div>
       <div class="cab-spec-row"><dt>Graded Cards</dt><dd id="spec-cap-graded">—</dd></div>
     </dl>
@@ -248,6 +249,14 @@
   }
   .cab-spec-row dt { color: #888; }
   .cab-spec-row dd { color: #f0ede8; margin: 0; font-weight: 500; }
+  .cab-spec-subhead {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #c9a96e;
+    font-weight: 600;
+    padding: 10px 0 2px;
+  }
 
   .cab-price-block {
     margin-top: auto;
