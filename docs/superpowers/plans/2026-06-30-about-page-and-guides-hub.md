@@ -207,21 +207,9 @@ git commit -m "feat: add guide article reader section + suffixed template with A
 **Files:**
 - Modify: `sections/about.liquid`
 
-- [ ] **Step 1a: Swap the banner image for the shop-cabinet establishing shot**
+- [ ] **Step 1: Replace the banner with the drawer brand-story feature**
 
-In [sections/about.liquid](../../../sections/about.liquid), keep the existing `.about-page__banner` full-width slot but replace its `<img>` (the backstops banner) with the finished-cabinet-in-shop photo — an authenticity/craftsmanship establishing shot directly under the hero:
-
-```liquid
-<div class="about-page__banner">
-  <img src="{{ 'cabinet-shop-closed-drawer.png' | asset_url }}"
-       alt="A finished maple Apex Archive cabinet standing in our workshop, built to order"
-       class="about-page__banner-img" width="1200" height="960" loading="lazy">
-</div>
-```
-
-- [ ] **Step 1b: Add the drawer brand-story feature**
-
-After the banner, add a two-column brand-story feature: drawer image on one side, the intro/story copy on the other. Use `assets/drawer-card-cutout.png`. Port the `.story` layout + radial-glow image treatment from the mockup, keeping the `about-page__` prefix:
+In [sections/about.liquid](../../../sections/about.liquid), replace the `.about-page__banner` block (the backstops `<img>`) with a two-column brand-story feature: drawer image on one side, the intro/story copy on the other. Use `assets/drawer-card-cutout.png`. Port the `.story` layout + radial-glow image treatment from the mockup, keeping the `about-page__` prefix:
 
 ```liquid
 <div class="about-page__story">
@@ -352,7 +340,7 @@ With `shopify theme dev` running, open http://localhost:9292/blogs/collectors-gu
 Article briefs (title · handle · first tag · image · primary internal link):
 
 1. **How to store graded cards (PSA / BGS / CGC slabs) the right way** · `store-graded-cards` · "Graded cards" · `guide-graded-slabs.png` · → configurator. H2s: why slab storage differs / upright vs stacked / materials that protect / environment (link guide 3) / capacity (link guide 4).
-2. **Protecting raw cards: penny sleeves, top-loaders & what actually works** · `protecting-raw-cards` · "Raw cards" · `guide-raw-cards.png` (RESERVED: swap for the owner's incoming "cards in shoe boxes" photos when available — they're the literal "before" this guide solves; use the generated placeholder until then) · → configurator. H2s: sleeve types / top-loader vs one-touch / what's overkill / organizing for retrieval.
+2. **Protecting raw cards: penny sleeves, top-loaders & what actually works** · `protecting-raw-cards` · "Raw cards" · `guide-raw-cards.png` · → configurator. H2s: sleeve types / top-loader vs one-touch / what's overkill / organizing for retrieval.
 3. **Humidity, light & temperature — the silent enemies of a card collection** · `humidity-light-temperature` · "Preservation" · `guide-environment.png` · → configurator. H2s: safe RH range / temperature / UV light / where to store (link guide 5).
 4. **How many cards can you actually store? Slab vs. top-loader capacity planning** · `card-storage-capacity` · "Capacity" · `drawer-card-cutout.png` · → configurator. H2s: slab vs raw footprint / per-drawer math / sizing your cabinet (link configurator).
 5. **Building a collection room: display vs. long-term storage** · `building-a-collection-room` · "Setup" · `guide-collection-room.png` · → configurator. H2s: display vs archive / furniture choices / environment (link guide 3) / scaling the collection.
