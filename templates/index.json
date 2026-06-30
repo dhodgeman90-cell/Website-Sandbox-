@@ -4,25 +4,23 @@
       "type": "homepage-hero",
       "blocks": {
         "slide_main": { "type": "slide", "settings": { "image_filename": "cabinet-hero-main.jpg", "label": "Main" } },
-        "slide_maple": { "type": "slide", "settings": { "image_filename": "cabinet-hero-maple.jpg", "label": "Maple" } },
-        "slide_walnut": { "type": "slide", "settings": { "image_filename": "cabinet-hero-walnut.jpg", "label": "Walnut" } },
-        "slide_black": { "type": "slide", "settings": { "image_filename": "cabinet-hero-black.jpg", "label": "Black" } },
-        "slide_white": { "type": "slide", "settings": { "image_filename": "cabinet-hero-white.jpg", "label": "White" } },
-        "slide_mdf": { "type": "slide", "settings": { "image_filename": "cabinet-hero-mdf.jpg", "label": "MDF" } },
-        "slide_wired_mercury": { "type": "slide", "settings": { "image_filename": "cabinet-hero-wired-mercury.jpg", "label": "Wired Mercury" } },
+        "slide_black_matte": { "type": "slide", "settings": { "image_filename": "cabinet-hero-black-matte.png", "label": "Black Matte" } },
         "slide_lakeshore_oak": { "type": "slide", "settings": { "image_filename": "cabinet-hero-lakeshore-oak.jpg", "label": "Lakeshore Oak" } },
-        "slide_acquedotti": { "type": "slide", "settings": { "image_filename": "cabinet-hero-acquedotti.jpg", "label": "Acquedotti" } }
+        "slide_white_gloss": { "type": "slide", "settings": { "image_filename": "cabinet-hero-white-gloss.png", "label": "White Gloss" } },
+        "slide_acquedotti": { "type": "slide", "settings": { "image_filename": "cabinet-hero-acquedotti.jpg", "label": "Acquedotti" } },
+        "slide_black_gloss": { "type": "slide", "settings": { "image_filename": "cabinet-hero-black-gloss.jpg", "label": "Black Gloss" } },
+        "slide_plum_creek": { "type": "slide", "settings": { "image_filename": "cabinet-hero-plum-creek-unfinished.jpg", "label": "Plum Creek (Unfinished)" } },
+        "slide_white_matte": { "type": "slide", "settings": { "image_filename": "cabinet-hero-white-matte.jpg", "label": "White Matte" } }
       },
       "block_order": [
         "slide_main",
-        "slide_maple",
-        "slide_walnut",
-        "slide_black",
-        "slide_white",
-        "slide_mdf",
-        "slide_wired_mercury",
+        "slide_black_matte",
         "slide_lakeshore_oak",
-        "slide_acquedotti"
+        "slide_white_gloss",
+        "slide_acquedotti",
+        "slide_black_gloss",
+        "slide_plum_creek",
+        "slide_white_matte"
       ],
       "settings": {}
     },
