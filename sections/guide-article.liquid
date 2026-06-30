@@ -1,0 +1,210 @@
+<article class="guide">
+  {%- if article.image -%}
+    <img class="guide__head" src="{{ article.image | image_url: width: 1600 }}"
+         alt="{{ article.title | escape }}" width="1600" height="700" loading="eager">
+  {%- endif -%}
+  <div class="guide__col">
+    <p class="guide__eyebrow"><a href="{{ blog.url }}">{{ blog.title }}</a></p>
+    <h1 class="guide__title">{{ article.title }}</h1>
+    <p class="guide__meta">{{ article.published_at | date: "%B %e, %Y" }}</p>
+    <div class="guide__body rte">{{ article.content }}</div>
+
+    <div class="guide__cta">
+      <p>Build a home for your collection.</p>
+      <div class="guide__ctabtns">
+        <a class="guide__btn guide__btn--p" href="/pages/build-your-cabinet">Configure your cabinet</a>
+        <a class="guide__btn guide__btn--o" href="{{ blog.url }}">&larr; All guides</a>
+      </div>
+    </div>
+  </div>
+</article>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ article.title | json }},
+  {%- if article.image %}"image": [{{ article.image | image_url: width: 1600 | prepend: "https:" | json }}],{% endif %}
+  "datePublished": {{ article.published_at | date: "%Y-%m-%dT%H:%M:%SZ" | json }},
+  "dateModified": {{ article.updated_at | date: "%Y-%m-%dT%H:%M:%SZ" | json }},
+  "author": { "@type": "Organization", "name": {{ shop.name | json }} },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }}{% if settings.logo %},
+    "logo": { "@type": "ImageObject", "url": {{ settings.logo | image_url: width: 600 | prepend: "https:" | json }} }{% endif %}
+  }
+}
+</script>
+
+{% stylesheet %}
+  .guide {
+    background: #000;
+  }
+
+  .guide__head {
+    display: block;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    height: auto;
+    aspect-ratio: 16 / 7;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  .guide__col {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 56px 40px;
+  }
+
+  .guide__eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #c9a96e;
+    margin: 0 0 14px;
+  }
+
+  .guide__eyebrow a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .guide__title {
+    font-size: 2rem;
+    color: #fff;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+    font-family: var(--font-heading--family);
+  }
+
+  .guide__meta {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #888;
+    margin: 0 0 32px;
+  }
+
+  /* .rte body typography */
+  .guide__body {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: #cccccc;
+  }
+
+  .guide__body p {
+    margin: 0 0 20px;
+  }
+
+  .guide__body h2 {
+    font-size: 1.3rem;
+    color: #f0ede8;
+    font-weight: 500;
+    margin: 36px 0 14px;
+    line-height: 1.3;
+  }
+
+  .guide__body h3 {
+    font-size: 1.05rem;
+    color: #f0ede8;
+    font-weight: 500;
+    margin: 28px 0 12px;
+  }
+
+  .guide__body ul,
+  .guide__body ol {
+    margin: 0 0 20px;
+    padding-left: 22px;
+  }
+
+  .guide__body li {
+    margin: 0 0 8px;
+  }
+
+  .guide__body a {
+    color: #c9a96e;
+    text-decoration: underline;
+  }
+
+  .guide__body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin: 24px 0;
+  }
+
+  .guide__body blockquote {
+    border-left: 2px solid #c9a96e;
+    padding-left: 20px;
+    margin: 24px 0;
+    color: #f0ede8;
+    font-style: italic;
+  }
+
+  .guide__body strong {
+    color: #f0ede8;
+  }
+
+  /* CTA strip — reuse the About/hero button look */
+  .guide__cta {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid #1e1e1e;
+  }
+
+  .guide__cta > p {
+    font-size: 0.9rem;
+    color: #888;
+    margin: 0 0 16px;
+  }
+
+  .guide__ctabtns {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .guide__btn {
+    display: inline-block;
+    padding: 13px 30px;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .guide__btn:hover {
+    opacity: 0.75;
+  }
+
+  .guide__btn--p {
+    background: #fff;
+    color: #000;
+    border: 1px solid #fff;
+  }
+
+  .guide__btn--o {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  @media screen and (max-width: 749px) {
+    .guide__col {
+      padding: 36px 20px;
+    }
+
+    .guide__title {
+      font-size: 1.6rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{ "name": "Guide Article", "settings": [], "presets": [] }
+{% endschema %}
