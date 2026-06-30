@@ -1,0 +1,196 @@
+<mxGraphModel grid="0" background="#1e1e1e" pageWidth="1600" pageHeight="1100">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <mxCell id="t-title" value="The Apex Archive — Store Architecture &amp; Customer Flow" style="text;html=1;align=center;fontColor=#d4d4d4;fontSize=24;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="40" y="18" width="1500" height="36" as="geometry"/>
+    </mxCell>
+    <mxCell id="t-sub" value="Shopify Online Store 2.0 (Dawn theme) — how a shopper flows from landing → configure → checkout, and how the theme ships" style="text;html=1;align=center;fontColor=#858585;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="40" y="56" width="1500" height="22" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="c-journey" value="Customer Journey" style="swimlane;rounded=1;arcSize=2;fillColor=#252526;strokeColor=#3c3c3c;fontColor=#cccccc;fontSize=15;fontStyle=1;startSize=34;swimlaneFillColor=#252526;" vertex="1" parent="1">
+      <mxGeometry x="40" y="90" width="1500" height="400" as="geometry"/>
+    </mxCell>
+    <mxCell id="home" value="&lt;b&gt;Homepage&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;templates/index.json&lt;br&gt;hero carousel + value props&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#007acc;fontColor=#d4d4d4;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="70" y="250" width="160" height="76" as="geometry"/>
+    </mxCell>
+    <mxCell id="browse" value="&lt;b&gt;Browse Collection&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;collection.json&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#454545;fontColor=#d4d4d4;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="290" y="150" width="170" height="56" as="geometry"/>
+    </mxCell>
+    <mxCell id="product" value="&lt;b&gt;Product Page&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;product.json&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#454545;fontColor=#d4d4d4;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="510" y="150" width="160" height="56" as="geometry"/>
+    </mxCell>
+    <mxCell id="cfg2d" value="&lt;b&gt;Cabinet Configurator — 2D&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;page.cabinet-configurator.json&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#007acc;strokeWidth=2;fontColor=#d4d4d4;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="290" y="240" width="220" height="58" as="geometry"/>
+    </mxCell>
+    <mxCell id="cfg3d" value="&lt;b&gt;Cabinet Configurator — 3D&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;page.cabinet-configurator-3d.json&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#007acc;strokeWidth=2;fontColor=#d4d4d4;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="290" y="312" width="220" height="58" as="geometry"/>
+    </mxCell>
+    <mxCell id="doors" value="&lt;b&gt;Door Profiles Gallery&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;door-profiles.liquid&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#454545;fontColor=#d4d4d4;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="290" y="402" width="180" height="56" as="geometry"/>
+    </mxCell>
+    <mxCell id="quote" value="&lt;b&gt;Quote Page&lt;/b&gt; (placeholder)&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;quote-placeholder.liquid&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#252526;strokeColor=#555555;fontColor=#858585;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="520" y="402" width="180" height="56" as="geometry"/>
+    </mxCell>
+    <mxCell id="contact" value="&lt;b&gt;Contact&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;page.contact.json&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#454545;fontColor=#d4d4d4;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="730" y="402" width="120" height="56" as="geometry"/>
+    </mxCell>
+    <mxCell id="addcart" value="&lt;b&gt;Add to Cart&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#cfe3f5;font-size:10px&quot;&gt;/cart/add.js&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0e639c;strokeColor=#1177bb;strokeWidth=2;fontColor=#ffffff;fontSize=12;arcSize=12;" vertex="1" parent="1">
+      <mxGeometry x="930" y="250" width="150" height="76" as="geometry"/>
+    </mxCell>
+    <mxCell id="cart" value="&lt;b&gt;Cart&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;cart.json&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#007acc;fontColor=#d4d4d4;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="1130" y="250" width="140" height="76" as="geometry"/>
+    </mxCell>
+    <mxCell id="checkout" value="&lt;b&gt;Checkout&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;Shopify-hosted&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#333333;strokeColor=#007acc;fontColor=#d4d4d4;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="1330" y="150" width="180" height="72" as="geometry"/>
+    </mxCell>
+    <mxCell id="order" value="&lt;b&gt;Order&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0e639c;strokeColor=#1177bb;strokeWidth=2;fontColor=#ffffff;fontSize=13;arcSize=50;" vertex="1" parent="1">
+      <mxGeometry x="1330" y="330" width="180" height="60" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="c-config" value="Inside the Cabinet Configurator  (2D + 3D)" style="swimlane;rounded=1;arcSize=2;fillColor=#252526;strokeColor=#3c3c3c;fontColor=#cccccc;fontSize=15;fontStyle=1;startSize=34;swimlaneFillColor=#252526;" vertex="1" parent="1">
+      <mxGeometry x="40" y="515" width="880" height="290" as="geometry"/>
+    </mxCell>
+    <mxCell id="cfg-inputs" value="&lt;b&gt;Customer chooses&lt;/b&gt;&lt;br&gt;&lt;br&gt;• Width (5)&lt;br&gt;• Depth (4)&lt;br&gt;• Finish (8)&lt;br&gt;• Backstops (12-packs)" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=12;fillColor=#333333;strokeColor=#454545;fontColor=#d4d4d4;fontSize=12;arcSize=8;" vertex="1" parent="1">
+      <mxGeometry x="70" y="575" width="180" height="150" as="geometry"/>
+    </mxCell>
+    <mxCell id="cfg-js" value="&lt;b&gt;Configurator JS&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;cabinet-configurator.js / -3d.js&lt;/span&gt;&lt;br&gt;&lt;br&gt;• match variant (5×4×8 = 160)&lt;br&gt;• live price = variant + backstop packs" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=12;fillColor=#333333;strokeColor=#007acc;strokeWidth=2;fontColor=#d4d4d4;fontSize=12;arcSize=8;" vertex="1" parent="1">
+      <mxGeometry x="290" y="585" width="250" height="120" as="geometry"/>
+    </mxCell>
+    <mxCell id="cfg-submit" value="&lt;b&gt;POST /cart/add.js&lt;/b&gt;&lt;br&gt;&lt;br&gt;line-item properties:&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:11px&quot;&gt;_cabinet_width · _depth · _color&lt;br&gt;_backstops · _price&lt;/span&gt;&lt;br&gt;&lt;br&gt;+ separate backstop line item" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=12;fillColor=#333333;strokeColor=#007acc;fontColor=#d4d4d4;fontSize=12;arcSize=8;" vertex="1" parent="1">
+      <mxGeometry x="580" y="565" width="310" height="160" as="geometry"/>
+    </mxCell>
+    <mxCell id="cfg-render" value="2D = swaps the product image by finish      ·      3D = Three.js canvas with wood PBR textures" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#252526;strokeColor=#555555;fontColor=#858585;fontSize=11;arcSize=8;" vertex="1" parent="1">
+      <mxGeometry x="70" y="742" width="820" height="44" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="c-backend" value="Shopify Backend &amp; Data" style="swimlane;rounded=1;arcSize=2;fillColor=#252526;strokeColor=#3c3c3c;fontColor=#cccccc;fontSize=15;fontStyle=1;startSize=34;swimlaneFillColor=#252526;" vertex="1" parent="1">
+      <mxGeometry x="940" y="515" width="600" height="290" as="geometry"/>
+    </mxCell>
+    <mxCell id="pr-cabinet" value="&lt;b&gt;Product: baseball-card-cabinet&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;160 variants (5 width × 4 depth × 8 finish)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#454545;fontColor=#d4d4d4;fontSize=12;arcSize=8;" vertex="1" parent="1">
+      <mxGeometry x="970" y="580" width="250" height="66" as="geometry"/>
+    </mxCell>
+    <mxCell id="pr-backstop" value="&lt;b&gt;Product: additional-apex-backstop&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;sold per 12-pack&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#454545;fontColor=#d4d4d4;fontSize=12;arcSize=8;" vertex="1" parent="1">
+      <mxGeometry x="970" y="668" width="250" height="56" as="geometry"/>
+    </mxCell>
+    <mxCell id="mf-finishes" value="&lt;b&gt;Metafield&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;cabinet_config.available_finishes&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#454545;fontColor=#d4d4d4;fontSize=12;arcSize=8;" vertex="1" parent="1">
+      <mxGeometry x="1250" y="580" width="270" height="66" as="geometry"/>
+    </mxCell>
+    <mxCell id="cart-api" value="&lt;b&gt;Cart API → Checkout&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#007acc;fontColor=#d4d4d4;fontSize=12;arcSize=8;" vertex="1" parent="1">
+      <mxGeometry x="1250" y="672" width="270" height="52" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="c-deploy" value="Deployment Pipeline" style="swimlane;rounded=1;arcSize=2;fillColor=#252526;strokeColor=#3c3c3c;fontColor=#cccccc;fontSize=15;fontStyle=1;startSize=34;swimlaneFillColor=#252526;" vertex="1" parent="1">
+      <mxGeometry x="40" y="820" width="1500" height="110" as="geometry"/>
+    </mxCell>
+    <mxCell id="d-vscode" value="VS Code&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;(local)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#454545;fontColor=#d4d4d4;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="70" y="862" width="140" height="46" as="geometry"/>
+    </mxCell>
+    <mxCell id="d-push" value="git push" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#454545;fontColor=#d4d4d4;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="250" y="862" width="110" height="46" as="geometry"/>
+    </mxCell>
+    <mxCell id="d-github" value="&lt;b&gt;GitHub&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;dhodgeman90-cell/Website-Sandbox-&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#454545;fontColor=#d4d4d4;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="400" y="862" width="240" height="46" as="geometry"/>
+    </mxCell>
+    <mxCell id="d-sync" value="auto-sync" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#454545;fontColor=#d4d4d4;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="680" y="862" width="110" height="46" as="geometry"/>
+    </mxCell>
+    <mxCell id="d-theme" value="&lt;b&gt;Shopify live theme&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;Dawn / OS 2.0&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#007acc;fontColor=#d4d4d4;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="830" y="862" width="200" height="46" as="geometry"/>
+    </mxCell>
+    <mxCell id="d-store" value="&lt;b&gt;Storefront&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;ywbx1x-1n.myshopify.com&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#007acc;fontColor=#d4d4d4;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="1070" y="862" width="240" height="46" as="geometry"/>
+    </mxCell>
+    <mxCell id="d-preview" value="&lt;span style=&quot;color:#858585;font-size:10px&quot;&gt;Local preview:&lt;br&gt;shopify theme dev&lt;br&gt;localhost:9292&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#252526;strokeColor=#555555;fontColor=#858585;fontSize=10;arcSize=8;" vertex="1" parent="1">
+      <mxGeometry x="1350" y="857" width="170" height="56" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="c-future" value="Future — Phase 3 (not built yet)" style="swimlane;rounded=1;arcSize=2;fillColor=#252526;strokeColor=#555555;fontColor=#858585;fontSize=14;fontStyle=1;startSize=32;swimlaneFillColor=#252526;dashed=1;" vertex="1" parent="1">
+      <mxGeometry x="40" y="945" width="1500" height="90" as="geometry"/>
+    </mxCell>
+    <mxCell id="f-quote" value="Real Quote Calculator&lt;br&gt;&lt;span style=&quot;color:#6a6a6a;font-size:10px&quot;&gt;replaces the placeholder&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#252526;strokeColor=#555555;fontColor=#858585;fontSize=11;arcSize=8;" vertex="1" parent="1">
+      <mxGeometry x="80" y="985" width="260" height="42" as="geometry"/>
+    </mxCell>
+    <mxCell id="f-embed" value="Configurator + Calculator as App Embed Blocks" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#252526;strokeColor=#555555;fontColor=#858585;fontSize=11;arcSize=8;" vertex="1" parent="1">
+      <mxGeometry x="370" y="985" width="320" height="42" as="geometry"/>
+    </mxCell>
+    <mxCell id="f-note" value="Today the configurators are native theme sections + vanilla JS — App Embed Blocks arrive in Phase 3" style="text;html=1;align=left;fontColor=#6a6a6a;fontSize=11;fontStyle=2;" vertex="1" parent="1">
+      <mxGeometry x="720" y="990" width="780" height="34" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;fontColor=#9d9d9d;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="home" target="browse">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;fontColor=#9d9d9d;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="home" target="cfg2d">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;fontColor=#9d9d9d;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="home" target="cfg3d">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;fontColor=#9d9d9d;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="home" target="doors">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;fontColor=#9d9d9d;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="browse" target="product">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;fontColor=#9d9d9d;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="product" target="addcart">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;fontColor=#9d9d9d;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="cfg2d" target="addcart">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;fontColor=#9d9d9d;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="cfg3d" target="addcart">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="e9" value="Get a Quote" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;fontColor=#9d9d9d;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="doors" target="quote">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="e10" value="for now" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;strokeColor=#555555;fontColor=#858585;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="quote" target="contact">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="e11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;fontColor=#9d9d9d;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="addcart" target="cart">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="e12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;fontColor=#9d9d9d;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="cart" target="checkout">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="e13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;fontColor=#9d9d9d;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="checkout" target="order">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="ec1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;fontColor=#9d9d9d;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="cfg-inputs" target="cfg-js">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="ec2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;fontColor=#9d9d9d;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="cfg-js" target="cfg-submit">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="eb1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;fontColor=#9d9d9d;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="pr-cabinet" target="cart-api">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="eb2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;fontColor=#9d9d9d;fontSize=11;endArrow=block;endFill=1;" edge="1" parent="1" source="pr-backstop" target="cart-api">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="eb3" value="drives finishes" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;strokeColor=#555555;fontColor=#858585;fontSize=10;endArrow=block;endFill=1;" edge="1" parent="1" source="mf-finishes" target="pr-cabinet">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="ed1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;endArrow=block;endFill=1;" edge="1" parent="1" source="d-vscode" target="d-push">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="ed2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;endArrow=block;endFill=1;" edge="1" parent="1" source="d-push" target="d-github">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="ed3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;endArrow=block;endFill=1;" edge="1" parent="1" source="d-github" target="d-sync">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="ed4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;endArrow=block;endFill=1;" edge="1" parent="1" source="d-sync" target="d-theme">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="ed5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#858585;endArrow=block;endFill=1;" edge="1" parent="1" source="d-theme" target="d-store">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+  </root>
+</mxGraphModel>

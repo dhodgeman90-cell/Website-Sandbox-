@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Apex Archive — Store Owner Handoff Checklist</title>
+<style>
+  @page { size: letter; margin: 0.5in; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Segoe UI', Arial, sans-serif;
+    font-size: 10.5pt; color: #1a1a1a; background: #fff;
+    line-height: 1.45; margin: 0;
+  }
+
+  h1 {
+    background: #1c1c1c; color: #f0ede8;
+    font-size: 20pt; font-weight: 700; letter-spacing: -0.3px;
+    line-height: 1.15; padding: 18px 20px 16px; margin: 0 0 4px;
+  }
+  h1 + p {
+    background: #1c1c1c; color: #f0ede8;
+    margin: 0 0 16px; padding: 10px 20px 12px; font-size: 9pt; line-height: 1.7;
+  }
+  h1 + p strong { color: #f0ede8; }
+
+  h2 {
+    font-size: 12.5pt; font-weight: 700; color: #1c1c1c;
+    border-bottom: 2px solid #c9a96e; padding-bottom: 4px;
+    margin: 18px 0 9px; page-break-after: avoid;
+  }
+  h2 .num {
+    display: inline-block; background: #c9a96e; color: #1c1c1c;
+    width: 20px; height: 20px; line-height: 20px; text-align: center;
+    border-radius: 50%; font-size: 10pt; margin-right: 8px;
+  }
+  p { margin: 0 0 9px; }
+  strong { color: #1c1c1c; }
+  em { color: #6a5a44; }
+  hr { border: 0; border-top: 1px solid #e3ddd2; margin: 14px 0; }
+
+  /* Checklist with drawn check-boxes */
+  ul.check { list-style: none; margin: 0 0 10px; padding-left: 2px; }
+  ul.check > li {
+    position: relative; padding-left: 26px; margin-bottom: 7px;
+    page-break-inside: avoid;
+  }
+  ul.check > li::before {
+    content: ""; position: absolute; left: 0; top: 1px;
+    width: 13px; height: 13px; border: 1.5px solid #1c1c1c;
+    border-radius: 2px; background: #fff;
+  }
+  /* Plain reference sub-list (e.g. DNS records) — no checkbox */
+  ul.ref { list-style: none; margin: 6px 0 4px; padding-left: 26px; }
+  ul.ref li {
+    margin-bottom: 3px; font-size: 9.5pt;
+    font-family: 'Consolas', 'Courier New', monospace;
+  }
+  ul.ref li::before { content: "—"; color: #c9a96e; margin-right: 7px; }
+
+  /* Informational notes — simple bullets, no checkbox */
+  ul.notes { margin: 6px 0 10px; padding-left: 22px; }
+  ul.notes li { margin-bottom: 5px; }
+
+  table {
+    width: 100%; border-collapse: collapse; margin: 8px 0 12px;
+    font-size: 9pt; page-break-inside: avoid;
+  }
+  th {
+    background: #1c1c1c; color: #f0ede8; text-align: left;
+    padding: 7px 9px; font-weight: 600; border: 1px solid #1c1c1c;
+  }
+  td { padding: 6px 9px; border: 1px solid #ddd6c9; vertical-align: top; }
+  tr:nth-child(even) td { background: #faf8f3; }
+
+  blockquote {
+    background: #f7f2e8; border-left: 4px solid #c9a96e;
+    margin: 12px 0; padding: 11px 16px; color: #5a4a32; font-size: 10pt;
+  }
+  blockquote p { margin: 2px 0; }
+
+  .why { color: #6a5a44; font-style: italic; font-size: 9.5pt; margin: 2px 0 4px 26px; }
+
+  .alert {
+    background: #fbf3e0; border-left: 4px solid #c9962e;
+    padding: 10px 14px; margin: 8px 0 10px 26px; font-size: 9.8pt; color: #5a4326;
+  }
+  .alert strong { color: #8a5a00; }
+
+  .signoff { margin-top: 16px; font-size: 10pt; }
+  .page-break { page-break-before: always; height: 0; }
+</style>
+</head>
+<body>
+<h1>The Apex Archive — Store Owner Handoff Checklist</h1>
+<h2><span class="num">1</span>Confirm your Shopify login</h2>
+<ul class="check">
+<li>You already have a Shopify account — just send me the email address it's under, so I can add you to the store and start the ownership transfer.</li>
+</ul>
+<p class="why">Why: I use your account's email to send the staff invite and transfer ownership to you.</p>
+
+<h2><span class="num">2</span>Accept the store</h2>
+<ul class="check">
+<li>Accept the <strong>staff invite</strong> Shopify sends to your existing account.</li>
+<li>Accept the <strong>ownership transfer</strong> — this makes you the official store owner.</li>
+</ul>
+<p class="why">Why: once you're the owner, the money, taxes, and account are all in your name (not mine).</p>
+
+<blockquote>
+<p><strong>Keeping me on (so I can help you):</strong> after the transfer I'll stay on your
+store as a staff member — or I can set up free <strong>collaborator access</strong> through my
+Shopify Partner account — so I can jump in whenever you need changes or run into something.
+Just keep me added / approve the access request; you can remove it anytime.</p>
+</blockquote>
+
+<h2><span class="num">3</span>Put your billing on the account</h2>
+<ul class="check">
+<li><strong>Settings → Plan</strong> → confirm the plan and add <strong>your</strong> payment method (card).</li>
+</ul>
+<p class="why">Why: the monthly Shopify subscription bills the owner — that's you now.</p>
+
+<h2><span class="num">4</span>Turn on payments</h2>
+<ul class="check">
+<li><strong>Settings → Payments → Activate Shopify Payments</strong> → enter your business info, tax ID, and <strong>bank account</strong> (this is where your sales money is deposited).</li>
+<li><em>(Optional)</em> Add <strong>PayPal</strong> as a second checkout button.</li>
+<li><em>(Optional)</em> Toggle on <strong>Shop Pay / Apple Pay / Google Pay</strong> and <strong>Shop Pay Installments</strong> (buy-now-pay-later).</li>
+</ul>
+<table>
+<thead>
+<tr><th>Option</th><th>What customers can use</th><th>Rough cost</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Shopify Payments</strong> <em>(main)</em></td><td>All major cards + Shop Pay + Apple/Google Pay</td><td>~2.4–2.9% + 30¢ / sale</td></tr>
+<tr><td><strong>PayPal</strong> <em>(optional)</em></td><td>PayPal balance + PayPal-processed cards</td><td>~3.49% + 49¢ / sale</td></tr>
+</tbody>
+</table>
+<p><em>Recommended: Shopify Payments as your primary, with PayPal added as a backup button.</em></p>
+
+<h2><span class="num">5</span>Set your store email to ApexCardArchive@gmail.com</h2>
+<ul class="check">
+<li><strong>Settings → Notifications → Sender email</strong> → enter <strong>ApexCardArchive@gmail.com</strong>.</li>
+<li><strong>Settings → Store details → Store contact email</strong> → set the same address.</li>
+</ul>
+<div class="alert">⚠️ <strong>Important:</strong> after entering the new email, Shopify sends a
+<strong>verification link to the ApexCardArchive@gmail.com inbox</strong>. Open that email and
+click the link — the address will <strong>not</strong> start receiving anything until you do.</div>
+<p class="why">Why: this is where your <strong>Contact form</strong> and <strong>Custom Order form</strong>
+submissions are delivered. (Newsletter / "Join our email list" signups don't go to an inbox —
+they appear automatically in your <strong>Customers</strong> list inside Shopify.)</p>
+
+<h2><span class="num">6</span>Connect your domain — TheApexArchive.com</h2>
+<p>Your domain is registered at <strong>GoDaddy</strong>, so the DNS changes happen there.</p>
+<ul class="check">
+<li>In Shopify: <strong>Settings → Domains → Connect existing domain</strong> → enter <strong>theapexarchive.com</strong>.</li>
+<li>In <strong>GoDaddy → Manage DNS</strong>, set these records (delete any old parking/forwarding records that conflict):</li>
+</ul>
+<ul class="ref">
+<li>A record &nbsp;— Host <strong>@</strong> → 23.227.38.65</li>
+<li>AAAA record — Host <strong>@</strong> → 2620:0127:f00f:5::</li>
+<li>CNAME record — Host <strong>www</strong> → shops.myshopify.com</li>
+</ul>
+<ul class="check">
+<li>Back in Shopify → <strong>Verify connection</strong> (usually works within a couple hours, up to 48).</li>
+<li>Set <strong>theapexarchive.com</strong> as your <strong>primary domain</strong> and turn on <strong>"Redirect all traffic to this domain."</strong></li>
+</ul>
+<p class="why">Why: this makes your store load at your own web address, with a secure padlock
+(Shopify adds the SSL certificate automatically).</p>
+
+<h2><span class="num">7</span>Go live</h2>
+<ul class="check">
+<li><strong>Online Store → Preferences</strong> → <strong>uncheck the password protection</strong> when you're ready for real customers.</li>
+</ul>
+
+<h2><span class="num">8</span>Test before you announce it</h2>
+<ul class="check">
+<li>Visit <strong>https://theapexarchive.com</strong> — it loads with a padlock (secure).</li>
+<li>Build a cabinet → <strong>Add to cart</strong> → check out → confirm the price is correct. Place one small <strong>test order</strong>, then <strong>refund</strong> it from the Orders page.</li>
+<li>Submit a quick <strong>test message</strong> through the Contact form → confirm it arrives at ApexCardArchive@gmail.com.</li>
+</ul>
+
+<h2>Good to know</h2>
+<ul class="notes">
+<li><strong>Configured cabinets charge the exact price automatically</strong> — the configurator is wired to real product pricing, so checkout always matches what the customer designed. No manual quotes.</li>
+<li><strong>Extra Apex Backstops</strong> are sold in packs of 12 ($10/pack) and add to the order automatically.</li>
+<li><strong>Newsletter subscribers</strong> build your Customers list inside Shopify — you can email them later with Shopify Email or a tool like Mailchimp.</li>
+</ul>
+
+</body>
+</html>
