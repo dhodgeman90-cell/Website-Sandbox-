@@ -5,50 +5,89 @@
     <h1 class="about-page__title">Built for the<br>serious collector</h1>
   </div>
 
-  <div class="about-page__banner">
-    <img src="{{ 'apex-backstops-banner.webp' | asset_url }}"
-         alt="Apex Archive Backstops — angled card supports that keep every card upright, from full rows to your last card"
-         class="about-page__banner-img" width="1536" height="1024" loading="lazy">
+  {%- comment -%} Brand story — the product doing its job {%- endcomment -%}
+  <div class="about-page__story">
+    <div class="about-page__story-img">
+      <img src="{{ 'drawer-card-cutout.png' | asset_url }}"
+           alt="A maple Apex Archive drawer filled with organized graded slabs and top-loaders in adjustable dividers"
+           width="1000" height="700" loading="lazy">
+    </div>
+    <div class="about-page__story-copy">
+      <h2>A storage solution worthy of the collection inside it.</h2>
+      <p>The Apex Archive was built around a single obsession: giving serious trading card collectors a home for their collection that protects, preserves, and showcases every graded slab, top-loader, and raw card the way it deserves.</p>
+      <p>We build to order — no compromises on size, finish, or configuration. Solid dovetail maple drawer boxes, undermount full-extension soft-close slides, and Stylelite exterior panels in your choice of high-gloss or matte.</p>
+      <p>The crown jewel of your collection deserves a home that matches it.</p>
+    </div>
   </div>
 
-  <div class="about-page__body">
-    <div class="about-page__intro">
-      <p>The Apex Archive was built around a single obsession: giving serious trading card collectors a storage solution worthy of their collection. Every cabinet we make is designed to protect, preserve, and showcase your graded slabs, top-loaders, and raw cards — the way they deserve to be displayed.</p>
-      <p>We build to order. That means no compromises on size, finish, or configuration. You tell us what you need, and we build it — with solid dovetail maple drawer boxes, undermount full-extension soft-close slides, and Stylelite exterior panels in your choice of high-gloss or matte finish.</p>
-      <p>The Crown Jewel of Your Collection deserves a home that matches it.</p>
-    </div>
-
+  {%- comment -%} Why we build this way — cohered value props {%- endcomment -%}
+  <div class="about-page__values-sec">
+    <p class="about-page__eyebrow about-page__eyebrow--gold">Why we build this way</p>
     <div class="about-page__values">
       <div class="about-page__value">
-        <p class="about-page__value-label">Carefully Crafted With Purpose</p>
+        <p class="about-page__value-label">Carefully crafted</p>
         <p class="about-page__value-body">Solid dovetail maple drawer boxes, prefinished for enduring quality. Built the way furniture was meant to be built.</p>
       </div>
       <div class="about-page__value">
-        <p class="about-page__value-label">8 High Quality Finishes</p>
-        <p class="about-page__value-body">Several size, color and finish options to create your perfect cabinet your way.</p>
+        <p class="about-page__value-label">8 high-quality finishes</p>
+        <p class="about-page__value-body">Size, color, and finish options to build your perfect cabinet, your way.</p>
       </div>
       <div class="about-page__value">
-        <p class="about-page__value-label">Precision Hardware</p>
-        <p class="about-page__value-body">Undermount, full extension soft close slides.</p>
+        <p class="about-page__value-label">Precision hardware</p>
+        <p class="about-page__value-body">Undermount, full-extension soft-close slides on every drawer.</p>
       </div>
       <div class="about-page__value">
-        <p class="about-page__value-label">Total Customization</p>
-        <p class="about-page__value-body">Fully adjustable 1/2" plywood dividers for graded slabs and raw cards. Configure your drawers exactly as you need them.</p>
+        <p class="about-page__value-label">Total customization</p>
+        <p class="about-page__value-body">Fully adjustable 1/2" plywood dividers for graded slabs and raw cards. Configure each drawer exactly as you need it.</p>
       </div>
       <div class="about-page__value">
-        <p class="about-page__value-label">Massive Capacity</p>
-        <p class="about-page__value-body">Securely houses up to 3,400+ PSA Slabs or 11,200+ Top-Loaders on standard models. Capacity varies by size.</p>
+        <p class="about-page__value-label">Massive capacity</p>
+        <p class="about-page__value-body">Securely houses 3,400+ PSA slabs or 11,200+ top-loaders on standard models. Capacity varies by size.</p>
+      </div>
+      <div class="about-page__value">
+        <p class="about-page__value-label">Made to last</p>
+        <p class="about-page__value-body">Furniture-grade construction designed to protect a collection for decades, not seasons.</p>
       </div>
     </div>
   </div>
 
-  <div class="about-page__testimonials">
-    <p class="about-page__eyebrow">What collectors are saying</p>
-    <div class="about-page__testimonial">
-      <p class="about-page__testimonial-quote">"Finally a cabinet built specifically for graded cards. The soft-close drawers, the finish quality, the capacity — nothing else comes close."</p>
-      <p class="about-page__testimonial-attr">— Apex Archive Customer</p>
+  {%- comment -%} Craftsmanship — how & where it's made (authentic workshop shot) {%- endcomment -%}
+  <div class="about-page__craft">
+    <div class="about-page__craft-copy">
+      <p class="about-page__eyebrow about-page__eyebrow--gold">Built to order, in our shop</p>
+      <h2>Made one at a time — not pulled off a shelf.</h2>
+      <p>Every Apex Archive cabinet is built in our workshop, by hand, to your specifications. We cut, assemble, and finish each piece to order, so the cabinet that protects your collection is made for it and nothing else.</p>
+    </div>
+    <div class="about-page__craft-img">
+      <img src="{{ 'cabinet-shop-closed-drawer.png' | asset_url }}"
+           alt="A finished maple Apex Archive cabinet on the workshop floor, surrounded by clamps and woodworking benches"
+           width="1200" height="960" loading="lazy">
     </div>
   </div>
+
+  {%- comment -%} Collector's Guides teaser — funnel into the hub (hidden until the blog has posts) {%- endcomment -%}
+  {%- assign guides = blogs['collectors-guides'] -%}
+  {%- if guides.articles_count > 0 -%}
+    <div class="about-page__guides">
+      <div class="about-page__guides-head">
+        <h2>Collector's Guides</h2>
+        <a class="about-page__readall" href="{{ guides.url }}">Read all guides →</a>
+      </div>
+      <div class="about-page__guides-grid">
+        {%- for article in guides.articles limit: 3 -%}
+          <a class="about-page__gcard" href="{{ article.url }}">
+            {%- if article.image -%}
+              <img class="about-page__gthumb" src="{{ article.image | image_url: width: 600 }}" alt="{{ article.title | escape }}" loading="lazy" width="600" height="400">
+            {%- endif -%}
+            <span class="about-page__gcbody">
+              <span class="about-page__gct">{{ article.title }}</span>
+              <span class="about-page__gcx">{{ article.excerpt_or_content | strip_html | truncatewords: 14 }}</span>
+            </span>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
 
   <div class="about-page__cta-strip">
     <p>Ready to protect your collection?</p>
@@ -60,16 +99,26 @@
 
 </div>
 
-<style>
+{% stylesheet %}
   .about-page {
     background: #000000;
     min-height: 60vh;
   }
 
-  .about-page__hero {
-    padding: 80px 40px 56px;
+  .about-page__inner,
+  .about-page__hero,
+  .about-page__story,
+  .about-page__values-sec,
+  .about-page__craft,
+  .about-page__guides,
+  .about-page__cta-strip {
     max-width: 1200px;
     margin: 0 auto;
+  }
+
+  /* ── Hero ── */
+  .about-page__hero {
+    padding: 80px 40px 56px;
     border-bottom: 1px solid #1e1e1e;
   }
 
@@ -81,6 +130,10 @@
     margin: 0 0 16px;
   }
 
+  .about-page__eyebrow--gold {
+    color: #c9a96e;
+  }
+
   .about-page__title {
     font-size: clamp(2rem, 4vw, 3.5rem);
     color: #ffffff;
@@ -90,50 +143,71 @@
     letter-spacing: -0.02em;
   }
 
-  .about-page__banner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 56px 40px;
+  /* ── Brand story feature ── */
+  .about-page__story {
+    padding: 64px 40px;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 64px;
+    align-items: center;
     border-bottom: 1px solid #1e1e1e;
   }
 
-  .about-page__banner-img {
-    display: block;
+  .about-page__story-img {
+    background: radial-gradient(ellipse at 50% 45%, #241a12 0%, #000 72%);
+    border-radius: 6px;
+    padding: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-page__story-img img {
     width: 100%;
     height: auto;
+    display: block;
+    filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.6));
   }
 
-  .about-page__body {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 56px 40px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-    border-bottom: 1px solid #1e1e1e;
+  .about-page__story-copy h2 {
+    font-size: 1.6rem;
+    color: #f0ede8;
+    font-weight: 400;
+    line-height: 1.25;
+    margin: 0 0 22px;
+    letter-spacing: -0.01em;
   }
 
-  .about-page__intro p {
-    font-size: 0.9rem;
+  .about-page__story-copy p {
+    font-size: 0.92rem;
     color: #cccccc;
-    line-height: 1.8;
-    margin: 0 0 20px;
+    line-height: 1.85;
+    margin: 0 0 18px;
   }
 
-  .about-page__intro p:last-child {
+  .about-page__story-copy p:last-child {
     margin-bottom: 0;
   }
 
+  /* ── Values grid ── */
+  .about-page__values-sec {
+    padding: 64px 40px;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .about-page__values-sec .about-page__eyebrow {
+    margin-bottom: 36px;
+  }
+
   .about-page__values {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 48px;
   }
 
   .about-page__value {
-    border-left: 1px solid #1e1e1e;
-    padding-left: 24px;
+    border-top: 1px solid #1e1e1e;
+    padding-top: 20px;
   }
 
   .about-page__value-label {
@@ -141,7 +215,7 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: #c9a96e;
-    margin: 0 0 8px;
+    margin: 0 0 10px;
   }
 
   .about-page__value-body {
@@ -151,9 +225,129 @@
     margin: 0;
   }
 
+  /* ── Craftsmanship band ── */
+  .about-page__craft {
+    padding: 64px 40px;
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 64px;
+    align-items: center;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .about-page__craft-copy h2 {
+    font-size: 1.6rem;
+    color: #f0ede8;
+    font-weight: 400;
+    line-height: 1.25;
+    margin: 0 0 22px;
+    letter-spacing: -0.01em;
+  }
+
+  .about-page__craft-copy p:not(.about-page__eyebrow) {
+    font-size: 0.92rem;
+    color: #cccccc;
+    line-height: 1.85;
+    margin: 0;
+  }
+
+  .about-page__craft-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+  }
+
+  /* ── Guides teaser ── */
+  .about-page__guides {
+    padding: 64px 40px;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .about-page__guides-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .about-page__guides-head h2 {
+    font-size: 1.5rem;
+    color: #f0ede8;
+    font-weight: 400;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .about-page__readall {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #c9a96e;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .about-page__readall:hover {
+    opacity: 0.7;
+  }
+
+  .about-page__guides-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .about-page__gcard {
+    background: #1e1410;
+    border: 1px solid #1e1e1e;
+    border-radius: 6px;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .about-page__gcard:hover {
+    border-color: #c9a96e;
+    transform: translateY(-3px);
+  }
+
+  .about-page__gthumb {
+    aspect-ratio: 3 / 2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background: #0c0c0c;
+  }
+
+  .about-page__gcbody {
+    padding: 18px 20px 22px;
+    display: block;
+  }
+
+  .about-page__gct {
+    font-size: 0.9rem;
+    color: #f0ede8;
+    line-height: 1.35;
+    margin: 0 0 8px;
+    font-weight: 500;
+    display: block;
+  }
+
+  .about-page__gcx {
+    font-size: 0.76rem;
+    color: #cccccc;
+    line-height: 1.6;
+    margin: 0;
+    display: block;
+  }
+
+  /* ── CTA strip ── */
   .about-page__cta-strip {
-    max-width: 1200px;
-    margin: 0 auto;
     padding: 56px 40px;
     display: flex;
     align-items: center;
@@ -201,55 +395,36 @@
     border: 1px solid rgba(255, 255, 255, 0.4);
   }
 
-  .about-page__testimonials {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 56px 40px;
-    border-bottom: 1px solid #1e1e1e;
-  }
-
-  .about-page__testimonials .about-page__eyebrow {
-    margin-bottom: 32px;
-  }
-
-  .about-page__testimonial {
-    border-left: 1px solid #c9a96e;
-    padding-left: 24px;
-  }
-
-  .about-page__testimonial-quote {
-    font-size: 0.95rem;
-    color: #f0ede8;
-    line-height: 1.8;
-    font-style: italic;
-    margin: 0 0 12px;
-  }
-
-  .about-page__testimonial-attr {
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #c9a96e;
-    margin: 0;
-  }
-
+  /* ── Responsive ── */
   @media screen and (max-width: 749px) {
     .about-page__hero {
       padding: 48px 20px 36px;
     }
 
-    .about-page__banner {
-      padding: 40px 20px;
-    }
-
-    .about-page__body {
+    .about-page__story,
+    .about-page__craft {
       grid-template-columns: 1fr;
-      gap: 40px;
-      padding: 40px 20px;
+      gap: 32px;
+      padding: 44px 20px;
     }
 
-    .about-page__testimonials {
-      padding: 40px 20px;
+    /* Keep image below copy on the craft band for natural reading order */
+    .about-page__craft-img {
+      order: 2;
+    }
+
+    .about-page__values-sec,
+    .about-page__guides {
+      padding: 44px 20px;
+    }
+
+    .about-page__values {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .about-page__guides-grid {
+      grid-template-columns: 1fr;
     }
 
     .about-page__cta-strip {
@@ -259,11 +434,11 @@
       padding: 40px 20px;
     }
   }
-</style>
+{% endstylesheet %}
 
 {% schema %}
 {
-  "name": "About & Testimonials",
+  "name": "About & Story",
   "settings": [],
   "presets": []
 }
