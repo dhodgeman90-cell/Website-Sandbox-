@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "guides_hub": { "type": "collectors-guides-hub", "settings": {} }
+  },
+  "order": ["guides_hub"]
+}
