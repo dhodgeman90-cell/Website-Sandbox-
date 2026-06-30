@@ -10,9 +10,19 @@
     colors:   {{ cfg.available_finishes.value | default: cfg.available_colors.value | default: '[]' | json }},
     variants: {{ cab_product.variants | json }},
     textureUrls: {
+      officeBackground: {{ 'Empty Office Image.png' | asset_url | json }},
       mapleColor:     {{ 'wood-maple (2).webp' | asset_url | json }},
       mapleNormal:    {{ 'Wood048_2K-JPG_NormalGL.webp' | asset_url | json }},
       mapleRoughness: {{ 'Wood048_2K-JPG_Roughness.webp' | asset_url | json }}
+    },
+    finishReferenceUrls: {
+      'white':         {{ 'cabinet-hero-white-matte.jpg'           | asset_url | json }},
+      'white-gloss':   {{ 'cabinet-hero-white-gloss.png'           | asset_url | json }},
+      'black-matte':   {{ 'cabinet-hero-black-matte.png'           | asset_url | json }},
+      'black':         {{ 'cabinet-hero-black-gloss.jpg'           | asset_url | json }},
+      'mdf':           {{ 'cabinet-hero-plum-creek-unfinished.jpg' | asset_url | json }},
+      'acquedotti':    {{ 'cabinet-hero-acquedotti.jpg'            | asset_url | json }},
+      'lakeshore-oak': {{ 'cabinet-hero-lakeshore-oak.jpg'         | asset_url | json }}
     }
   };
 </script>
@@ -83,8 +93,12 @@
 
   {%- comment -%} Centre panel: Three.js 3D preview {%- endcomment -%}
   <div class="cab-panel cab-panel--preview">
-    <canvas id="cc-canvas"></canvas>
-    <div class="cab-rotate-hint">&#8635; Drag to rotate</div>
+    <div
+      class="cab-preview-stage"
+      style="background-image: url({{ 'Empty Office Image.png' | asset_url }});"
+    >
+      <canvas id="cc-canvas"></canvas>
+    </div>
   </div>
 
   {%- comment -%} Right panel: spec + price + cart {%- endcomment -%}
@@ -115,8 +129,8 @@
 <style>
   .cabinet-configurator {
     display: grid;
-    grid-template-columns: 240px 1fr 200px;
-    min-height: 560px;
+    grid-template-columns: 220px minmax(460px, 1fr) 200px;
+    min-height: 680px;
     border: 1px solid #2e2e2e;
     border-radius: 8px;
     overflow: hidden;
@@ -179,6 +193,19 @@
     padding: 0;
     position: relative;
     overflow: hidden;
+    display: grid;
+    place-items: center;
+    background: #111;
+  }
+
+  .cab-preview-stage {
+    position: relative;
+    height: 100%;
+    max-width: 100%;
+    aspect-ratio: 1149 / 1379;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   #cc-canvas {
@@ -257,16 +284,6 @@
     font-size: 0.6rem;
     color: #555;
     text-align: center;
-  }
-
-  .cab-rotate-hint {
-    position: absolute;
-    bottom: 10px;
-    right: 12px;
-    font-size: 0.55rem;
-    color: #444;
-    letter-spacing: 0.06em;
-    pointer-events: none;
   }
 
   /* ── Hero ───────────────────────────────────────────────────────────────── */
@@ -363,7 +380,11 @@
     }
     .cab-panel { border-right: none; border-bottom: 1px solid #2e2e2e; }
     .cab-panel:last-child { border-bottom: none; }
-    .cab-panel--preview { min-height: 380px; }
+    .cab-panel--preview { min-height: 0; }
+    .cab-preview-stage {
+      width: 100%;
+      height: auto;
+    }
     #cc-canvas { position: absolute; }
     .cab-steps__grid {
       grid-template-columns: 1fr;
@@ -376,8 +397,7 @@
 </style>
 
 <script src="{{ 'three.min.js' | asset_url }}" defer></script>
-<script src="{{ 'three-orbit-controls.min.js' | asset_url }}" defer></script>
-<script src="{{ 'cabinet-configurator-3d.js' | asset_url }}?v=1" defer></script>
+<script src="{{ 'cabinet-configurator-3d.js' | asset_url }}?v=42" defer></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
