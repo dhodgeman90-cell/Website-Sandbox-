@@ -4,10 +4,40 @@
          alt="{{ article.title | escape }}" width="1600" height="700" loading="eager">
   {%- endif -%}
   <div class="guide__col">
-    <p class="guide__eyebrow"><a href="{{ blog.url }}">{{ blog.title }}</a></p>
+    <nav class="guide__crumbs" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span class="guide__crumbsep" aria-hidden="true">/</span>
+      <a href="{{ blog.url }}">{{ blog.title }}</a>
+      <span class="guide__crumbsep" aria-hidden="true">/</span>
+      <span class="guide__crumbcur">{{ article.title }}</span>
+    </nav>
     <h1 class="guide__title">{{ article.title }}</h1>
     <p class="guide__meta">{{ article.published_at | date: "%B %e, %Y" }}</p>
     <div class="guide__body rte">{{ article.content }}</div>
+
+    {%- comment -%} Related guides — internal linking; hidden when fewer than 2 other guides exist {%- endcomment -%}
+    {%- assign other_count = blog.articles_count | minus: 1 -%}
+    {%- if other_count > 1 -%}
+      <div class="guide__more">
+        <p class="guide__more-h">More guides</p>
+        <div class="guide__more-grid">
+          {%- assign shown = 0 -%}
+          {%- for a in blog.articles -%}
+            {%- unless a.id == article.id -%}
+              {%- if shown < 3 -%}
+                <a class="guide__mcard" href="{{ a.url }}">
+                  {%- if a.image -%}
+                    <img class="guide__mthumb" src="{{ a.image | image_url: width: 400 }}" alt="{{ a.title | escape }}" loading="lazy" width="400" height="267">
+                  {%- endif -%}
+                  <span class="guide__mtitle">{{ a.title }}</span>
+                </a>
+                {%- assign shown = shown | plus: 1 -%}
+              {%- endif -%}
+            {%- endunless -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
 
     <div class="guide__cta">
       <p>Build a home for your collection.</p>
@@ -33,6 +63,18 @@
     "name": {{ shop.name | json }}{% if settings.logo %},
     "logo": { "@type": "ImageObject", "url": {{ settings.logo | image_url: width: 600 | prepend: "https:" | json }} }{% endif %}
   }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": {{ request.origin | json }} },
+    { "@type": "ListItem", "position": 2, "name": {{ blog.title | json }}, "item": {{ request.origin | append: blog.url | json }} },
+    { "@type": "ListItem", "position": 3, "name": {{ article.title | json }}, "item": {{ request.origin | append: article.url | json }} }
+  ]
 }
 </script>
 
@@ -69,6 +111,32 @@
   .guide__eyebrow a {
     color: inherit;
     text-decoration: none;
+  }
+
+  .guide__crumbs {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #888;
+    margin: 0 0 14px;
+  }
+
+  .guide__crumbs a {
+    color: #c9a96e;
+    text-decoration: none;
+  }
+
+  .guide__crumbs a:hover {
+    text-decoration: underline;
+  }
+
+  .guide__crumbsep {
+    margin: 0 8px;
+    color: #555;
+  }
+
+  .guide__crumbcur {
+    color: #888;
   }
 
   .guide__title {
@@ -149,6 +217,58 @@
     color: #f0ede8;
   }
 
+  /* Related guides — internal linking */
+  .guide__more {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid #1e1e1e;
+  }
+
+  .guide__more-h {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #c9a96e;
+    margin: 0 0 18px;
+  }
+
+  .guide__more-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .guide__mcard {
+    background: #2c1e12;
+    border: 1px solid #1e1e1e;
+    border-radius: 6px;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .guide__mcard:hover {
+    border-color: #c9a96e;
+    transform: translateY(-3px);
+  }
+
+  .guide__mthumb {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    display: block;
+    background: #0c0c0c;
+  }
+
+  .guide__mtitle {
+    display: block;
+    padding: 14px 16px 16px;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: #f0ede8;
+  }
+
   /* CTA strip — reuse the About/hero button look */
   .guide__cta {
     margin-top: 48px;
@@ -201,6 +321,10 @@
 
     .guide__title {
       font-size: 1.6rem;
+    }
+
+    .guide__more-grid {
+      grid-template-columns: 1fr;
     }
   }
 {% endstylesheet %}
