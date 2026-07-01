@@ -452,6 +452,15 @@
     background: #ffffff;
   }
 
+  /* Keep browser autofill from tinting the customer-info fields */
+  .oww-form-input:-webkit-autofill,
+  .oww-form-input:-webkit-autofill:hover,
+  .oww-form-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #1c1c1c;
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
+    box-shadow: 0 0 0 1000px #ffffff inset;
+  }
+
   .oww-form-textarea {
     resize: vertical;
     min-height: 56px;
