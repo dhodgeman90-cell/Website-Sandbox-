@@ -440,6 +440,7 @@
     transition: border-color 0.15s;
     -webkit-appearance: none;
     appearance: none;
+    color-scheme: light;
   }
 
   .oww-form-input::placeholder {
@@ -452,13 +453,17 @@
     background: #ffffff;
   }
 
-  /* Keep browser autofill from tinting the customer-info fields */
+  /* Keep browser autofill (incl. dark mode) from tinting the customer-info fields */
   .oww-form-input:-webkit-autofill,
   .oww-form-input:-webkit-autofill:hover,
-  .oww-form-input:-webkit-autofill:focus {
-    -webkit-text-fill-color: #1c1c1c;
-    -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
-    box-shadow: 0 0 0 1000px #ffffff inset;
+  .oww-form-input:-webkit-autofill:focus,
+  .oww-form-input:-webkit-autofill:active {
+    -webkit-text-fill-color: #1c1c1c !important;
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    box-shadow: 0 0 0 1000px #ffffff inset !important;
+    caret-color: #1c1c1c;
+    /* Park the autofill background-color change ~never so #fff shows through */
+    transition: background-color 600000s 0s, border-color 0.15s;
   }
 
   .oww-form-textarea {
