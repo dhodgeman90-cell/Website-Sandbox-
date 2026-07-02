@@ -1,0 +1,19 @@
+{%- comment -%}
+  Hidden backing product for the "Build Your Cabinet" configurator.
+  This product MUST stay published to the Online Store so the configurator can read
+  its variants via all_products (see sections/cabinet-configurator.liquid).
+  This template hides the standalone product page: it renders nothing, redirects every
+  visitor to the real configurator, and tells search engines not to index it.
+{%- endcomment -%}
+{%- layout none -%}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="refresh" content="0; url=/pages/build-your-cabinet">
+  <link rel="canonical" href="{{ shop.url }}/pages/build-your-cabinet">
+  <script>window.location.replace("/pages/build-your-cabinet");</script>
+  <title>Redirecting&hellip;</title>
+</head>
+<body></body>
+</html>
