@@ -4,8 +4,12 @@ Only the narrow left/right frame member strips and corner bracket zones are
 touched. The drawer face area (x ≈ 490–760) is never modified.
 """
 
+from pathlib import Path
+
 from PIL import Image, ImageFilter
 import numpy as np
+
+ASSETS = Path(__file__).resolve().parent.parent / "assets"
 
 
 def remove_rivets(img, x1, y1, x2, y2, window=41):
@@ -30,7 +34,7 @@ def remove_rivets(img, x1, y1, x2, y2, window=41):
     return Image.fromarray(arr)
 
 
-img = Image.open(r"c:\VS Code\Website Fuckery\assets\cabinet-hero.jpg")
+img = Image.open(ASSETS / "cabinet-hero.jpg")
 
 # ── LEFT FRAME MEMBER  (≈23 px wide — stays off the drawer face)
 img = remove_rivets(img, 462, 392, 486, 958, window=51)
@@ -48,5 +52,5 @@ img = remove_rivets(img, 734, 392, 790, 442, window=41)
 img = remove_rivets(img, 462, 912, 528, 958, window=31)
 img = remove_rivets(img, 734, 912, 790, 958, window=31)
 
-img.save(r"c:\VS Code\Website Fuckery\assets\cabinet-hero-flat.jpg", quality=95)
+img.save(ASSETS / "cabinet-hero-flat.jpg", quality=95)
 print("Saved: assets/cabinet-hero-flat.jpg")

@@ -108,7 +108,7 @@ Do this every time you work on the site:
 
 ```
 1. Open PowerShell
-2. Type: cd "c:\VS Code\Website Fuckery"
+2. Type: cd "c:\VS Code\Website Fuckery\The Apex Archive"
 3. Type: git pull                         (grab any tasks added from your phone)
 4. Type: code .           (VS Code opens in the right folder)
 5. In the VS Code terminal: shopify theme dev --store ywbx1x-1n.myshopify.com
