@@ -98,11 +98,24 @@
     }) || null;
   }
 
-  // ─── Price: variant + backstop add-ons (Shopify stores cents as integers) ──
+  // ─── Backstops can be bought on their own (no cabinet configured) ──────────
+  function backstopsAddable() {
+    return state.backstops > 0 && !!(cfg.backstop && cfg.backstop.variantId);
+  }
+
+  // ─── Price: cabinet variant (if any) + backstop add-ons ────────────────────
+  // Shopify stores cents as integers. Returns null only when there's nothing to
+  // buy: no cabinet configured AND no backstops chosen.
   function calculatePrice() {
     var v = findVariant();
-    if (!v) return null;
-    return v.price / 100 + (state.backstops / PACK_SIZE) * backstopPackPrice();
+    var backstopCost = (state.backstops / PACK_SIZE) * backstopPackPrice();
+    if (!v) return backstopsAddable() ? backstopCost : null;
+    return v.price / 100 + backstopCost;
+  }
+
+  // ─── Enable Add to Cart for a valid cabinet OR backstops-only ──────────────
+  function updateAtcState() {
+    atcBtn.disabled = !(findVariant() || backstopsAddable());
   }
 
   // ─── Swap preview image when colour changes ───────────────────────────────
@@ -180,7 +193,7 @@
     updateSpec();
     updatePrice();
     updatePreviewImage();
-    atcBtn.disabled = !findVariant();
+    updateAtcState();
   }
 
   // ─── Backstop quantity change handler ─────────────────────────────────────
@@ -192,36 +205,43 @@
     state.backstops = n;
     updateSpec();
     updatePrice();
+    updateAtcState();
   }
 
   // ─── Add to Cart ──────────────────────────────────────────────────────────
   function addToCart() {
     var v     = findVariant();
     var total = calculatePrice();
-    if (!v || total === null) return;
+    if (!v && !backstopsAddable()) return;   // nothing selected to add
 
     atcBtn.disabled    = true;
     atcBtn.textContent = 'Adding…';
     atcErrorEl.hidden  = true;
 
-    // Cabinet line item; total records the full price incl. backstops.
-    var items = [{
-      id:       v.id,
-      quantity: 1,
-      properties: {
-        '_cabinet_width':        state.width,
-        '_cabinet_depth':        state.depth,
-        '_cabinet_height':       36,
-        '_cabinet_color':        state.colorId,
-        '_cabinet_color_label':  state.colorLabel,
-        '_cabinet_drawer_count': 4,
-        '_cabinet_backstops':    state.backstops,
-        '_cabinet_price':        total.toFixed(2),
-      },
-    }];
+    var items = [];
+
+    // Cabinet line item — only when a full cabinet is configured.
+    // total records the full price incl. backstops.
+    if (v) {
+      items.push({
+        id:       v.id,
+        quantity: 1,
+        properties: {
+          '_cabinet_width':        state.width,
+          '_cabinet_depth':        state.depth,
+          '_cabinet_height':       36,
+          '_cabinet_color':        state.colorId,
+          '_cabinet_color_label':  state.colorLabel,
+          '_cabinet_drawer_count': 4,
+          '_cabinet_backstops':    state.backstops,
+          '_cabinet_price':        total.toFixed(2),
+        },
+      });
+    }
 
     // Add-on backstops as a separate line item so they actually bill.
-    if (state.backstops > 0 && cfg.backstop && cfg.backstop.variantId) {
+    // This is also the sole line for a backstops-only order (no cabinet).
+    if (backstopsAddable()) {
       items.push({ id: cfg.backstop.variantId, quantity: state.backstops / PACK_SIZE });
     }
 
