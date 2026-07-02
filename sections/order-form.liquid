@@ -119,39 +119,9 @@
               <tr class="oww-order-row">
                 <td class="oww-order-row__num">{{ i }}</td>
                 <td><input class="oww-form-input oww-order-input" type="number" min="1" placeholder="1"></td>
-                <td>
-                  <select class="oww-form-input oww-order-select">
-                    <option value="">Select width…</option>
-                    <option value='17 5/8"'>17 5/8"</option>
-                    <option value='21 3/8"'>21 3/8"</option>
-                    <option value='25 1/8"'>25 1/8"</option>
-                    <option value='28 7/8"'>28 7/8"</option>
-                    <option value='32 5/8"'>32 5/8"</option>
-                    <option value="Other — see notes">Other — see notes</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="oww-form-input oww-order-select">
-                    <option value="">Select depth…</option>
-                    <option value='13"'>13"</option>
-                    <option value='16"'>16"</option>
-                    <option value='19"'>19"</option>
-                    <option value='22"'>22"</option>
-                    <option value="Other — see notes">Other — see notes</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="oww-form-input oww-order-select">
-                    <option value="">Select finish…</option>
-                    <option value="White">White</option>
-                    <option value="Black">Black</option>
-                    <option value="Walnut">Walnut</option>
-                    <option value="Maple">Maple</option>
-                    <option value="MDF">MDF</option>
-                    <option value="Ash">Ash</option>
-                    <option value="Other — see notes">Other — see notes</option>
-                  </select>
-                </td>
+                <td><input class="oww-form-input oww-order-input" type="text" aria-label="Width" placeholder='e.g. 24"'></td>
+                <td><input class="oww-form-input oww-order-input" type="text" aria-label="Depth" placeholder='e.g. 16"'></td>
+                <td><input class="oww-form-input oww-order-input" type="text" aria-label="Finish" placeholder="e.g. Walnut"></td>
               </tr>
               {%- endfor -%}
             </tbody>
@@ -521,16 +491,6 @@
     font-size: 12px;
   }
 
-  .oww-order-select {
-    padding: 6px 8px;
-    font-size: 12px;
-    cursor: pointer;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    padding-right: 28px;
-  }
-
   /* ── Add row button ────────────────────────────────── */
   .oww-add-row-btn {
     display: inline-flex;
@@ -754,7 +714,6 @@
     var newNum = rows.length + 1;
     newRow.querySelector('.oww-order-row__num').textContent = newNum;
     newRow.querySelectorAll('input').forEach(function(inp) { inp.value = ''; });
-    newRow.querySelectorAll('select').forEach(function(sel) { sel.selectedIndex = 0; });
     tbody.appendChild(newRow);
     if (rows.length + 1 >= 20) {
       document.getElementById('owwAddRowBtn').style.display = 'none';
@@ -776,12 +735,12 @@
       var orderLines = [];
       var rows = document.querySelectorAll('.oww-order-row');
       rows.forEach(function(row, idx) {
-        var qtyInput  = row.querySelector('input[type="number"]');
-        var selects   = row.querySelectorAll('select');
-        var qty    = qtyInput   ? qtyInput.value.trim()  : '';
-        var width  = selects[0] ? selects[0].value.trim() : '';
-        var depth  = selects[1] ? selects[1].value.trim() : '';
-        var finish = selects[2] ? selects[2].value.trim() : '';
+        var qtyInput   = row.querySelector('input[type="number"]');
+        var textInputs = row.querySelectorAll('input[type="text"]');
+        var qty    = qtyInput      ? qtyInput.value.trim()      : '';
+        var width  = textInputs[0] ? textInputs[0].value.trim() : '';
+        var depth  = textInputs[1] ? textInputs[1].value.trim() : '';
+        var finish = textInputs[2] ? textInputs[2].value.trim() : '';
         if (!qty && !width && !depth && !finish) return;
         orderLines.push(
           'Row ' + (idx + 1) + ': Qty ' + (qty || '—') +
