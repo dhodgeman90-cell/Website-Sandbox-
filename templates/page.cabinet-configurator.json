@@ -12,10 +12,12 @@
     "main": {
       "type": "cabinet-configurator",
       "settings": {
-        "product": "baseball-card-cabinet",
+        "product": "collector-card-cabinet",
         "backstop_product": "additional-apex-backstop"
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
