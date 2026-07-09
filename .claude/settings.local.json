@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "mcp__blender__get_screenshot_of_window_as_image"
-    ]
-  }
-}
