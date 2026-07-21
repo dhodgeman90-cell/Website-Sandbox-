@@ -11,3 +11,6 @@ Thumbs.db
 .superpowers/
 .worktrees/
 .claude/
+
+# Blender autosave backups
+*.blend1
