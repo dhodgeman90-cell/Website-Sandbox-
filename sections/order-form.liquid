@@ -146,6 +146,13 @@
             We'll review your request and be in touch within 1–2 business days.<br>
             Questions? Email <a class="oww-form-helper__link" href="mailto:ApexCardArchive@gmail.com">ApexCardArchive@gmail.com</a>
           </p>
+          {%- if shop.privacy_policy != blank -%}
+            <p class="oww-form-helper">
+              We use these details only to prepare your quote and contact you about it. Your phone
+              number is used for project communication, not marketing. See our
+              <a class="oww-form-helper__link" href="{{ shop.privacy_policy.url }}">{{ shop.privacy_policy.title | downcase }}</a>.
+            </p>
+          {%- endif -%}
           <button type="submit" class="oww-form-submit-btn" id="owwSubmitBtn">
             Submit Quote Request →
           </button>

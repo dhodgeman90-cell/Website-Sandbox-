@@ -123,6 +123,14 @@
       {{- form.body -}}
     </textarea>
 
+    {%- if shop.privacy_policy != blank -%}
+      <p class="contact-form__privacy" style="font-size: 0.85em; opacity: 0.75; margin-block: 1rem 0;">
+        We use the details you provide only to respond to your message. Your phone number is used
+        for project communication, not marketing. See our
+        <a href="{{ shop.privacy_policy.url }}">{{ shop.privacy_policy.title | downcase }}</a>.
+      </p>
+    {%- endif -%}
+
     {{ submit_button }}
   {%- endform -%}
 </div>

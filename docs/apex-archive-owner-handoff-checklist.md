@@ -55,10 +55,31 @@ Your domain is registered at **GoDaddy**, so the DNS changes happen there.
 
 *Why: this makes your store load at your own web address, with a secure padlock (Shopify adds the SSL certificate automatically).*
 
-## 7. Go live
+## 7. Publish your store policies — do this before you go live
+Right now your store has a **privacy policy only**. Your Terms of Service, Refund Policy, and
+Shipping Policy pages do not exist yet, so their links don't appear in the footer. A store that
+sells to the public should have all four.
+
+- [ ] Go to **Settings → Policies**.
+- [ ] For each of **Refund policy**, **Privacy policy**, **Terms of service**, and **Shipping
+      policy**, click **Insert default template**. Shopify writes a starting version using your
+      real store details.
+- [ ] **Read each one and edit it to match how you actually operate** — especially the refund
+      window, who pays return shipping, and your shipping timelines. A generated policy that
+      contradicts what you really do is worse than not having one.
+- [ ] **Save.** The footer links appear automatically once each policy has content.
+- [ ] Confirm they work: visit `/policies/refund-policy`, `/policies/terms-of-service`, and
+      `/policies/shipping-policy` on your store. All should load, not 404.
+
+*Why: your Terms of Service is where dispute-resolution terms live, and a posted refund policy
+is expected of any retail seller. **Have your own attorney review these before you launch** —
+these are your legal documents, not Devon's, and Devon is not a lawyer. See the Website
+Compliance Responsibilities notice provided with this checklist.*
+
+## 8. Go live
 - [ ] **Online Store → Preferences** → **uncheck the password protection** when you're ready for real customers.
 
-## 8. Test before you announce it
+## 9. Test before you announce it
 - [ ] Visit **https://theapexarchive.com** — it loads with a padlock (secure).
 - [ ] Build a cabinet → **Add to cart** → check out → confirm the price is correct. Place one small **test order**, then **refund** it from the Orders page.
 - [ ] Submit a quick **test message** through the Contact form → confirm it arrives at ApexCardArchive@gmail.com.
