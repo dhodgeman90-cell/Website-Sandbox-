@@ -174,11 +174,17 @@
     </a>
   {% elsif product != blank and product.media.size == 0 %}
     <product-title class="product-card-gallery__title-placeholder">
+      {%- comment -%}
+        This title link duplicates the card's main link, so it is hidden from screen readers.
+        tabindex="-1" takes it out of the tab order too — an aria-hidden element that is still
+        focusable is a WCAG 4.1.2 failure (keyboard users land on a control AT cannot announce).
+      {%- endcomment -%}
       <a
         class="contents"
         ref="productTitleLink"
         href="{{ product.selected_or_first_available_variant.url }}"
         aria-hidden="true"
+        tabindex="-1"
       >
         <span class="title-text">{{- product.title -}}</span>
       </a>

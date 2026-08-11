@@ -82,7 +82,14 @@
       <div class="cab-spec-row"><dt>Color</dt>  <dd id="spec-color">—</dd></div>
       <div class="cab-spec-row"><dt>Drawers</dt><dd>4</dd></div>
       <div class="cab-spec-row"><dt>Apex Backstops</dt><dd id="spec-backstops">0</dd></div>
-      <div class="cab-spec-subhead">Capacity</div>
+    </dl>
+    {%- comment -%}
+      The subhead has to sit OUTSIDE the <dl>. A <dl> may only contain <dt>, <dd>, or a <div>
+      wrapping a dt/dd pair — a bare <div> is invalid and breaks how screen readers announce
+      the list (WCAG 1.3.1). So the list is split around it.
+    {%- endcomment -%}
+    <div class="cab-spec-subhead">Capacity</div>
+    <dl class="cab-spec-list">
       <div class="cab-spec-row"><dt>Penny-Sleeved</dt><dd id="spec-cap-penny">—</dd></div>
       <div class="cab-spec-row"><dt>Graded Cards</dt><dd id="spec-cap-graded">—</dd></div>
     </dl>
@@ -249,6 +256,10 @@
   }
   .cab-spec-row dt { color: #888; }
   .cab-spec-row dd { color: #f0ede8; margin: 0; font-weight: 500; }
+  /* the list is split around the subhead; drop the gap on the half above it */
+  .cab-spec-list:has(+ .cab-spec-subhead) {
+    margin-bottom: 0;
+  }
   .cab-spec-subhead {
     font-size: 0.6rem;
     letter-spacing: 0.1em;
@@ -303,7 +314,7 @@
   .cab-atc-note {
     margin-top: 8px;
     font-size: 0.6rem;
-    color: #555;
+    color: #888; /* #555 was 2.29:1 on #1c1c1c — fails WCAG 1.4.3 */
     text-align: center;
   }
 

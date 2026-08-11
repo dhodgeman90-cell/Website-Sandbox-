@@ -79,7 +79,12 @@
         --input-disabled-background-color: rgb(var(--color-foreground-rgb) / var(--opacity-10));
         --input-disabled-border-color: rgb(var(--color-foreground-rgb) / var(--opacity-5-15));
         --input-disabled-text-color: rgb(var(--color-foreground-rgb) / var(--opacity-50));
-        --color-foreground-muted: rgb(var(--color-foreground-rgb) / var(--opacity-60));
+        {%- comment -%}
+          Raised 60% -> 80%: at 60% the footer/filter/sorting muted text composited to 3.5:1
+          against the dark background, failing WCAG 1.4.3 (4.5:1 for text under 24px).
+          80% gives 5.16:1. Verify with docs/test-contrast.mjs after changing scheme colors.
+        {%- endcomment -%}
+        --color-foreground-muted: rgb(var(--color-foreground-rgb) / var(--opacity-80));
         --font-h1--color: var(--color-foreground-heading);
         --font-h2--color: var(--color-foreground-heading);
         --font-h3--color: var(--color-foreground-heading);
