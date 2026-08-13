@@ -1,0 +1,37 @@
+# Line-ending policy for this repo.
+#
+# Why this file exists: without it, core.autocrlf=true (the Git-for-Windows
+# default on this machine) stores LF but checks out CRLF, while `shopify theme
+# pull` writes LF. Comparing the repo against the live theme then reports
+# hundreds of "differences" that are pure CRLF-vs-LF noise, burying real drift.
+#
+# eol=lf overrides core.autocrlf, so the working tree matches what Shopify
+# serves and a repo-vs-live diff shows only real content differences.
+
+* text=auto eol=lf
+
+# Be explicit for the theme file types, so intent survives future edits.
+*.liquid  text eol=lf
+*.json    text eol=lf
+*.css     text eol=lf
+*.js      text eol=lf
+*.mjs     text eol=lf
+*.md      text eol=lf
+*.yml     text eol=lf
+*.svg     text eol=lf
+
+# Never line-ending-munge binaries — that corrupts them.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.webp  binary
+*.gif   binary
+*.ico   binary
+*.mp4   binary
+*.mov   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.pdf   binary
+*.blend binary
