@@ -1,0 +1,27 @@
+name: CI
+
+# Runs on every push to main and on every pull request, so Liquid errors are
+# caught before they reach the live store instead of after.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# theme-check-action writes inline annotations onto the PR via the Checks API.
+# The default GITHUB_TOKEN is read-only, so without this the job dies with
+# "Resource not accessible by integration" — a permissions error, not a
+# code-quality failure. Least privilege: read the code, write only checks.
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  theme-check:
+    name: Theme Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Theme Check
+        uses: shopify/theme-check-action@v2
+        with:
+          token: ${{ github.token }}
